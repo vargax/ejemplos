@@ -1,4 +1,9 @@
 # -*- coding: UTF-8 -*-
+'''
+Requiere librerias pprint y matplotlib
+pprint => Instalar con pip: aptitude install python-pip && pip install pprint
+matplotlib => Instalar desde repositorio: aptitude install python-matplotlib
+'''
 # IMPORTS
 import pprint
 import random
