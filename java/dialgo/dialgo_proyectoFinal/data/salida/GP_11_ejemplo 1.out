@@ -1,0 +1,11 @@
+ejemplo 1
+a x * b + c =
+x
+25
+--------------------
+[0] a*x + b = c
+= <Aislamiento: a + b = c <> a = c - b>
+[1] a*x = c + -b
+= <Aislamiento: a*b = c <> a = c/b>
+[2] x = (c + -b)*1/a
+--------------------

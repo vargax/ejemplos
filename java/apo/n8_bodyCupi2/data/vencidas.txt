@@ -1,0 +1,9 @@
+LISTA DE USUARIOS CON SUSCRIPCIONES VENCIDAS
+Usuario: Juan Villa
+Id: 123
+Tipo de suscripción: AMATEUR
+Fecha de apertura suscripción: 23-2-2011 0:0 hh
+Usuario: Camila Velez
+Id: 456
+Tipo de suscripción: MASTER
+Fecha de apertura suscripción: 15-3-2011 0:0 hh

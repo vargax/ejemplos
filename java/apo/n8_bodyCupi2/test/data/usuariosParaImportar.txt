@@ -1,0 +1,20 @@
+Cantidad de usuarios:2
+-------------------------------------------------------------------------------------------
+123;Juan Villa;24;Masculino;3115874;./data/imagenes/usuarios/usuario1.png;Sin antecedentes
+Datos suscripciones:
+	Cantidad de suscripciones:2
+AMATEUR;2011;1;10;0;0
+AMATEUR;2011;2;23;0;0
+Datos registros de tiempo:
+	Cantidad de registros de tiempo:2
+2011;1;10;15;30-2011;1;10;18;0
+2011;1;11;17;0-Pendiente
+-------------------------------------------------------------------------------------------
+456;Camila Velez;21;Femenino;6129055;./data/imagenes/usuarios/bambam.png;Sin antecedentes
+Datos suscripciones:
+	Cantidad de suscripciones:1
+MASTER;2011;3;15;0;0
+Datos registros de tiempo:
+	Cantidad de registros de tiempo:0
+-------------------------------------------------------------------------------------------
+

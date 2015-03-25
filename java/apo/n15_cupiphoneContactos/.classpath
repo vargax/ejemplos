@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="classes" path="source"/>
+	<classpathentry kind="src" output="test/classes" path="test/source"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/Cupi2Collections.jar"/>
+	<classpathentry kind="lib" path="test/lib/junit.jar"/>
+	<classpathentry kind="lib" path="lib/cupiphoneSDK.jar" sourcepath="/n15_cupIphone"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>

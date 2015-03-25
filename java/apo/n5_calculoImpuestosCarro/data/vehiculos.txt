@@ -1,0 +1,43 @@
+#---------------------------------------------------------
+# Vehiculos almacenados para el calculo de impuestos
+#
+# Formato: Marca,Linea,Modelo,Precio
+#---------------------------------------------------------
+
+Peugeot,307,2005,71800000
+Peugeot,206,2005,90900000
+Peugeot,206,2004,88900000
+
+Mazda,Allegro,2005,43000000
+Mazda,Mazda3,2005,55000000
+Mazda,Mazda6,2005,75600000
+
+BMW,320i,2005,128000000
+BMW,M3,2004,230000000
+
+Mercedez Benz,C180,2005,128000000
+Mercedez Benz,C180,2004,122000000
+
+Audi,A4,2003,95000000
+Audi,A4,2002,110000000
+Audi,A4,2004,113000000
+Audi,A4,2005,116000000
+
+Chevrolet,Astra,2005,55000000
+Chevrolet,Corsa,2005,30000000
+Chevrolet,Epica,2005,64580000
+Chevrolet,Trail Blazer,2005,117990000
+Chevrolet,Gran Vitara,2005,81590000
+
+Volvo,S40,2004,130000000
+Volvo,S60,2003,175000000
+
+Volkswagen,Golf,2004,55000000
+Volkswagen,Gold,2004,60000000
+
+Toyota,Corolla,2005,61200000
+Toyota,Camry,2005,145500000
+Toyota,Land Cruiser,2005,80000000
+
+Renault,Megane,2005,40860000
+Renault,Clio,2005,38660000  

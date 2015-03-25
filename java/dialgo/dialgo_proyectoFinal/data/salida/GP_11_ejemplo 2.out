@@ -1,0 +1,15 @@
+ejemplo 2
+a x * b + c x * d + =
+x
+25
+--------------------
+[0] a*x + b = c*x + d
+= <Atracción: a = b + c <> a - c = b>
+[1] a*x + b + -c*x = d
+= <Colección: (a*u) + (b*u) = (a + b)*u>
+[2] b + x*(a + -c) = d
+= <Aislamiento: a + b = c <> a = c - b>
+[3] x*(a + -c) = d + -b
+= <Aislamiento: a*b = c <> a = c/b>
+[4] x = (d + -b)*(1/(a + -c))
+--------------------

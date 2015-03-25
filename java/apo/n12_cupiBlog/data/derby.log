@@ -1,0 +1,10 @@
+----------------------------------------------------------------
+2011-11-23 04:09:40.813 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.1.1.0 - (208786): instance c013800d-0133-ce9d-621d-ffffc7a2e89d
+on database directory /home/cvargasc/Documentos/Uniandes/201120/APO2/nivel12/n12_cupiBlog/data/cupiBlog 
+
+Database Class Loader started - derby.database.classpath=''
+
+2011-11-23 04:10:41.516 GMT:
+Shutting down instance c013800d-0133-ce9d-621d-ffffc7a2e89d
+----------------------------------------------------------------

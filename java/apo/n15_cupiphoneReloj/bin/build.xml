@@ -1,0 +1,44 @@
+<project name="Componente Reloj" default="jar" basedir="../">
+	
+    <property name="src.dir"     value="source"/>
+    <property name="classes.dir" value="classes"/>
+    <property name="jar.dir"     value="dist"/>
+	<property name="lib.dir"     value="lib"/>
+	<property name="data.dir"     value="data"/>
+	<property name="jar.name"     value="Reloj.jar"/>
+	<property name="core.dir"     value="../n15_cupIphone"/>
+	<property name="deploy.dir"     value="${core.dir}/dist"/>
+	
+    <!-- Classpath para la compilacion. En este directorio debe aparecer: La libreria del core, las librerias de estructuras de datos,
+    las librerias de otros componentes para desarollo -->
+	<path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+    </path>
+	
+    <!-- Inicializar-->
+    <target name="clean">
+    	<delete dir="${classes.dir}"/>
+    	<delete dir="${jar.dir}"/>
+    	<mkdir dir="${classes.dir}"/>
+    	<mkdir dir="${jar.dir}"/>
+    </target>
+
+    <!-- Tarea para Compilar utilizando el classpath definido anteriormente-->
+    <target name="compile" depends="clean">
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" 
+        	classpathref="classpath" debug="true">
+    	</javac>
+    </target>		
+
+    <!-- Tarea para crear el Jar del componente. Se empaquetan unicamente las librerias propias
+    y los archivos de datos. Aunque para compilar se utilizan otros componentes y librerias del core,
+    estos no se incluyen en el jar del componente actual-->
+    <target name="jar" depends="compile">
+        <jar destfile="${jar.dir}/${jar.name}" basedir="${classes.dir}">
+        	<fileset dir="./" includes="${data.dir}/**"/>
+			<fileset dir="./" includes="${lib.dir}/**"/>
+			<fileset dir="./" excludes="${lib.dir}/cupiphoneSDK.jar"/>
+        </jar>
+    	<copy file="${jar.dir}/${jar.name}" todir="${deploy.dir}" />
+    </target>
+</project>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+   <description>n16 CupiClimam</description>
+   <servlet>
+    <servlet-name>ServletShutdownHook</servlet-name>
+    <servlet-class>uniandes.cupi2.cupiClima.mundo.ServletShutdownHook</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletShutdownHook</servlet-name>
+    <url-pattern>/hook</url-pattern>
+  </servlet-mapping>
+</web-app>

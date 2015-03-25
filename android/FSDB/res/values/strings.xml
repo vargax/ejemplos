@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">FSDB</string>
+    <string name="menu_settings">Herramientas</string>
+    <string name="presion">Presión Arterial</string>
+    <string name="sistole">SYS</string>
+    <string name="diastole">DIA</string>
+    <string name="presionArterial">PA</string>
+    <string name="comenzar">Comenzar</string>
+    <string name="sincronizar">Sincronizar con FSDB</string>
+
+</resources>

@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!-- 
+Universidad de los Andes (Bogotá - Colombia)
+Departamento de Ingeniería de Sistemas y Computación 
+Licenciado bajo el esquema Academic Free License version 2.1 
+
+Proyecto Cupi2 (http://cupi2.uniandes.edu.co)
+Ejercicio: n18_colegioWeb
+Autor: Pablo Barvo - 08-Feb-2006 
+-->
+
+<!DOCTYPE web-app PUBLIC
+   "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+   "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+
+   <description>Servlets Colegio Web</description>
+
+   <!-- SERVLETS -->
+
+   <servlet>
+      <servlet-name>Edicion</servlet-name>
+      <servlet-class>uniandes.cupi2.colegioweb.interfaz.ServletEdicion</servlet-class>
+   </servlet>
+   
+   <servlet>
+      <servlet-name>Eliminar</servlet-name>
+      <servlet-class>uniandes.cupi2.colegioweb.interfaz.ServletEliminar</servlet-class>
+   </servlet>
+   
+   <servlet>
+      <servlet-name>Guardar</servlet-name>
+      <servlet-class>uniandes.cupi2.colegioweb.interfaz.ServletGuardar</servlet-class>
+   </servlet>
+   
+   <servlet>
+      <servlet-name>Resultados</servlet-name>
+      <servlet-class>uniandes.cupi2.colegioweb.interfaz.ServletResultados</servlet-class>
+   </servlet>
+
+   <!-- MAPPING -->
+	
+   <servlet-mapping>
+      <servlet-name>Edicion</servlet-name>
+      <url-pattern>/estudiante.htm</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>Eliminar</servlet-name>
+      <url-pattern>/eliminar.htm</url-pattern>
+   </servlet-mapping>
+   
+   <servlet-mapping>
+      <servlet-name>Guardar</servlet-name>
+      <url-pattern>/guardar.htm</url-pattern>
+   </servlet-mapping>
+   
+   <servlet-mapping>
+      <servlet-name>Resultados</servlet-name>
+      <url-pattern>/resultado.htm</url-pattern>
+   </servlet-mapping>
+
+</web-app>

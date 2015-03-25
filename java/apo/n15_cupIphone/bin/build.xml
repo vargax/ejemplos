@@ -1,0 +1,49 @@
+<project name="CupIphone" default="jar" basedir="../">
+        
+    <property name="src.dir" value="source"/>
+    <property name="classes.dir" value="classes"/>
+    <property name="dist.dir" value="dist"/>
+	<property name="lib.dir" value="lib"/>
+	<property name="jar.name" value="cupiphoneSDK.jar"/>
+	<property name="mainClass" value="uniandes.cupi2.cupIphone.interfaz.InterfazCupIphone"/>
+	
+	<!-- Classpath para la compilacion. En este directorio se encuentra la libreria de estructuras de datos del core-->
+	<path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+    </path>
+	
+	<!-- Tarea para limpiar los directorios de destino-->
+	<target name="clean">
+        <delete dir="${classes.dir}"/>
+		<delete dir="${dist.dir}"/>
+		<mkdir dir="${classes.dir}"/>
+		<mkdir dir="${dist.dir}"/>
+    </target>
+
+	<!-- Tarea para Compilar utilizando el classpath definido anteriormente-->
+	<target name="compile" depends="clean">        
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" 
+        	classpathref="classpath" debug="true">        	
+    	</javac>
+    </target>		
+
+	<!-- Tarea para crear el Jar del cupiphoneSDK. Se declara la clase principal para que sea un
+	jar ejecutable-->
+    <target name="jar" depends="compile">        
+        <jar destfile="${dist.dir}/${jar.name}" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${mainClass}"/>
+            </manifest>
+        </jar>
+    </target>
+	
+	<!-- Tarea para ejecutar la aplicación desde ant-->
+    <target name="run">
+        <java classname="${mainClass}" fork="true">
+        	<classpath>
+        		<path refid="classpath"/>
+        		<path location="${dist.dir}/${jar.name}"/>
+        	</classpath>
+        </java>
+    </target>
+</project>

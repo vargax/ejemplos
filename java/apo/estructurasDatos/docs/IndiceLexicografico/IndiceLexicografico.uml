@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_yOSHAGRlEeGUjruY5YTD1Q" name="Model">
+  <packageImport xmi:id="_yOSHAWRlEeGUjruY5YTD1Q">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_3kk2QGRlEeGUjruY5YTD1Q" name="IIndiceLexicografico">
+    <ownedOperation xmi:id="_AHVhgGRmEeGUjruY5YTD1Q" name="agregarObjeto" concurrency="concurrent"/>
+    <ownedOperation xmi:id="_qLxMoGRmEeGUjruY5YTD1Q" name="buscarObjeto"/>
+    <ownedOperation xmi:id="_v3lf8GRmEeGUjruY5YTD1Q" name="darObjetos"/>
+    <ownedOperation xmi:id="_xBS6AGRmEeGUjruY5YTD1Q" name="darNumeroElementos"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_0Hq1EGRmEeGUjruY5YTD1Q" name="IndiceLexicografico">
+    <generalization xmi:id="_5IY88GRmEeGUjruY5YTD1Q" general="_3kk2QGRlEeGUjruY5YTD1Q"/>
+    <ownedAttribute xmi:id="_-08QEGRmEeGUjruY5YTD1Q" name="NUMERO_ELEMENTOS_REHASH"/>
+    <ownedAttribute xmi:id="_E9Er8GRnEeGUjruY5YTD1Q" name="numeroElementos"/>
+    <ownedAttribute xmi:id="_GeKrQGRnEeGUjruY5YTD1Q" name="raizComun"/>
+    <ownedAttribute xmi:id="_d3apoGRnEeGUjruY5YTD1Q" name="indiceLexicografico" type="_0Hq1EGRmEeGUjruY5YTD1Q" association="_d3ds8GRnEeGUjruY5YTD1Q">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_d3apoWRnEeGUjruY5YTD1Q" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_d3apomRnEeGUjruY5YTD1Q" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_zudIcIr1EeGE0L6lmx_IPQ" name="listaEncadenada" type="_qoKSUIr1EeGE0L6lmx_IPQ" association="_zudvgIr1EeGE0L6lmx_IPQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zudIcYr1EeGE0L6lmx_IPQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zudIcor1EeGE0L6lmx_IPQ" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_d3ds8GRnEeGUjruY5YTD1Q" name="indices[]" memberEnd="_d3ds8WRnEeGUjruY5YTD1Q _d3apoGRnEeGUjruY5YTD1Q">
+    <ownedEnd xmi:id="_d3ds8WRnEeGUjruY5YTD1Q" name="indiceLexicografico" type="_0Hq1EGRmEeGUjruY5YTD1Q" association="_d3ds8GRnEeGUjruY5YTD1Q">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_d3ds8mRnEeGUjruY5YTD1Q" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_d3ds82RnEeGUjruY5YTD1Q" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_qoKSUIr1EeGE0L6lmx_IPQ" name="ListaEncadenada" clientDependency="_JJJIYIr2EeGE0L6lmx_IPQ">
+    <ownedAttribute xmi:id="_w63mgIr1EeGE0L6lmx_IPQ" name="nodoIndice" type="_uqnbIIr1EeGE0L6lmx_IPQ" association="_w66CwIr1EeGE0L6lmx_IPQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_w63mgYr1EeGE0L6lmx_IPQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_w63mgor1EeGE0L6lmx_IPQ" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_uqnbIIr1EeGE0L6lmx_IPQ" name="NodoIndice">
+    <ownedAttribute xmi:id="_cnUYUIr2EeGE0L6lmx_IPQ" name="criterioOrdenamiento"/>
+    <ownedAttribute xmi:id="_fP3H4Ir2EeGE0L6lmx_IPQ" name="criterioReducido"/>
+    <ownedAttribute xmi:id="_h0-I8Ir2EeGE0L6lmx_IPQ" name="objetoAlmacenado"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_w66CwIr1EeGE0L6lmx_IPQ" name="lista" memberEnd="_w66CwYr1EeGE0L6lmx_IPQ _w63mgIr1EeGE0L6lmx_IPQ">
+    <ownedEnd xmi:id="_w66CwYr1EeGE0L6lmx_IPQ" name="listaEncadenada" type="_qoKSUIr1EeGE0L6lmx_IPQ" association="_w66CwIr1EeGE0L6lmx_IPQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_w66Cwor1EeGE0L6lmx_IPQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_w66Cw4r1EeGE0L6lmx_IPQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_zudvgIr1EeGE0L6lmx_IPQ" name="lista" memberEnd="_zudvgYr1EeGE0L6lmx_IPQ _zudIcIr1EeGE0L6lmx_IPQ">
+    <ownedEnd xmi:id="_zudvgYr1EeGE0L6lmx_IPQ" name="indiceLexicografico" type="_0Hq1EGRmEeGUjruY5YTD1Q" association="_zudvgIr1EeGE0L6lmx_IPQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zudvgor1EeGE0L6lmx_IPQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zudvg4r1EeGE0L6lmx_IPQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_JJJIYIr2EeGE0L6lmx_IPQ" name="elementoAlmacenado" supplier="_uqnbIIr1EeGE0L6lmx_IPQ" client="_qoKSUIr1EeGE0L6lmx_IPQ"/>
+</uml:Model>

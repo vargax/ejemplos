@@ -1,0 +1,20 @@
+LISTA DE USUARIOS DE BODYCUPI2 
+
+Usuario: Pepito Pérez
+Id: 789
+Edad: 21
+Género: Masculino
+Registro médico:Sin antecedentes
+------------------------------------------------
+Usuario: Juan Villa
+Id: 123
+Edad: 24
+Género: Masculino
+Registro médico:Sin antecedentes
+------------------------------------------------
+Usuario: Camila Velez
+Id: 456
+Edad: 21
+Género: Femenino
+Registro médico:Sin antecedentes
+------------------------------------------------

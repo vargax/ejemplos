@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_8xSu0XTkEeGH0KU2--HMfA" name="Model">
+  <packageImport xmi:id="_8xSu0nTkEeGH0KU2--HMfA">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Hf3KUHTlEeGH0KU2--HMfA" name="CupiShare" clientDependency="_sRiiYHTlEeGH0KU2--HMfA _NAZIwHTnEeGH0KU2--HMfA">
+    <ownedAttribute xmi:id="_yFcasHTlEeGH0KU2--HMfA" name="servidor" type="_fytDIHTlEeGH0KU2--HMfA" association="_yFeP4HTlEeGH0KU2--HMfA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_yFdBwHTlEeGH0KU2--HMfA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_yFdBwXTlEeGH0KU2--HMfA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_MLO30HTmEeGH0KU2--HMfA" name="archivosLocales"/>
+    <ownedAttribute xmi:id="_OXbCkHTmEeGH0KU2--HMfA" name="archivosRemotos"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_dTUPkHTlEeGH0KU2--HMfA" name="ThreadCliente">
+    <ownedAttribute xmi:id="_e2Ks8HTmEeGH0KU2--HMfA" name="socket"/>
+    <ownedAttribute xmi:id="_gFp-4HTmEeGH0KU2--HMfA" name="nombre"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_fytDIHTlEeGH0KU2--HMfA" name="ThreadServidor">
+    <ownedAttribute xmi:id="_cj4hQHTmEeGH0KU2--HMfA" name="socket"/>
+    <ownedAttribute xmi:id="_dsK_AHTmEeGH0KU2--HMfA" name="puerto"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_sRiiYHTlEeGH0KU2--HMfA" name="clientes" supplier="_dTUPkHTlEeGH0KU2--HMfA" client="_Hf3KUHTlEeGH0KU2--HMfA"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_yFeP4HTlEeGH0KU2--HMfA" name="servidor" visibility="private" memberEnd="_yFeP4XTlEeGH0KU2--HMfA _yFcasHTlEeGH0KU2--HMfA">
+    <ownedEnd xmi:id="_yFeP4XTlEeGH0KU2--HMfA" name="mundo" type="_Hf3KUHTlEeGH0KU2--HMfA" association="_yFeP4HTlEeGH0KU2--HMfA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_yFeP4nTlEeGH0KU2--HMfA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_yFeP43TlEeGH0KU2--HMfA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_-ONt4HTmEeGH0KU2--HMfA" name="Mailer">
+    <ownedAttribute xmi:id="_CR9QIHTnEeGH0KU2--HMfA" name="destinatario"/>
+    <ownedAttribute xmi:id="_EWukQHTnEeGH0KU2--HMfA" name="asunto"/>
+    <ownedAttribute xmi:id="_F8rOYHTnEeGH0KU2--HMfA" name="cuerpo"/>
+    <ownedAttribute xmi:id="_HF0nwHTnEeGH0KU2--HMfA" name="adjunto"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_NAZIwHTnEeGH0KU2--HMfA" name="correo" supplier="_-ONt4HTmEeGH0KU2--HMfA" client="_Hf3KUHTlEeGH0KU2--HMfA"/>
+</uml:Model>

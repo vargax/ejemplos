@@ -1,0 +1,45 @@
+h1{ 
+	font-family: Verdana; 
+	font-size: 10pt; 
+	color: #FFFFFF; 
+	font-weight: bold 
+}
+
+p, body, td, .normal{ 
+	font-family: Verdana; 
+	font-size: 8pt 
+}
+
+p.error{ 
+	font-family: Verdana; 
+	font-size: 10pt;
+	color: red; 
+}
+
+p.ok{ 
+	font-family: Verdana; 
+	font-size: 10pt;
+	color: green; 
+}
+
+h2{ 
+	font-family: Verdana; 
+	font-size: 12pt; 
+	color: #255DD0; 
+	font-weight: bold 
+}
+
+td.h1{
+	background-color: #707070
+}
+
+td.h2{
+	background-color: #1672A3
+}
+
+a:link, a:visited{
+	font-family: Verdana; 
+	font-size: 8pt;
+	color: #1672A3;
+	text-decoration: underline 
+}
