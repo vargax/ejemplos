@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="src" path="source"/>
-	<classpathentry kind="src" path="test/source"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="test/lib/junit.jar"/>
-	<classpathentry kind="lib" path="lib/cupi2Collections.jar"/>
-	<classpathentry kind="output" path="classes"/>
-</classpath>
