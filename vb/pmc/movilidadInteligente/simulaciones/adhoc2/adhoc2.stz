@@ -1,0 +1,17 @@
+
+Queue Length Record
+
+File:     C:\Users\Pmc\Desktop\MOVILIDAD INTELIGENTE\simulaciones\adhoc2\adhoc2.inp
+Comment:  
+Date:     lunes, 29 de abril de 2013 06:02:34 p.m.
+VISSIM:   5.40-03 [33277]
+
+Queue Counter        1: Link     1 At      67.640 m
+
+Avg.: average queue length [m] within time interval
+max: maximum queue length [m] within time interval
+Stop: number of stops within queue
+
+  Time; Avg.; max;Stop; 
+  No.:;    1;   1;   1; 
+  3156;    0;   0;   0; 

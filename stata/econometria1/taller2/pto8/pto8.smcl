@@ -1,0 +1,107 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+       log:  {res}C:\Users\Camilo\Documents\Uniandes\200720\Econometría I\Taller2.EconometríaI\pto8\pto8.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}23 Oct 2007, 19:36:31
+{txt}
+{com}. use MLB1
+{txt}
+{com}. *****
+. * A *
+. *****
+. reg lsalary years games atbats hruns runs runsyr fldperc yrsallst frstbase scndbase thrdbase shrtstop catcher
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     353
+{txt}{hline 13}{char +}{hline 30}           F( 13,   339) ={res}   48.06
+    {txt}   Model {char |} {res} 319.068017    13  24.5436936           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 173.107519   339  .510641648           {txt}R-squared     = {res} 0.6483
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.6348
+    {txt}   Total {char |} {res} 492.175535   352  1.39822595           {txt}Root MSE      = {res} .71459
+
+{txt}{hline 13}{c TT}{hline 64}
+     lsalary {c |}      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+{hline 13}{char +}{hline 64}
+       years {c |}  {res} .1481461   .0435356     3.40   0.001     .0625121    .2337801
+{txt}       games {c |}  {res} .0007338   .0008158     0.90   0.369    -.0008708    .0023384
+{txt}      atbats {c |}  {res}-.0002814    .000189    -1.49   0.138    -.0006532    .0000904
+{txt}       hruns {c |}  {res} .0019172   .0009419     2.04   0.043     .0000644    .0037699
+{txt}        runs {c |}  {res} -.001557   .0005405    -2.88   0.004      -.00262   -.0004939
+{txt}      runsyr {c |}  {res} .0422004   .0032684    12.91   0.000     .0357715    .0486294
+{txt}     fldperc {c |}  {res}-.0011786   .0022513    -0.52   0.601    -.0056069    .0032496
+{txt}    yrsallst {c |}  {res} .0455039    .032215     1.41   0.159    -.0178626    .1088705
+{txt}    frstbase {c |}  {res}-.0329414   .1265124    -0.26   0.795    -.2817896    .2159068
+{txt}    scndbase {c |}  {res}-.1479758    .138062    -1.07   0.285    -.4195419    .1235903
+{txt}    thrdbase {c |}  {res} .0003794   .1447274     0.00   0.998    -.2842975    .2850562
+{txt}    shrtstop {c |}  {res}-.0484286    .128842    -0.38   0.707    -.3018592    .2050019
+{txt}     catcher {c |}  {res} .3138261   .1321137     2.38   0.018     .0539602    .5736919
+{txt}       _cons {c |}  {res} 12.49832   2.174185     5.75   0.000     8.221725    16.77491
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. *---------- 
+. * Ho: Catchers y jardineros ganan en promedio la misma suma. 
+. * B13--> Coeficiente de los Catchers.
+. *       Ho: beta13 == 0
+. *       H1: beta13 <> 0
+. *
+. * El salario de los catchers es en promedio un 31.3% mayor que el de los jardineros.
+. * Dado que el t estadistico para el coeficiente de [catcher] es 2.38, podemos afirmar que dicho coeficiente es significativamente diferente de cero, incluso a un nivel de significancia del 95%
+. *----------
+. *****
+. * B *
+. *****
+. reg lsalary years games atbats hruns runs runsyr fldperc yrsallst frstbase scndbase thrdbase shrtstop catcher
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     353
+{txt}{hline 13}{char +}{hline 30}           F( 13,   339) ={res}   48.06
+    {txt}   Model {char |} {res} 319.068017    13  24.5436936           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 173.107519   339  .510641648           {txt}R-squared     = {res} 0.6483
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.6348
+    {txt}   Total {char |} {res} 492.175535   352  1.39822595           {txt}Root MSE      = {res} .71459
+
+{txt}{hline 13}{c TT}{hline 64}
+     lsalary {c |}      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+{hline 13}{char +}{hline 64}
+       years {c |}  {res} .1481461   .0435356     3.40   0.001     .0625121    .2337801
+{txt}       games {c |}  {res} .0007338   .0008158     0.90   0.369    -.0008708    .0023384
+{txt}      atbats {c |}  {res}-.0002814    .000189    -1.49   0.138    -.0006532    .0000904
+{txt}       hruns {c |}  {res} .0019172   .0009419     2.04   0.043     .0000644    .0037699
+{txt}        runs {c |}  {res} -.001557   .0005405    -2.88   0.004      -.00262   -.0004939
+{txt}      runsyr {c |}  {res} .0422004   .0032684    12.91   0.000     .0357715    .0486294
+{txt}     fldperc {c |}  {res}-.0011786   .0022513    -0.52   0.601    -.0056069    .0032496
+{txt}    yrsallst {c |}  {res} .0455039    .032215     1.41   0.159    -.0178626    .1088705
+{txt}    frstbase {c |}  {res}-.0329414   .1265124    -0.26   0.795    -.2817896    .2159068
+{txt}    scndbase {c |}  {res}-.1479758    .138062    -1.07   0.285    -.4195419    .1235903
+{txt}    thrdbase {c |}  {res} .0003794   .1447274     0.00   0.998    -.2842975    .2850562
+{txt}    shrtstop {c |}  {res}-.0484286    .128842    -0.38   0.707    -.3018592    .2050019
+{txt}     catcher {c |}  {res} .3138261   .1321137     2.38   0.018     .0539602    .5736919
+{txt}       _cons {c |}  {res} 12.49832   2.174185     5.75   0.000     8.221725    16.77491
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. *----------
+. * Ho: beta8==beta9==beta10==beta11==beta12==beta13
+. * H1: beta8<>beta9<>beta10<>beta11<>beta12<>beta13
+. *----------
+. test frstbase scndbase thrdbase shrtstop catcher
+
+{txt} ( 1)  {res}frstbase = 0
+{txt} ( 2)  {res}scndbase = 0
+{txt} ( 3)  {res}thrdbase = 0
+{txt} ( 4)  {res}shrtstop = 0
+{txt} ( 5)  {res}catcher = 0
+
+{txt}       F(  5,   339) ={res}    1.80
+{txt}{col 13}Prob > F ={res}    0.1117
+{txt}
+{com}. *----------
+. * Dado que la masa de probabilidad acumulada es 11.1%, se puede concluir que [frstbase] [scndbase] [thrdbase] [shrtstop] [catcher] son conjuntamente insignificantes incluso a un nivel de significancia del 10%.
+. *----------
+. *****
+. * C *
+. *****
+. *----------
+. * Los resultados obtenidos en los puntos a y b son congruentes, ya que en ambos casos concluimos que los salarios son diferentes de acuerdo a la posición de cada jugador.
+. 
+{txt}end of do-file
+
+
+{com}. exit, clear

@@ -1,0 +1,18 @@
+
+Queue Length Record
+
+File:     \\CODD.sis.virtual.uniandes.edu.co\Estudiantes\Profiles\js.contreras2187\Documents\MOVILIDAD INTELIGENTE\cruce.inp
+Comment:  
+Date:     jueves, 04 de abril de 2013 02:14:55 p.m.
+VISSIM:   5.30-02 [26389]
+
+Queue Counter        1: Link     1 At      48.300 m
+Queue Counter        2: Link     3 At      35.100 m
+
+Avg.: average queue length [m] within time interval
+Max.: maximum queue length [m] within time interval
+Stop: number of stops within queue
+
+  Time; Avg.; max;Stop; Avg.; max;Stop; 
+  No.:;    1;   1;   1;    2;   2;   2; 
+  1000;   40;  53;   8;   28;  39;   6; 

@@ -1,0 +1,34 @@
+The error occurred in line 2499 of file .\editor.cpp in function bool __cdecl MausDoppel(void *,struct XVT2DOTNET::s_pnt).
+Information:
+EventHandler for MouseDouble: active link changed?
+Stack:
+0x1e9912f0
+0x12c200
+0x12d000
+
+Simulation: Run 0 3.2 sec, The error occurred in line 2964 of file .\menue.cpp in function void __cdecl Hauptmenue(void *,short,bool,bool).
+Information:
+Exception access violation
+Code : 0xc0000005
+Flags : 0
+Address : 0x409e850b
+Stack:
+not availableThe error occurred in line 1367 of file .\netzwin.cpp in function long __cdecl netz_eh(void *,struct XVT2DOTNET::s_event *).
+Information:
+Exception access violation
+Code : 0xc0000005
+Flags : 0
+Address : 0x405cae01
+Stack:
+not availableThe error occurred in line 921 of file .\netzwin.cpp in function long __cdecl main_eh(void *,struct XVT2DOTNET::s_event *).
+Information:
+Unidentified exception
+Stack:
+0x7ff00f75008
+0x1249b0
+0x1257b0
+The error occurred in line 921 of file .\netzwin.cpp in function long __cdecl main_eh(void *,struct XVT2DOTNET::s_event *).
+Information:
+Unidentified exception
+Stack:
+not available

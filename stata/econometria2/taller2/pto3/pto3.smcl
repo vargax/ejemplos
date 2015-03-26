@@ -1,0 +1,386 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+       log:  {res}C:\Users\Camilo\Documents\Uniandes\200810\Econometría II\taller2\pto3\pto3.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 5 Mar 2008, 08:40:35
+{txt}
+{com}. use MROZ
+{txt}
+{com}. d
+
+{txt}Contains data from {res}MROZ.dta
+{txt}  obs:{res}           753                          
+{txt} vars:{res}            22                          2 Mar 1999 11:30
+{txt} size:{res}        42,921{txt} (99.6% of memory free)
+{hline 79}
+              storage  display     value
+variable name   type   format      label      variable label
+{hline 79}
+{res}inlf           {txt} byte   %9.0g                  {res}=1 if in lab frce, 1975
+hours          {txt} int    %9.0g                  {res}hours worked, 1975
+kidslt6        {txt} byte   %9.0g                  {res}# kids < 6 years
+kidsge6        {txt} byte   %9.0g                  {res}# kids 6-18
+age            {txt} byte   %9.0g                  {res}woman's age in yrs
+educ           {txt} byte   %9.0g                  {res}years of schooling
+wage           {txt} float  %9.0g                  {res}est. wage from earn, hrs
+repwage        {txt} float  %9.0g                  {res}rep. wage at interview in 1976
+hushrs         {txt} int    %9.0g                  {res}hours worked by husband, 1975
+husage         {txt} byte   %9.0g                  {res}husband's age
+huseduc        {txt} byte   %9.0g                  {res}husband's years of schooling
+huswage        {txt} float  %9.0g                  {res}husband's hourly wage, 1975
+faminc         {txt} float  %9.0g                  {res}family income, 1975
+mtr            {txt} float  %9.0g                  {res}fed. marg. tax rte facing woman
+motheduc       {txt} byte   %9.0g                  {res}mother's years of schooling
+fatheduc       {txt} byte   %9.0g                  {res}father's years of schooling
+unem           {txt} float  %9.0g                  {res}unem. rate in county of resid.
+city           {txt} byte   %9.0g                  {res}=1 if live in SMSA
+exper          {txt} byte   %9.0g                  {res}actual labor mkt exper
+nwifeinc       {txt} float  %9.0g                  {res}(faminc - wage*hours)/1000
+lwage          {txt} float  %9.0g                  {res}log(wage)
+expersq        {txt} int    %9.0g                  {res}exper^2
+{txt}{hline 79}
+Sorted by:  
+
+{com}. * -------------------------
+. * Condición De Rango
+. * -------------------------
+. * MC2E EC1
+. * -------------------------
+. ivregress 2sls hours educ age kidslt6 kidsge6 nwifeinc (lwage=educ age kidslt6 kidsge6 nwifeinc exper expersq), first
+
+{txt}First-stage regressions
+{hline 23}
+
+{col 51}Number of obs{col 67}= {res}       428
+{txt}{col 51}F({res}   7{txt},{res}    420{txt}){col 67}= {res}     11.78
+{txt}{col 51}Prob > F{col 67}= {res}    0.0000
+{txt}{col 51}R-squared{col 67}= {res}    0.1641
+{txt}{col 51}Adj R-squared{col 67}= {res}    0.1502
+{txt}{col 51}Root MSE{col 67}= {res}    0.6667
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}       lwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}        educ{col 14}{c |}{result}{space 2} .0998844{col 26}{space 2} .0150975{col 37}{space 1}    6.62{col 46}{space 3}0.000{col 55}{space 3} .0702084{col 67}{space 3} .1295604
+{col 1}{text}         age{col 14}{c |}{result}{space 2}-.0035204{col 26}{space 2} .0054145{col 37}{space 1}   -0.65{col 46}{space 3}0.516{col 55}{space 3}-.0141633{col 67}{space 3} .0071225
+{col 1}{text}     kidslt6{col 14}{c |}{result}{space 2}-.0558725{col 26}{space 2} .0886034{col 37}{space 1}   -0.63{col 46}{space 3}0.529{col 55}{space 3}-.2300339{col 67}{space 3} .1182889
+{col 1}{text}     kidsge6{col 14}{c |}{result}{space 2}-.0176484{col 26}{space 2}  .027891{col 37}{space 1}   -0.63{col 46}{space 3}0.527{col 55}{space 3}-.0724718{col 67}{space 3} .0371749
+{col 1}{text}    nwifeinc{col 14}{c |}{result}{space 2} .0056942{col 26}{space 2} .0033195{col 37}{space 1}    1.72{col 46}{space 3}0.087{col 55}{space 3}-.0008307{col 67}{space 3} .0122192
+{col 1}{text}       exper{col 14}{c |}{result}{space 2} .0407097{col 26}{space 2} .0133723{col 37}{space 1}    3.04{col 46}{space 3}0.002{col 55}{space 3} .0144249{col 67}{space 3} .0669946
+{col 1}{text}     expersq{col 14}{c |}{result}{space 2}-.0007473{col 26}{space 2} .0004018{col 37}{space 1}   -1.86{col 46}{space 3}0.064{col 55}{space 3}-.0015371{col 67}{space 3} .0000424
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2}-.3579972{col 26}{space 2} .3182963{col 37}{space 1}   -1.12{col 46}{space 3}0.261{col 55}{space 3}-.9836494{col 67}{space 3} .2676551
+{col 1}{text}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+
+{res}
+{txt}{col 1}Instrumental variables (2SLS) regression{col 56}Number of obs{col 70}= {res}    428
+{txt}{col 1}{col 56}Wald chi2({res}6{txt}){col 70}={res}   20.80
+{txt}{col 1}{col 56}Prob > chi2{col 70}= {res} 0.0020
+{txt}{col 1}{col 56}R-squared{col 70}={res}       .
+{txt}{col 56}Root MSE{col 70}= {res} 1291.2
+
+{txt}{hline 13}{c TT}{hline 64}
+       hours {c |}      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+       lwage {c |}  {res} 1544.819   476.7913     3.24   0.001     610.3248    2479.312
+        {txt}educ {c |}  {res} -177.449   57.66517    -3.08   0.002    -290.4706    -64.4273
+         {txt}age {c |}  {res}-10.78409   9.498705    -1.14   0.256    -29.40121    7.833034
+     {txt}kidslt6 {c |}  {res}-210.8339   175.4811    -1.20   0.230    -554.7706    133.1028
+     {txt}kidsge6 {c |}  {res}-47.55708   56.45049    -0.84   0.400     -158.198    63.08384
+    {txt}nwifeinc {c |}  {res}-9.249121   6.427897    -1.44   0.150    -21.84757    3.349327
+       {txt}_cons {c |}  {res} 2432.198   589.2929     4.13   0.000     1277.205    3587.191
+{txt}{hline 13}{c BT}{hline 64}
+{p 0 15 45}Instrumented:{space 2}lwage{p_end}
+{p 0 15 45}Instruments:{space 3}educ age kidslt6 kidsge6 nwifeinc exper expersq{p_end}
+
+{com}. * -------------------------
+. * MC2E EC2
+. * -------------------------
+. ivregress 2sls lwage educ exper expersq (hours=educ age kidslt6 kidsge6 nwifeinc exper expersq), first
+
+{txt}First-stage regressions
+{hline 23}
+
+{col 51}Number of obs{col 67}= {res}       428
+{txt}{col 51}F({res}   7{txt},{res}    420{txt}){col 67}= {res}      9.79
+{txt}{col 51}Prob > F{col 67}= {res}    0.0000
+{txt}{col 51}R-squared{col 67}= {res}    0.1403
+{txt}{col 51}Adj R-squared{col 67}= {res}    0.1260
+{txt}{col 51}Root MSE{col 67}= {res}  725.7314
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}       hours{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}        educ{col 14}{c |}{result}{space 2}-22.78841{col 26}{space 2} 16.43448{col 37}{space 1}   -1.39{col 46}{space 3}0.166{col 55}{space 3}-55.09248{col 67}{space 3}  9.51567
+{col 1}{text}       exper{col 14}{c |}{result}{space 2} 47.00509{col 26}{space 2} 14.55649{col 37}{space 1}    3.23{col 46}{space 3}0.001{col 55}{space 3} 18.39244{col 67}{space 3} 75.61774
+{col 1}{text}     expersq{col 14}{c |}{result}{space 2}-.5136442{col 26}{space 2} .4373576{col 37}{space 1}   -1.17{col 46}{space 3}0.241{col 55}{space 3}-1.373327{col 67}{space 3} .3460382
+{col 1}{text}         age{col 14}{c |}{result}{space 2}-19.66352{col 26}{space 2} 5.894026{col 37}{space 1}   -3.34{col 46}{space 3}0.001{col 55}{space 3}-31.24899{col 67}{space 3}-8.078057
+{col 1}{text}     kidslt6{col 14}{c |}{result}{space 2}-305.7209{col 26}{space 2} 96.45007{col 37}{space 1}   -3.17{col 46}{space 3}0.002{col 55}{space 3}-495.3059{col 67}{space 3}-116.1359
+{col 1}{text}     kidsge6{col 14}{c |}{result}{space 2}-72.36673{col 26}{space 2} 30.36099{col 37}{space 1}   -2.38{col 46}{space 3}0.018{col 55}{space 3}-132.0451{col 67}{space 3}-12.68832
+{col 1}{text}    nwifeinc{col 14}{c |}{result}{space 2} .4438514{col 26}{space 2} 3.613498{col 37}{space 1}    0.12{col 46}{space 3}0.902{col 55}{space 3}-6.658942{col 67}{space 3} 7.546644
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2} 2056.643{col 26}{space 2} 346.4843{col 37}{space 1}    5.94{col 46}{space 3}0.000{col 55}{space 3} 1375.583{col 67}{space 3} 2737.702
+{col 1}{text}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+
+{res}
+{txt}{col 1}Instrumental variables (2SLS) regression{col 56}Number of obs{col 70}= {res}    428
+{txt}{col 1}{col 56}Wald chi2({res}4{txt}){col 70}={res}   76.08
+{txt}{col 1}{col 56}Prob > chi2{col 70}= {res} 0.0000
+{txt}{col 1}{col 56}R-squared{col 70}={res}  0.1112
+{txt}{col 56}Root MSE{col 70}= {res} .68101
+
+{txt}{hline 13}{c TT}{hline 64}
+       lwage {c |}      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+       hours {c |}  {res} .0001608   .0002141     0.75   0.453    -.0002589    .0005805
+        {txt}educ {c |}  {res} .1111175   .0152421     7.29   0.000     .0812436    .1409914
+       {txt}exper {c |}  {res}  .032646   .0179552     1.82   0.069    -.0025456    .0678375
+     {txt}expersq {c |}  {res}-.0006765     .00044    -1.54   0.124     -.001539    .0001859
+       {txt}_cons {c |}  {res}  -.69279   .3048041    -2.27   0.023    -1.290195    -.095385
+{txt}{hline 13}{c BT}{hline 64}
+{p 0 15 45}Instrumented:{space 2}hours{p_end}
+{p 0 15 45}Instruments:{space 3}educ exper expersq age kidslt6 kidsge6 nwifeinc{p_end}
+
+{com}. * -------------------------
+. * MC3E
+. * -------------------------
+. reg3 (hours lwage educ age kidslt6 kidsge6 nwifeinc) (lwage hours educ exper expersq)
+
+{txt}Three-stage least-squares regression
+{hline 70}
+Equation          Obs  Parms        RMSE    "R-sq"       chi2        P
+{hline 70}
+{res}hours             428      6    1368.362   -2.1145      34.54   0.0000
+lwage             428      4    .6892584    0.0895      79.87   0.0000
+{txt}{hline 70}
+
+{hline 13}{c TT}{hline 64}
+             {c |}      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+{res}hours        {txt}{c |}
+       lwage {c |}  {res} 1676.933    431.169     3.89   0.000     831.8577    2522.009
+        {txt}educ {c |}  {res}-205.0267   51.84729    -3.95   0.000    -306.6455   -103.4078
+         {txt}age {c |}  {res}-12.28121   8.261529    -1.49   0.137    -28.47351    3.911094
+     {txt}kidslt6 {c |}  {res}-200.5673   134.2685    -1.49   0.135    -463.7287    62.59414
+     {txt}kidsge6 {c |}  {res}-48.63986   35.95137    -1.35   0.176    -119.1032    21.82352
+    {txt}nwifeinc {c |}  {res} .3678943   3.451518     0.11   0.915    -6.396957    7.132745
+       {txt}_cons {c |}  {res} 2504.799   535.8919     4.67   0.000      1454.47    3555.128
+{txt}{hline 13}{c +}{hline 64}
+{res}lwage        {txt}{c |}
+       hours {c |}  {res}  .000201   .0002109     0.95   0.340    -.0002123    .0006143
+        {txt}educ {c |}  {res} .1129699   .0151452     7.46   0.000     .0832858    .1426539
+       {txt}exper {c |}  {res} .0208906   .0142782     1.46   0.143    -.0070942    .0488753
+     {txt}expersq {c |}  {res}-.0002943   .0002614    -1.13   0.260    -.0008066     .000218
+       {txt}_cons {c |}  {res}-.7051103   .3045904    -2.31   0.021    -1.302097   -.1081241
+{txt}{hline 13}{c BT}{hline 64}
+Endogenous variables:  hours lwage {res}
+{txt}Exogenous variables:   educ age kidslt6 kidsge6 nwifeinc exper expersq {res}
+{txt}{hline 78}
+
+{com}. * *************************
+. * Educación como variable endógena
+. * -------------------------
+. * MC2E EC1
+. * -------------------------
+. ivregress 2sls hours age kidslt6 kidsge6 nwifeinc (educ lwage= age kidslt6 kidsge6 nwifeinc motheduc fatheduc exper expersq), first
+
+{txt}First-stage regressions
+{hline 23}
+
+{col 51}Number of obs{col 67}= {res}       428
+{txt}{col 51}F({res}   8{txt},{res}    419{txt}){col 67}= {res}     21.05
+{txt}{col 51}Prob > F{col 67}= {res}    0.0000
+{txt}{col 51}R-squared{col 67}= {res}    0.2866
+{txt}{col 51}Adj R-squared{col 67}= {res}    0.2730
+{txt}{col 51}Root MSE{col 67}= {res}    1.9486
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}        educ{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}         age{col 14}{c |}{result}{space 2}-.0082753{col 26}{space 2} .0161192{col 37}{space 1}   -0.51{col 46}{space 3}0.608{col 55}{space 3}-.0399598{col 67}{space 3} .0234093
+{col 1}{text}     kidslt6{col 14}{c |}{result}{space 2} .7051216{col 26}{space 2} .2572803{col 37}{space 1}    2.74{col 46}{space 3}0.006{col 55}{space 3} .1994007{col 67}{space 3} 1.210843
+{col 1}{text}     kidsge6{col 14}{c |}{result}{space 2}-.1561275{col 26}{space 2} .0814656{col 37}{space 1}   -1.92{col 46}{space 3}0.056{col 55}{space 3}-.3162597{col 67}{space 3} .0040047
+{col 1}{text}    nwifeinc{col 14}{c |}{result}{space 2} .0536562{col 26}{space 2} .0093466{col 37}{space 1}    5.74{col 46}{space 3}0.000{col 55}{space 3} .0352842{col 67}{space 3} .0720282
+{col 1}{text}    motheduc{col 14}{c |}{result}{space 2} .1562401{col 26}{space 2} .0350396{col 37}{space 1}    4.46{col 46}{space 3}0.000{col 55}{space 3} .0873647{col 67}{space 3} .2251155
+{col 1}{text}    fatheduc{col 14}{c |}{result}{space 2} .1595197{col 26}{space 2} .0327236{col 37}{space 1}    4.87{col 46}{space 3}0.000{col 55}{space 3} .0951968{col 67}{space 3} .2238427
+{col 1}{text}       exper{col 14}{c |}{result}{space 2} .0496659{col 26}{space 2} .0390114{col 37}{space 1}    1.27{col 46}{space 3}0.204{col 55}{space 3}-.0270165{col 67}{space 3} .1263484
+{col 1}{text}     expersq{col 14}{c |}{result}{space 2}-.0008345{col 26}{space 2} .0011742{col 37}{space 1}   -0.71{col 46}{space 3}0.478{col 55}{space 3}-.0031426{col 67}{space 3} .0014736
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2} 8.729802{col 26}{space 2} .8540024{col 37}{space 1}   10.22{col 46}{space 3}0.000{col 55}{space 3} 7.051139{col 67}{space 3} 10.40846
+{col 1}{text}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+
+{col 51}Number of obs{col 67}= {res}       428
+{txt}{col 51}F({res}   8{txt},{res}    419{txt}){col 67}= {res}      4.58
+{txt}{col 51}Prob > F{col 67}= {res}    0.0000
+{txt}{col 51}R-squared{col 67}= {res}    0.0805
+{txt}{col 51}Adj R-squared{col 67}= {res}    0.0629
+{txt}{col 51}Root MSE{col 67}= {res}    0.7001
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}       lwage{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}         age{col 14}{c |}{result}{space 2}-.0062424{col 26}{space 2} .0057913{col 37}{space 1}   -1.08{col 46}{space 3}0.282{col 55}{space 3} -.017626{col 67}{space 3} .0051412
+{col 1}{text}     kidslt6{col 14}{c |}{result}{space 2} .0131463{col 26}{space 2} .0924355{col 37}{space 1}    0.14{col 46}{space 3}0.887{col 55}{space 3}-.1685488{col 67}{space 3} .1948413
+{col 1}{text}     kidsge6{col 14}{c |}{result}{space 2}-.0368895{col 26}{space 2} .0292689{col 37}{space 1}   -1.26{col 46}{space 3}0.208{col 55}{space 3}-.0944217{col 67}{space 3} .0206427
+{col 1}{text}    nwifeinc{col 14}{c |}{result}{space 2} .0117951{col 26}{space 2}  .003358{col 37}{space 1}    3.51{col 46}{space 3}0.000{col 55}{space 3} .0051944{col 67}{space 3} .0183958
+{col 1}{text}    motheduc{col 14}{c |}{result}{space 2} .0012135{col 26}{space 2}  .012589{col 37}{space 1}    0.10{col 46}{space 3}0.923{col 55}{space 3} -.023532{col 67}{space 3}  .025959
+{col 1}{text}    fatheduc{col 14}{c |}{result}{space 2} .0118099{col 26}{space 2} .0117569{col 37}{space 1}    1.00{col 46}{space 3}0.316{col 55}{space 3}   -.0113{col 67}{space 3} .0349198
+{col 1}{text}       exper{col 14}{c |}{result}{space 2} .0460509{col 26}{space 2}  .014016{col 37}{space 1}    3.29{col 46}{space 3}0.001{col 55}{space 3} .0185005{col 67}{space 3} .0736013
+{col 1}{text}     expersq{col 14}{c |}{result}{space 2}-.0008453{col 26}{space 2} .0004219{col 37}{space 1}   -2.00{col 46}{space 3}0.046{col 55}{space 3}-.0016746{col 67}{space 3}-.0000161
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2}  .757117{col 26}{space 2} .3068254{col 37}{space 1}    2.47{col 46}{space 3}0.014{col 55}{space 3} .1540082{col 67}{space 3} 1.360226
+{col 1}{text}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+
+{res}
+{txt}{col 1}Instrumental variables (2SLS) regression{col 56}Number of obs{col 70}= {res}    428
+{txt}{col 1}{col 56}Wald chi2({res}6{txt}){col 70}={res}   21.94
+{txt}{col 1}{col 56}Prob > chi2{col 70}= {res} 0.0012
+{txt}{col 1}{col 56}R-squared{col 70}={res}       .
+{txt}{col 56}Root MSE{col 70}= {res} 1228.8
+
+{txt}{hline 13}{c TT}{hline 64}
+       hours {c |}      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+        educ {c |}  {res}-86.15417   70.20253    -1.23   0.220    -223.7486    51.44026
+       {txt}lwage {c |}  {res} 1408.637    426.884     3.30   0.001     571.9593    2245.314
+         {txt}age {c |}  {res}-8.159718   9.173867    -0.89   0.374    -26.14017    9.820732
+     {txt}kidslt6 {c |}  {res}-274.7547   169.1392    -1.62   0.104    -606.2614     56.7519
+     {txt}kidsge6 {c |}  {res}-32.79479   57.00454    -0.58   0.565    -144.5216    78.93205
+    {txt}nwifeinc {c |}  {res}-13.84787   7.422762    -1.87   0.062    -28.39622     .700477
+       {txt}_cons {c |}  {res} 1404.552   936.2355     1.50   0.134     -430.436     3239.54
+{txt}{hline 13}{c BT}{hline 64}
+{p 0 15 45}Instrumented:{space 2}educ lwage{p_end}
+{p 0 15 45}Instruments:{space 3}age kidslt6 kidsge6 nwifeinc motheduc fatheduc exper expersq{p_end}
+
+{com}. * -------------------------
+. * MC2E EC2
+. * -------------------------
+. ivregress 2sls lwage exper expersq (hours educ = age kidslt6 kidsge6 nwifeinc motheduc fatheduc exper expersq), first
+
+{txt}First-stage regressions
+{hline 23}
+
+{col 51}Number of obs{col 67}= {res}       428
+{txt}{col 51}F({res}   8{txt},{res}    419{txt}){col 67}= {res}      8.38
+{txt}{col 51}Prob > F{col 67}= {res}    0.0000
+{txt}{col 51}R-squared{col 67}= {res}    0.1379
+{txt}{col 51}Adj R-squared{col 67}= {res}    0.1214
+{txt}{col 51}Root MSE{col 67}= {res}  727.6177
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}       hours{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}       exper{col 14}{c |}{result}{space 2}  45.8623{col 26}{space 2} 14.56723{col 37}{space 1}    3.15{col 46}{space 3}0.002{col 55}{space 3} 17.22834{col 67}{space 3} 74.49625
+{col 1}{text}     expersq{col 14}{c |}{result}{space 2}-.5026641{col 26}{space 2} .4384618{col 37}{space 1}   -1.15{col 46}{space 3}0.252{col 55}{space 3}-1.364523{col 67}{space 3} .3591947
+{col 1}{text}         age{col 14}{c |}{result}{space 2}-19.10492{col 26}{space 2} 6.019057{col 37}{space 1}   -3.17{col 46}{space 3}0.002{col 55}{space 3}-30.93623{col 67}{space 3}-7.273614
+{col 1}{text}     kidslt6{col 14}{c |}{result}{space 2}-319.4436{col 26}{space 2} 96.07092{col 37}{space 1}   -3.33{col 46}{space 3}0.001{col 55}{space 3}-508.2846{col 67}{space 3}-130.6026
+{col 1}{text}     kidsge6{col 14}{c |}{result}{space 2}-70.15783{col 26}{space 2} 30.42003{col 37}{space 1}   -2.31{col 46}{space 3}0.022{col 55}{space 3}-129.9527{col 67}{space 3}-10.36294
+{col 1}{text}    nwifeinc{col 14}{c |}{result}{space 2}-.6933173{col 26}{space 2} 3.490098{col 37}{space 1}   -0.20{col 46}{space 3}0.843{col 55}{space 3}  -7.5536{col 67}{space 3} 6.166965
+{col 1}{text}    motheduc{col 14}{c |}{result}{space 2} 2.661641{col 26}{space 2} 13.08413{col 37}{space 1}    0.20{col 46}{space 3}0.839{col 55}{space 3}-23.05708{col 67}{space 3} 28.38036
+{col 1}{text}    fatheduc{col 14}{c |}{result}{space 2}-9.929742{col 26}{space 2} 12.21931{col 37}{space 1}   -0.81{col 46}{space 3}0.417{col 55}{space 3}-33.94853{col 67}{space 3} 14.08905
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2} 1841.442{col 26}{space 2} 318.8926{col 37}{space 1}    5.77{col 46}{space 3}0.000{col 55}{space 3} 1214.613{col 67}{space 3}  2468.27
+{col 1}{text}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+
+{col 51}Number of obs{col 67}= {res}       428
+{txt}{col 51}F({res}   8{txt},{res}    419{txt}){col 67}= {res}     21.05
+{txt}{col 51}Prob > F{col 67}= {res}    0.0000
+{txt}{col 51}R-squared{col 67}= {res}    0.2866
+{txt}{col 51}Adj R-squared{col 67}= {res}    0.2730
+{txt}{col 51}Root MSE{col 67}= {res}    1.9486
+
+{col 1}{text}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}        educ{col 14}{c |}      Coef.{col 26}   Std. Err.{col 37}      t{col 46}   P>|t|{col 55}    [95% Conf. Interval]
+{col 1}{text}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+{col 1}{text}       exper{col 14}{c |}{result}{space 2} .0496659{col 26}{space 2} .0390114{col 37}{space 1}    1.27{col 46}{space 3}0.204{col 55}{space 3}-.0270165{col 67}{space 3} .1263484
+{col 1}{text}     expersq{col 14}{c |}{result}{space 2}-.0008345{col 26}{space 2} .0011742{col 37}{space 1}   -0.71{col 46}{space 3}0.478{col 55}{space 3}-.0031426{col 67}{space 3} .0014736
+{col 1}{text}         age{col 14}{c |}{result}{space 2}-.0082753{col 26}{space 2} .0161192{col 37}{space 1}   -0.51{col 46}{space 3}0.608{col 55}{space 3}-.0399598{col 67}{space 3} .0234093
+{col 1}{text}     kidslt6{col 14}{c |}{result}{space 2} .7051216{col 26}{space 2} .2572803{col 37}{space 1}    2.74{col 46}{space 3}0.006{col 55}{space 3} .1994007{col 67}{space 3} 1.210843
+{col 1}{text}     kidsge6{col 14}{c |}{result}{space 2}-.1561275{col 26}{space 2} .0814656{col 37}{space 1}   -1.92{col 46}{space 3}0.056{col 55}{space 3}-.3162597{col 67}{space 3} .0040047
+{col 1}{text}    nwifeinc{col 14}{c |}{result}{space 2} .0536562{col 26}{space 2} .0093466{col 37}{space 1}    5.74{col 46}{space 3}0.000{col 55}{space 3} .0352842{col 67}{space 3} .0720282
+{col 1}{text}    motheduc{col 14}{c |}{result}{space 2} .1562401{col 26}{space 2} .0350396{col 37}{space 1}    4.46{col 46}{space 3}0.000{col 55}{space 3} .0873647{col 67}{space 3} .2251155
+{col 1}{text}    fatheduc{col 14}{c |}{result}{space 2} .1595197{col 26}{space 2} .0327236{col 37}{space 1}    4.87{col 46}{space 3}0.000{col 55}{space 3} .0951968{col 67}{space 3} .2238427
+{col 1}{text}       _cons{col 14}{c |}{result}{space 2} 8.729802{col 26}{space 2} .8540024{col 37}{space 1}   10.22{col 46}{space 3}0.000{col 55}{space 3} 7.051139{col 67}{space 3} 10.40846
+{col 1}{text}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 9}{hline 12}{hline 12}
+
+{res}
+{txt}{col 1}Instrumental variables (2SLS) regression{col 56}Number of obs{col 70}= {res}    428
+{txt}{col 1}{col 56}Wald chi2({res}4{txt}){col 70}={res}   32.85
+{txt}{col 1}{col 56}Prob > chi2{col 70}= {res} 0.0000
+{txt}{col 1}{col 56}R-squared{col 70}={res}  0.1147
+{txt}{col 56}Root MSE{col 70}= {res} .67968
+
+{txt}{hline 13}{c TT}{hline 64}
+       lwage {c |}      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+       hours {c |}  {res} .0001489    .000212     0.70   0.482    -.0002665    .0005644
+        {txt}educ {c |}  {res} .0975843   .0275579     3.54   0.000     .0435718    .1515968
+       {txt}exper {c |}  {res} .0340542   .0179074     1.90   0.057    -.0010437    .0691522
+     {txt}expersq {c |}  {res}-.0007117   .0004409    -1.61   0.106    -.0015758    .0001523
+       {txt}_cons {c |}  {res}-.5160962   .4160389    -1.24   0.215    -1.331517     .299325
+{txt}{hline 13}{c BT}{hline 64}
+{p 0 15 45}Instrumented:{space 2}hours educ{p_end}
+{p 0 15 45}Instruments:{space 3}exper expersq age kidslt6 kidsge6 nwifeinc motheduc fatheduc{p_end}
+
+{com}. * -------------------------
+. * MC2E EC3
+. * -------------------------
+. ivregress 2sls educ motheduc fatheduc
+{res}
+{txt}{col 1}Instrumental variables (2SLS) regression{col 56}Number of obs{col 70}= {res}    753
+{txt}{col 1}{col 56}Wald chi2({res}2{txt}){col 70}={res}  244.31
+{txt}{col 1}{col 56}Prob > chi2{col 70}= {res} 0.0000
+{txt}{col 1}{col 56}R-squared{col 70}={res}  0.2450
+{txt}{col 56}Root MSE{col 70}= {res}   1.98
+
+{txt}{hline 13}{c TT}{hline 64}
+        educ {c |}      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+    motheduc {c |}  {res} .1832786   .0261644     7.00   0.000     .1319973    .2345599
+    {txt}fatheduc {c |}  {res}  .183418   .0246643     7.44   0.000      .135077    .2317591
+       {txt}_cons {c |}  {res} 8.975657   .2252179    39.85   0.000     8.534238    9.417076
+{txt}{hline 13}{c BT}{hline 64}
+(no endogenous regressors)
+
+{com}. * -------------------------
+. * MC3E
+. * -------------------------
+. reg3 (hours lwage educ age kidslt6 kidsge6 nwifeinc) (lwage hours educ exper expersq) (educ motheduc fatheduc)
+
+{txt}Three-stage least-squares regression
+{hline 70}
+Equation          Obs  Parms        RMSE    "R-sq"       chi2        P
+{hline 70}
+{res}hours             428      6    1381.673   -2.1754      50.78   0.0000
+lwage             428      4     .697639    0.0673      36.09   0.0000
+educ              428      2    2.031462    0.2080     113.95   0.0000
+{txt}{hline 70}
+
+{hline 13}{c TT}{hline 64}
+             {c |}      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+{res}hours        {txt}{c |}
+       lwage {c |}  {res}  1695.13   376.2704     4.51   0.000     957.6535    2432.606
+        {txt}educ {c |}  {res}-177.0387   56.27175    -3.15   0.002    -287.3293   -66.74808
+         {txt}age {c |}  {res}-11.13454   7.901497    -1.41   0.159    -26.62119    4.352113
+     {txt}kidslt6 {c |}  {res}-153.3742   126.2146    -1.22   0.224    -400.7503    94.00196
+     {txt}kidsge6 {c |}  {res}-50.87296    37.4319    -1.36   0.174    -124.2381    22.49221
+    {txt}nwifeinc {c |}  {res} 1.583147   4.638902     0.34   0.733    -7.508935    10.67523
+       {txt}_cons {c |}  {res} 2054.103   807.0469     2.55   0.011     472.3207    3635.886
+{txt}{hline 13}{c +}{hline 64}
+{res}lwage        {txt}{c |}
+       hours {c |}  {res} .0002349   .0002032     1.16   0.248    -.0001633    .0006331
+        {txt}educ {c |}  {res}  .096061   .0272666     3.52   0.000     .0426194    .1495026
+       {txt}exper {c |}  {res} .0195784   .0145013     1.35   0.177    -.0088436    .0480005
+     {txt}expersq {c |}  {res}-.0002808   .0002783    -1.01   0.313    -.0008263    .0002647
+       {txt}_cons {c |}  {res} -.521254   .4091014    -1.27   0.203    -1.323078      .28057
+{txt}{hline 13}{c +}{hline 64}
+{res}educ         {txt}{c |}
+    motheduc {c |}  {res} .1623034    .035308     4.60   0.000     .0931009    .2315059
+    {txt}fatheduc {c |}  {res} .1847804   .0331564     5.57   0.000      .119795    .2497658
+       {txt}_cons {c |}  {res} 9.453477   .3197157    29.57   0.000     8.826846    10.08011
+{txt}{hline 13}{c BT}{hline 64}
+Endogenous variables:  hours lwage educ {res}
+{txt}Exogenous variables:   age kidslt6 kidsge6 nwifeinc exper expersq motheduc {res}
+     {txt}fatheduc {res}
+{txt}{hline 78}
+
+{com}. 
+{txt}end of do-file
+
+{com}. exit, clear

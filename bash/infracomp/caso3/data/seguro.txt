@@ -1,0 +1,67 @@
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 5852
+%CPU  MINFL  MAJFL
+ 6.4  63588      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 6354
+%CPU  MINFL  MAJFL
+ 6.0  62400      9
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 6821
+%CPU  MINFL  MAJFL
+ 5.8  61196      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 7313
+%CPU  MINFL  MAJFL
+ 6.8  31072      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 7770
+%CPU  MINFL  MAJFL
+ 6.3  34034      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 8241
+%CPU  MINFL  MAJFL
+ 6.0  31637      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 8719
+%CPU  MINFL  MAJFL
+ 6.9  33146      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 9163
+%CPU  MINFL  MAJFL
+ 5.7  31578      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 9618
+%CPU  MINFL  MAJFL
+ 6.5  29419      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 10064
+%CPU  MINFL  MAJFL
+ 8.6  77559      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 10509
+%CPU  MINFL  MAJFL
+ 7.7  57678      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 10966
+%CPU  MINFL  MAJFL
+ 7.1 101718      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 11416
+%CPU  MINFL  MAJFL
+ 7.0  31617      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 11856
+%CPU  MINFL  MAJFL
+ 7.6  31737      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 12315
+%CPU  MINFL  MAJFL
+ 9.4  39560      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 12777
+%CPU  MINFL  MAJFL
+ 8.6  34545      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 13230
+%CPU  MINFL  MAJFL
+ 9.8  79578      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 13688
+%CPU  MINFL  MAJFL
+ 9.8  57270      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 14141
+%CPU  MINFL  MAJFL
+ 9.7  54463      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 14598
+%CPU  MINFL  MAJFL
+ 9.8  63827      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 15058
+%CPU  MINFL  MAJFL
+11.6  68300      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 15537
+%CPU  MINFL  MAJFL
+ 7.4  46343      0
+

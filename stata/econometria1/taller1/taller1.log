@@ -1,0 +1,291 @@
+-------------------------------------------------------------------------------------------------------------------------
+       log:  C:\Users\Camilo\Documents\Uniandes\200720\Econometría I\Taller1.EconometríaI\pto3-4.taller1.econometría1.log
+  log type:  text
+ opened on:  14 Apr 2008, 17:58:12
+
+. use taller1
+
+. **********
+. **PUNTO3**
+. **********
+. *
+. *a) Estimación de coeficientes (Modelo1)
+. reg votos_d gastos_d
+
+      Source |       SS       df       MS              Number of obs =     173
+-------------+------------------------------           F(  1,   171) =   31.64
+       Model |   7566.1632     1   7566.1632           Prob > F      =  0.0000
+    Residual |  40891.0854   171  239.129154           R-squared     =  0.1561
+-------------+------------------------------           Adj R-squared =  0.1512
+       Total |  48457.2486   172  281.728189           Root MSE      =  15.464
+
+------------------------------------------------------------------------------
+     votos_d |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+    gastos_d |   .0236042   .0041963     5.62   0.000      .015321    .0318874
+       _cons |   43.17116   1.755322    24.59   0.000     39.70627    46.63605
+------------------------------------------------------------------------------
+
+. *-------------------
+. *Los coeficientes son iguales a los obtenidos en excel para el Modelo1
+. *
+. *(Modelo2)
+. reg votos_d gastos_r
+
+      Source |       SS       df       MS              Number of obs =     173
+-------------+------------------------------           F(  1,   171) =   36.47
+       Model |  8517.96891     1  8517.96891           Prob > F      =  0.0000
+    Residual |  39939.2796   171  233.563039           R-squared     =  0.1758
+-------------+------------------------------           Adj R-squared =  0.1710
+       Total |  48457.2486   172  281.728189           Root MSE      =  15.283
+
+------------------------------------------------------------------------------
+     votos_d |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+    gastos_r |  -.0229767   .0038047    -6.04   0.000     -.030487   -.0154665
+       _cons |   57.51282   1.642398    35.02   0.000     54.27084    60.75481
+------------------------------------------------------------------------------
+
+. *-------------------
+. *Los coeficientes son iguales a los obtenidos en excel para el Modelo2
+. *
+. *b)Gráficas
+. plot votos_d gastos_d
+
+      84 +  
+    %    |                *
+         |  
+    d    |     *     *          *
+    e    |       **  * *       *     *
+         |     **  ** *  ***  *       *
+    v    |          *** ** ** *    *                       *
+    o    |      ** ***     *** ****   *   *
+    t    | **     *      *  *  * **   * **     *
+    o    |                           *  *
+    s    |                  ***   *              *   *                   *
+         |              * *         *                        *             *
+    d    |          ***   * * **      **  *          *
+    e    |    *  *    * * *      *     *   * *
+    l    |  ** *  **        *       *           *
+         | ***** * *
+    c    | *** *   * *
+    a    | ***     *
+    n    | **
+    d    | *
+      16 + * *
+          +----------------------------------------------------------------+
+               .3    Gastos de campaña del candidato demócrat     1470.67
+
+
+. plot votos_d gastos_r
+
+      84 +  
+    %    | *
+         |  
+    d    | * *
+    e    | ***
+         | *****
+    v    | *** *  *
+    o    | ********* *         *
+    t    | ** * * *      ****          *
+    o    |       *   *
+    s    |   *  *   *   *      *          **            *
+         |               *        *    *      *        *                  *
+    d    |              * *    *   * * *  *               *      *
+    e    |                *        ** *   * *       *   *
+    l    |      **   *****  ** *  ** *   *
+         |    **  *  *  **      *    *                         *
+    c    |         ** ** * *   *      *   *
+    a    |      ** ** ***  *         *
+    n    |     * * **       ***                *
+    d    |    *
+      16 +        *  *
+          +----------------------------------------------------------------+
+              .93    Gastos de campaña del candidato republic     1548.19
+
+
+. twoway scatter votos_d gastos_d || lfit votos_d gastos_d, saving(votos_dgastos_d, replace)
+(note: file votos_dgastos_d.gph not found)
+(file votos_dgastos_d.gph saved)
+
+. twoway scatter votos_d gastos_r || lfit votos_d gastos_r, saving(votos_dgastos_r, replace)
+(note: file votos_dgastos_r.gph not found)
+(file votos_dgastos_r.gph saved)
+
+. graph export votos_dgastos_d.emf, replace
+(file C:\Users\Camilo\Documents\Uniandes\200720\Econometría I\Taller1.EconometríaI\votos_dgastos_d.emf written in Enhance
+> d Metafile format)
+
+. graph export votos_dgastos_r.emf, replace
+(file C:\Users\Camilo\Documents\Uniandes\200720\Econometría I\Taller1.EconometríaI\votos_dgastos_r.emf written in Enhance
+> d Metafile format)
+
+. *
+. *c) Comparación de r-squared
+. reg votos_d gastos_d
+
+      Source |       SS       df       MS              Number of obs =     173
+-------------+------------------------------           F(  1,   171) =   31.64
+       Model |   7566.1632     1   7566.1632           Prob > F      =  0.0000
+    Residual |  40891.0854   171  239.129154           R-squared     =  0.1561
+-------------+------------------------------           Adj R-squared =  0.1512
+       Total |  48457.2486   172  281.728189           Root MSE      =  15.464
+
+------------------------------------------------------------------------------
+     votos_d |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+    gastos_d |   .0236042   .0041963     5.62   0.000      .015321    .0318874
+       _cons |   43.17116   1.755322    24.59   0.000     39.70627    46.63605
+------------------------------------------------------------------------------
+
+. reg votos_r gastos_r
+
+      Source |       SS       df       MS              Number of obs =     173
+-------------+------------------------------           F(  1,   171) =   36.47
+       Model |  8517.96891     1  8517.96891           Prob > F      =  0.0000
+    Residual |  39939.2796   171  233.563039           R-squared     =  0.1758
+-------------+------------------------------           Adj R-squared =  0.1710
+       Total |  48457.2486   172  281.728189           Root MSE      =  15.283
+
+------------------------------------------------------------------------------
+     votos_r |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+    gastos_r |   .0229767   .0038047     6.04   0.000     .0154665     .030487
+       _cons |   42.48718   1.642398    25.87   0.000     39.24519    45.72916
+------------------------------------------------------------------------------
+
+. **R-squared(_r)=  0.1758
+. **R-squared(_d)=  0.1561
+. *-------------------
+. *El Modelo2 es mejor que el Modelo1 según r-squared
+. *
+. **********
+. **PUNTO4**
+. **********
+. *
+. *a)Modelo para Cambio Porcentual
+. gen prvotos_d=100*log(votos_d)
+
+. plot prvotos_d gastos_d
+
+ 443.082 +  
+         |                *
+         |     *     *          *
+         |     ***** *** ***   *     **
+         |      *  **** ** ** **   *                       *
+         | **   ******   *  ** ****   * * *
+    p    |                  *        *  **     *     *
+    r    |              * * ***   *              *                       * *
+    v    |          ***   *   **    * **  *          *       *
+    o    |    *  *    * * * *    *    **   * *
+    t    |  **    **        *
+    o    | ** ** ***                *           *
+    s    | *****
+    _    | ***     * *
+    d    | ***     *
+         | **
+         | *
+         |  
+         |  
+         |   *
+ 277.259 + *
+          +----------------------------------------------------------------+
+               .3    Gastos de campaña del candidato demócrat     1470.67
+
+
+. reg prvotos_d gastos_d
+
+      Source |       SS       df       MS              Number of obs =     173
+-------------+------------------------------           F(  1,   171) =   43.77
+       Model |  47075.2272     1  47075.2272           Prob > F      =  0.0000
+    Residual |  183907.105   171  1075.48014           R-squared     =  0.2038
+-------------+------------------------------           Adj R-squared =  0.1991
+       Total |  230982.332   172  1342.92053           Root MSE      =  32.795
+
+------------------------------------------------------------------------------
+   prvotos_d |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+    gastos_d |   .0588773   .0088992     6.62   0.000     .0413108    .0764438
+       _cons |   367.6982   3.722561    98.78   0.000     360.3501    375.0463
+------------------------------------------------------------------------------
+
+. *
+. *b)Modelo3: "Gastos de campaña afectan exponencialmente el porcentaje de votos obtenidos"
+. gen expgastos_d=exp(gastos_d)
+(14 missing values generated)
+
+. plot votos_d expgastos_d
+
+      61 +  
+    %    | *
+         |  
+    d    |  
+    e    |  
+         |  
+    v    |  
+    o    |  
+    t    |  
+    o    |  
+    s    |  
+         | *
+    d    | *                                         *                    *
+    e    | *
+    l    | *
+         | *
+    c    | *
+    a    | *
+    n    | *
+    d    | *
+      16 + *
+          +----------------------------------------------------------------+
+          1.34986                   expgastos_d                    4.3e+35
+
+
+. reg votos_d expgastos_d
+
+      Source |       SS       df       MS              Number of obs =      45
+-------------+------------------------------           F(  1,    43) =    0.55
+       Model |  39.6670909     1  39.6670909           Prob > F      =  0.4617
+    Residual |  3092.24402    43  71.9126516           R-squared     =  0.0127
+-------------+------------------------------           Adj R-squared = -0.0103
+       Total |  3131.91111    44   71.179798           Root MSE      =  8.4801
+
+------------------------------------------------------------------------------
+     votos_d |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+ expgastos_d |   1.26e-35   1.69e-35     0.74   0.462    -2.16e-35    4.68e-35
+       _cons |   30.95727   1.292029    23.96   0.000     28.35164    33.56289
+------------------------------------------------------------------------------
+
+. *-------------------
+. *Según r-squared el Modelo3 es peor que el Modelo2
+. *
+. *c)Modelo para Cálculo de Elasticidad
+. gen lvotos_d=log(votos_d)
+
+. gen lgastos_d=log(gastos_d)
+
+. reg lgastos_d lvotos_d
+
+      Source |       SS       df       MS              Number of obs =     173
+-------------+------------------------------           F(  1,   171) =  150.91
+       Model |  206.922558     1  206.922558           Prob > F      =  0.0000
+    Residual |  234.473883   171   1.3711923           R-squared     =  0.4688
+-------------+------------------------------           Adj R-squared =  0.4657
+       Total |  441.396441   172  2.56625838           Root MSE      =   1.171
+
+------------------------------------------------------------------------------
+   lgastos_d |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+    lvotos_d |   2.993054   .2436463    12.28   0.000     2.512112    3.473995
+       _cons |  -6.527323   .9446455    -6.91   0.000     -8.39199   -4.662655
+------------------------------------------------------------------------------
+
+. *-------------------
+. *La elasticidad estimada de votos_d respecto a gastos_d es 2.993054
+. 
+. log close
+       log:  C:\Users\Camilo\Documents\Uniandes\200720\Econometría I\Taller1.EconometríaI\pto3-4.taller1.econometría1.log
+  log type:  text
+ closed on:  14 Apr 2008, 17:58:19
+-------------------------------------------------------------------------------------------------------------------------

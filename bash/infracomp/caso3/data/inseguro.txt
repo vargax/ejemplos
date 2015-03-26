@@ -1,0 +1,107 @@
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 21396
+%CPU  MINFL  MAJFL
+ 3.0  13754      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 21837
+%CPU  MINFL  MAJFL
+ 3.0  13397      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 22284
+%CPU  MINFL  MAJFL
+ 2.7  14111      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 22735
+%CPU  MINFL  MAJFL
+ 3.1  16049      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 23175
+%CPU  MINFL  MAJFL
+ 2.8  14022      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 23616
+%CPU  MINFL  MAJFL
+ 1.8  14005      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 24056
+%CPU  MINFL  MAJFL
+ 2.2  16504      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 24510
+%CPU  MINFL  MAJFL
+ 2.1  16351      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 24959
+%CPU  MINFL  MAJFL
+ 3.8  13280      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 25400
+%CPU  MINFL  MAJFL
+ 4.2  13923      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 25841
+%CPU  MINFL  MAJFL
+ 4.0  13754      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 26287
+%CPU  MINFL  MAJFL
+ 2.9  13668      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 26742
+%CPU  MINFL  MAJFL
+ 3.3  14096      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 27187
+%CPU  MINFL  MAJFL
+ 2.8  13765      0
+cvargasc@cvargasc:~$ 
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 27631
+%CPU  MINFL  MAJFL
+ 1.9  13884      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 28080
+%CPU  MINFL  MAJFL
+ 2.0  14108      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 28549
+%CPU  MINFL  MAJFL
+ 1.7  13913      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 29034
+%CPU  MINFL  MAJFL
+ 4.2  14200      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 29481
+%CPU  MINFL  MAJFL
+ 5.1  13404      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 29932
+%CPU  MINFL  MAJFL
+ 5.6  16099      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 30408
+%CPU  MINFL  MAJFL
+ 2.8  13958      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 30856
+%CPU  MINFL  MAJFL
+ 3.1  13869      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 31304
+%CPU  MINFL  MAJFL
+ 2.9  14163      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 31758
+%CPU  MINFL  MAJFL
+ 1.9  16644      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 32238
+%CPU  MINFL  MAJFL
+ 2.0  14160      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 32687
+%CPU  MINFL  MAJFL
+ 1.8  14098      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 680
+%CPU  MINFL  MAJFL
+ 5.5  16453      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 1161
+%CPU  MINFL  MAJFL
+ 6.6  13941      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 1712
+%CPU  MINFL  MAJFL
+ 7.2  16232      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 2306
+%CPU  MINFL  MAJFL
+ 3.5  16633      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 2864
+%CPU  MINFL  MAJFL
+ 3.9  13977      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 3342
+%CPU  MINFL  MAJFL
+ 3.2  16065      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 3797
+%CPU  MINFL  MAJFL
+ 2.3  14152      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 4267
+%CPU  MINFL  MAJFL
+ 2.2  16871      0
+cvargasc@cvargasc:~$ ps -o pcpu,min_flt,maj_flt 4740
+%CPU  MINFL  MAJFL
+ 2.3  14167      0
+cvargasc@cvargasc:~$

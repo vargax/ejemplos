@@ -1,0 +1,33 @@
+The error occurred in line 226 of file .\comsvr\COMSignalController.cpp in function long __stdcall CSignalController::get_SignalGroups(struct ISignalGroups **).
+Information:
+not available
+Stack:
+not available
+Simulation: Run 0 0.4 sec, The error occurred in line 226 of file .\comsvr\COMSignalController.cpp in function long __stdcall CSignalController::get_SignalGroups(struct ISignalGroups **).
+Information:
+not available
+Stack:
+not available
+Simulation: Run 0 0.4 sec, The error occurred in line 226 of file .\comsvr\COMSignalController.cpp in function long __stdcall CSignalController::get_SignalGroups(struct ISignalGroups **).
+Information:
+not available
+Stack:
+not available
+Simulation: Run 0 0.4 sec, The error occurred in line 226 of file .\comsvr\COMSignalController.cpp in function long __stdcall CSignalController::get_SignalGroups(struct ISignalGroups **).
+Information:
+not available
+Stack:
+not available
+Simulation: Run 0 0.4 sec, The error occurred in line 226 of file .\comsvr\COMSignalController.cpp in function long __stdcall CSignalController::get_SignalGroups(struct ISignalGroups **).
+Information:
+not available
+Stack:
+not available
+Simulation: Run 0 0.4 sec, The error occurred in line 907 of file .\netzwin.cpp in function long __cdecl main_eh(void *,struct XVT2DOTNET::s_event *).
+Information:
+Exception access violation
+Code : 0xc0000005
+Flags : 0
+Address : 0x77c68dc9
+Stack:
+not available

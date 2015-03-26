@@ -1,0 +1,170 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+       log:  {res}C:\Users\Camilo\Documents\Uniandes\200720\Econometría I\Taller2.EconometríaI\pto7\pto7.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}23 Oct 2007, 19:36:22
+{txt}
+{com}. use WAGE2
+{txt}
+{com}. *****
+. * A *
+. *****
+. reg lwage educ exper tenure married black south urban
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     935
+{txt}{hline 13}{char +}{hline 30}           F(  7,   927) ={res}   44.75
+    {txt}   Model {char |} {res} 41.8377619     7  5.97682312           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 123.818521   927  .133569063           {txt}R-squared     = {res} 0.2526
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2469
+    {txt}   Total {char |} {res} 165.656283   934  .177362188           {txt}Root MSE      = {res} .36547
+
+{txt}{hline 13}{c TT}{hline 64}
+       lwage {c |}      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+{hline 13}{char +}{hline 64}
+        educ {c |}  {res} .0654307   .0062504    10.47   0.000     .0531642    .0776973
+{txt}       exper {c |}  {res}  .014043   .0031852     4.41   0.000      .007792     .020294
+{txt}      tenure {c |}  {res} .0117473    .002453     4.79   0.000     .0069333    .0165613
+{txt}     married {c |}  {res} .1994171   .0390502     5.11   0.000     .1227801     .276054
+{txt}       black {c |}  {res}-.1883499   .0376666    -5.00   0.000    -.2622717   -.1144281
+{txt}       south {c |}  {res}-.0909036   .0262485    -3.46   0.001     -.142417   -.0393903
+{txt}       urban {c |}  {res} .1839121   .0269583     6.82   0.000     .1310056    .2368185
+{txt}       _cons {c |}  {res} 5.395497    .113225    47.65   0.000      5.17329    5.617704
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. *----------
+. * El salario de los negros es en promedio un 18.8% menor que el de los no negros.
+. *----------
+. * El estadistico t para el coeficiente de [wage] es -5, por lo cual podemos afirmar que dicho coeficiente es significativamente diferente de cero (con un nivel de significancia del 99%)
+. *----------
+. *****
+. * B *
+. *****
+. gen expersquared=exper^2
+{txt}
+{com}. gen tenuresquared=tenure^2
+{txt}
+{com}. reg lwage educ exper tenure married black south urban
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     935
+{txt}{hline 13}{char +}{hline 30}           F(  7,   927) ={res}   44.75
+    {txt}   Model {char |} {res} 41.8377619     7  5.97682312           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 123.818521   927  .133569063           {txt}R-squared     = {res} 0.2526
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2469
+    {txt}   Total {char |} {res} 165.656283   934  .177362188           {txt}Root MSE      = {res} .36547
+
+{txt}{hline 13}{c TT}{hline 64}
+       lwage {c |}      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+{hline 13}{char +}{hline 64}
+        educ {c |}  {res} .0654307   .0062504    10.47   0.000     .0531642    .0776973
+{txt}       exper {c |}  {res}  .014043   .0031852     4.41   0.000      .007792     .020294
+{txt}      tenure {c |}  {res} .0117473    .002453     4.79   0.000     .0069333    .0165613
+{txt}     married {c |}  {res} .1994171   .0390502     5.11   0.000     .1227801     .276054
+{txt}       black {c |}  {res}-.1883499   .0376666    -5.00   0.000    -.2622717   -.1144281
+{txt}       south {c |}  {res}-.0909036   .0262485    -3.46   0.001     -.142417   -.0393903
+{txt}       urban {c |}  {res} .1839121   .0269583     6.82   0.000     .1310056    .2368185
+{txt}       _cons {c |}  {res} 5.395497    .113225    47.65   0.000      5.17329    5.617704
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. reg lwage educ exper tenure married black south urban expersquared tenuresquared
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     935
+{txt}{hline 13}{char +}{hline 30}           F(  9,   925) ={res}   35.17
+    {txt}   Model {char |} {res} 42.2353257     9  4.69281397           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 123.420958   925  .133428062           {txt}R-squared     = {res} 0.2550
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2477
+    {txt}   Total {char |} {res} 165.656283   934  .177362188           {txt}Root MSE      = {res} .36528
+
+{txt}{hline 13}{c TT}{hline 64}
+       lwage {c |}      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+{hline 13}{char +}{hline 64}
+        educ {c |}  {res} .0642761   .0063115    10.18   0.000     .0518896    .0766625
+{txt}       exper {c |}  {res} .0172146   .0126138     1.36   0.173    -.0075403    .0419695
+{txt}      tenure {c |}  {res} .0249291   .0081297     3.07   0.002     .0089743    .0408838
+{txt}     married {c |}  {res}  .198547   .0391103     5.08   0.000     .1217917    .2753023
+{txt}       black {c |}  {res}-.1906636   .0377011    -5.06   0.000    -.2646533    -.116674
+{txt}       south {c |}  {res}-.0912153   .0262356    -3.48   0.001    -.1427035   -.0397271
+{txt}       urban {c |}  {res} .1854241   .0269585     6.88   0.000     .1325171    .2383311
+{txt}expersquared {c |}  {res}-.0001138   .0005319    -0.21   0.831    -.0011576      .00093
+{txt}tenuresqua~d {c |}  {res}-.0007964    .000471    -1.69   0.091    -.0017208    .0001279
+{txt}       _cons {c |}  {res} 5.358676   .1259143    42.56   0.000     5.111565    5.605787
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. *----------
+. * Ho: beta8 = 0 H1: beta8 <> 0
+. *     beta9 = 0 H1: beta9 <> 0
+. * 
+. *      (0.2550-0.2526)/2
+. * F = -------------------- = 1.4899
+. *     (1-0.2550)/(935-9-1)
+. *
+. * Utilizando Stata:
+. *----------
+. test expersquared tenuresquared
+
+{txt} ( 1)  {res}expersquared = 0
+{txt} ( 2)  {res}tenuresquared = 0
+
+{txt}       F(  2,   925) ={res}    1.49
+{txt}{col 13}Prob > F ={res}    0.2260
+{txt}
+{com}. *----------
+. * Dado que la masa de probabilidad acumulada 22.6%, la cual es mayor al 20%, se puede concluir que [expersquared] y [tenuresquared] son conjuntamente insignificantes incluso a un nivel de significancia del 20%
+. *----------
+. *****
+. * C *
+. *****
+. *
+. *****
+. * D *
+. *****
+. gen snn=(1-married)*(1-black)
+{txt}
+{com}. gen sn=(1-married)*black
+{txt}
+{com}. gen cnn=(1-black)*married
+{txt}
+{com}. gen cn=married*black
+{txt}
+{com}. label var snn "=1 si soltero no negro"
+{txt}
+{com}. label var sn "=1 si soltero negro"
+{txt}
+{com}. label var cnn "=1 si casado no negro"
+{txt}
+{com}. label var cn "=1 si casado negro"
+{txt}
+{com}. *----------
+. * Definimos el grupo de casadas negras como grupo de control
+. *----------
+. reg lwage educ exper tenure south urban snn sn cnn
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     935
+{txt}{hline 13}{char +}{hline 30}           F(  8,   926) ={res}   39.17
+    {txt}   Model {char |} {res} 41.8849359     8  5.23561699           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 123.771347   926  .133662362           {txt}R-squared     = {res} 0.2528
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2464
+    {txt}   Total {char |} {res} 165.656283   934  .177362188           {txt}Root MSE      = {res}  .3656
+
+{txt}{hline 13}{c TT}{hline 64}
+       lwage {c |}      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+{hline 13}{char +}{hline 64}
+        educ {c |}  {res} .0654751    .006253    10.47   0.000     .0532034    .0777469
+{txt}       exper {c |}  {res} .0141462    .003191     4.43   0.000     .0078837    .0204087
+{txt}      tenure {c |}  {res} .0116628   .0024579     4.74   0.000      .006839    .0164866
+{txt}       south {c |}  {res}-.0919894   .0263212    -3.49   0.000    -.1436455   -.0403333
+{txt}       urban {c |}  {res} .1843501   .0269778     6.83   0.000     .1314053    .2372948
+{txt}         snn {c |}  {res}-.0094484   .0560131    -0.17   0.866    -.1193757    .1004789
+{txt}          sn {c |}  {res}-.2502684   .0940889    -2.66   0.008    -.4349207   -.0656161
+{txt}         cnn {c |}  {res} .1794663   .0405386     4.43   0.000     .0999082    .2590244
+{txt}       _cons {c |}  {res} 5.413242   .1102773    49.09   0.000     5.196819    5.629664
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. *----------
+. * El salario de las personas casadas no negras es en promedio un 17.9% mayor que el de las casadas negras.
+. *----------
+. * El t estadistico para el coeficiente de [cnn] es 4.43, por lo cual hay evidencia estadistica suficiente para afirmar que dicho coeficiente es significativamente diferente de cero (a un nivel de significancia del 99%).
+. 
+{txt}end of do-file
+
+
+{com}. exit, clear

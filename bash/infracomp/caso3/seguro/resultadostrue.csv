@@ -1,0 +1,147 @@
+ Caso 3 - Infraestructura Computacional,,,
+ 400 solicitudes,,,
+,,,
+, Threads, Retardo, Iteración
+,1,20,1
+%CPU  MINFL,,,
+ 4.6  45893,,,
+, Threads, Retardo, Iteración
+,1,20,2
+%CPU  MINFL,,,
+ 5.1  46234,,,
+, Threads, Retardo, Iteración
+,1,20,3
+%CPU  MINFL,,,
+ 6.1  63696,,,
+, Threads, Retardo, Iteración
+,1,50,1
+%CPU  MINFL,,,
+ 4.7  34014,,,
+, Threads, Retardo, Iteración
+,1,50,2
+%CPU  MINFL,,,
+ 1.4  22857,,,
+, Threads, Retardo, Iteración
+,1,50,3
+%CPU  MINFL,,,
+ 4.7  30179,,,
+, Threads, Retardo, Iteración
+,1,100,1
+%CPU  MINFL,,,
+ 3.7  36926,,,
+, Threads, Retardo, Iteración
+,1,100,2
+%CPU  MINFL,,,
+ 3.6  33502,,,
+, Threads, Retardo, Iteración
+,1,100,3
+%CPU  MINFL,,,
+ 3.7  35746,,,
+, Threads, Retardo, Iteración
+,2,20,1
+%CPU  MINFL,,,
+ 5.7  45316,,,
+, Threads, Retardo, Iteración
+,2,20,2
+%CPU  MINFL,,,
+ 5.8  65632,,,
+, Threads, Retardo, Iteración
+,2,20,3
+%CPU  MINFL,,,
+ 5.6  90502,,,
+, Threads, Retardo, Iteración
+,2,50,1
+%CPU  MINFL,,,
+ 4.2  40896,,,
+, Threads, Retardo, Iteración
+,2,50,2
+%CPU  MINFL,,,
+ 4.9  63217,,,
+, Threads, Retardo, Iteración
+,2,50,3
+%CPU  MINFL,,,
+ 4.5  47376,,,
+, Threads, Retardo, Iteración
+,2,100,1
+%CPU  MINFL,,,
+ 3.7  32266,,,
+, Threads, Retardo, Iteración
+,2,100,2
+%CPU  MINFL,,,
+ 3.3  40446,,,
+, Threads, Retardo, Iteración
+,2,100,3
+%CPU  MINFL,,,
+ 3.1  40104,,,
+, Threads, Retardo, Iteración
+,8,20,1
+%CPU  MINFL,,,
+ 5.8  92497,,,
+, Threads, Retardo, Iteración
+,8,20,2
+%CPU  MINFL,,,
+ 5.8  94075,,,
+, Threads, Retardo, Iteración
+,8,20,3
+%CPU  MINFL,,,
+ 5.8 104782,,,
+, Threads, Retardo, Iteración
+,8,50,1
+%CPU  MINFL,,,
+ 4.5  61365,,,
+, Threads, Retardo, Iteración
+,8,50,2
+%CPU  MINFL,,,
+ 4.5  61056,,,
+, Threads, Retardo, Iteración
+,8,50,3
+%CPU  MINFL,,,
+ 4.5  90114,,,
+, Threads, Retardo, Iteración
+,8,100,1
+%CPU  MINFL,,,
+ 3.4  54998,,,
+, Threads, Retardo, Iteración
+,8,100,2
+%CPU  MINFL,,,
+ 3.4  55175,,,
+, Threads, Retardo, Iteración
+,8,100,3
+%CPU  MINFL,,,
+ 3.4  39980,,,
+, Threads, Retardo, Iteración
+,16,20,1
+%CPU  MINFL,,,
+ 5.5 101820,,,
+, Threads, Retardo, Iteración
+,16,20,2
+%CPU  MINFL,,,
+ 5.5 101194,,,
+, Threads, Retardo, Iteración
+,16,20,3
+%CPU  MINFL,,,
+ 5.9 105748,,,
+, Threads, Retardo, Iteración
+,16,50,1
+%CPU  MINFL,,,
+ 4.3  86377,,,
+, Threads, Retardo, Iteración
+,16,50,2
+%CPU  MINFL,,,
+ 4.2  58256,,,
+, Threads, Retardo, Iteración
+,16,50,3
+%CPU  MINFL,,,
+ 4.4  88633,,,
+, Threads, Retardo, Iteración
+,16,100,1
+%CPU  MINFL,,,
+ 3.4  73781,,,
+, Threads, Retardo, Iteración
+,16,100,2
+%CPU  MINFL,,,
+ 3.4  56416,,,
+, Threads, Retardo, Iteración
+,16,100,3
+%CPU  MINFL,,,
+ 0.5  86709,,,
