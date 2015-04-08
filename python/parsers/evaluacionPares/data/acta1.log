@@ -1,0 +1,398 @@
+
+GIS :: 3 integrantes
+   s.abisambra125 {'jc.ruiz160': 3, 's.abisambra125': -1, 'mp.mancipe10': 3}
+   jc.ruiz160 {'jc.ruiz160': -1, 's.abisambra125': 3, 'mp.mancipe10': 3}
+   mp.mancipe10 {'jc.ruiz160': 3, 's.abisambra125': 3, 'mp.mancipe10': -1}
+
+Crowd Control :: 5 integrantes
+   m.villamizar564 {'m.villamizar564': -1, 'sd.salas10': 3, 'ol.pino521': 3, 'ds.chicaiza10': 3, 'lc.mojica639': 3}
+   lc.mojica639 {'m.villamizar564': 3, 'sd.salas10': 3, 'ol.pino521': 3, 'ds.chicaiza10': 3, 'lc.mojica639': -1}
+   ol.pino521 {'m.villamizar564': 3, 'sd.salas10': 3, 'ol.pino521': -1, 'ds.chicaiza10': 3, 'lc.mojica639': 3}
+   ds.chicaiza10 {'m.villamizar564': 3, 'sd.salas10': 3, 'ol.pino521': 3, 'ds.chicaiza10': -1, 'lc.mojica639': 3}
+   sd.salas10 {'m.villamizar564': 3, 'sd.salas10': -1, 'ol.pino521': 3, 'ds.chicaiza10': 3, 'lc.mojica639': 3}
+
+OndeHay :: 4 integrantes
+   jj.rodriguez644 {'jj.rodriguez644': -1, 'we.gamba125': 3, 'da.paternina1691': 3, 'ca.ortiz1633': 3}
+   we.gamba125 {'jj.rodriguez644': 3, 'we.gamba125': -1, 'da.paternina1691': 3, 'ca.ortiz1633': 3}
+   ca.ortiz1633 {'jj.rodriguez644': 3, 'we.gamba125': 3, 'da.paternina1691': 3, 'ca.ortiz1633': -1}
+   da.paternina1691 {'jj.rodriguez644': 3, 'we.gamba125': 3, 'da.paternina1691': -1, 'ca.ortiz1633': 3}
+
+3D Home :: 3 integrantes
+   la.avila30 {'ja.angel904': 3, 'ca.barrientos1030': 3, 'la.avila30': -1}
+   ca.barrientos1030 {'ja.angel904': 3, 'ca.barrientos1030': -1, 'la.avila30': 3}
+   ja.angel904 {'ja.angel904': -1, 'ca.barrientos1030': 3, 'la.avila30': 3}
+
+Should I? :: 4 integrantes
+   f.otalora10 {'me.hernandez10': 3, 'f.otalora10': -1, 's.florez10': 3, 'nf.chaves10': 3}
+   me.hernandez10 {'me.hernandez10': -1, 'f.otalora10': 3, 's.florez10': 3, 'nf.chaves10': 3}
+   nf.chaves10 {'me.hernandez10': 3, 'f.otalora10': 3, 's.florez10': 3, 'nf.chaves10': -1}
+   s.florez10 {'me.hernandez10': 3, 'f.otalora10': 3, 's.florez10': -1, 'nf.chaves10': 3}
+
+moveCam :: 2 integrantes
+   je.bautista10 {'je.bautista10': -1, 'pa.sarmiento10': 3}
+   pa.sarmiento10 {'je.bautista10': 3, 'pa.sarmiento10': -1}
+
+Aster :: 5 integrantes
+   pa.otoya757 {'ad.sanchez10': 3, 'jp.lalinde1079': 3, 'sd.hernandez204': 3, 'da.gomez11': 3, 'pa.otoya757': -1}
+   jp.lalinde1079 {'ad.sanchez10': 3, 'jp.lalinde1079': -1, 'sd.hernandez204': 3, 'da.gomez11': 3, 'pa.otoya757': 3}
+   da.gomez11 {'ad.sanchez10': 3, 'jp.lalinde1079': 3, 'sd.hernandez204': 3, 'da.gomez11': -1, 'pa.otoya757': 3}
+   sd.hernandez204 {'ad.sanchez10': 3, 'jp.lalinde1079': 3, 'sd.hernandez204': -1, 'da.gomez11': 3, 'pa.otoya757': 3}
+   ad.sanchez10 {'ad.sanchez10': -1, 'jp.lalinde1079': 3, 'sd.hernandez204': 3, 'da.gomez11': 3, 'pa.otoya757': 3}
+
+TicketService :: 4 integrantes
+   f.iregui310 {'n.sanchez1668': 3, 'hf.vargas10': 3, 'd.rodriguez13': 3, 'f.iregui310': -1}
+   n.sanchez1668 {'n.sanchez1668': -1, 'hf.vargas10': 3, 'd.rodriguez13': 3, 'f.iregui310': 3}
+   d.rodriguez13 {'n.sanchez1668': 3, 'hf.vargas10': 3, 'd.rodriguez13': -1, 'f.iregui310': 3}
+   hf.vargas10 {'n.sanchez1668': 3, 'hf.vargas10': -1, 'd.rodriguez13': 3, 'f.iregui310': 3}
+
+Enigami :: 4 integrantes
+   ce.forero2551 {'f.mate10': 3, 'ce.forero2551': -1, 's.beltran10': 3, 's.siza10': 3}
+   f.mate10 {'f.mate10': -1, 'ce.forero2551': 3, 's.beltran10': 3, 's.siza10': 3}
+   s.beltran10 {'f.mate10': 3, 'ce.forero2551': 3, 's.beltran10': -1, 's.siza10': 3}
+   s.siza10 {'f.mate10': 3, 'ce.forero2551': 3, 's.beltran10': 3, 's.siza10': -1}
+
+TransMotion :: 4 integrantes
+   de.dluyz1309 {'de.dluyz1309': -1, 'jj.diaz1067': 3, 'cd.bedoya212': 3, 'js.salamanca1967': 3}
+   cd.bedoya212 {'de.dluyz1309': 3, 'jj.diaz1067': 3, 'cd.bedoya212': -1, 'js.salamanca1967': 3}
+   jj.diaz1067 {'de.dluyz1309': 3, 'jj.diaz1067': -1, 'cd.bedoya212': 3, 'js.salamanca1967': 3}
+   js.salamanca1967 {'de.dluyz1309': 3, 'jj.diaz1067': 3, 'cd.bedoya212': 3, 'js.salamanca1967': -1}
+
+Temporizate :: 4 integrantes
+   jh.gomez1793 {'ba.hurtado564': 3, 'ea.cabello10': 3, 'jh.gomez1793': -1, 'ja.de83': 3}
+   ba.hurtado564 {'ba.hurtado564': -1, 'ea.cabello10': 3, 'jh.gomez1793': 3, 'ja.de83': 3}
+   ea.cabello10 {'ba.hurtado564': 3, 'ea.cabello10': -1, 'jh.gomez1793': 3, 'ja.de83': 3}
+   ja.de83 {'ba.hurtado564': 3, 'ea.cabello10': 3, 'jh.gomez1793': 3, 'ja.de83': -1}
+
+ ----------------------------------------------------------------- 
+
+Procesando evaluación de f.mate10
+++ Evaluación de f.mate10 se procesó sin errores
+   {'f.mate10': 0, 'ce.forero2551': 3.0, 's.beltran10': 3.0, 's.siza10': 3.0}
+  
+Procesando evaluación de d.rodriguez13
+-- Evaluación de d.rodriguez13 se procesó con errores
+   {'n.sanchez1668': 3.0, 'hf.vargas10': 3.0, 'd.rodriguez13': -0.5, 'f.iregui310': 3.0}
+  Evaluaci�n enviada tarde
+
+Procesando evaluación de jc.ruiz160
+++ Evaluación de jc.ruiz160 se procesó sin errores
+   {'jc.ruiz160': 0, 's.abisambra125': 3.0, 'mp.mancipe10': 3.0}
+  
+Procesando evaluación de we.gamba125
+++ Evaluación de we.gamba125 se procesó sin errores
+   {'jj.rodriguez644': 3.0, 'we.gamba125': 0, 'da.paternina1691': 3.0, 'ca.ortiz1633': 3.0}
+  
+Procesando evaluación de ja.de83
+++ Evaluación de ja.de83 se procesó sin errores
+   {'ba.hurtado564': 0.0, 'ea.cabello10': 5.0, 'jh.gomez1793': 4.0, 'ja.de83': 0}
+  
+Procesando evaluación de ce.forero2551
+++ Evaluación de ce.forero2551 se procesó sin errores
+   {'f.mate10': 3.0, 'ce.forero2551': 0, 's.beltran10': 3.0, 's.siza10': 3.0}
+  
+Procesando evaluación de f.iregui310
+++ Evaluación de f.iregui310 se procesó sin errores
+   {'n.sanchez1668': 6.0, 'hf.vargas10': 3.0, 'd.rodriguez13': 0.0, 'f.iregui310': 0}
+  
+Procesando evaluación de pa.otoya757
+++ Evaluación de pa.otoya757 se procesó sin errores
+   {'ad.sanchez10': 3.0, 'jp.lalinde1079': 3.0, 'sd.hernandez204': 3.0, 'da.gomez11': 3.0, 'pa.otoya757': 0}
+  
+Procesando evaluación de n.sanchez1668
+++ Evaluación de n.sanchez1668 se procesó sin errores
+   {'n.sanchez1668': 0, 'hf.vargas10': 3.0, 'd.rodriguez13': 0.0, 'f.iregui310': 6.0}
+  
+Procesando evaluación de ea.cabello10
+++ Evaluación de ea.cabello10 se procesó sin errores
+   {'ba.hurtado564': 0.0, 'ea.cabello10': 0, 'jh.gomez1793': 5.0, 'ja.de83': 4.0}
+  
+Procesando evaluación de sd.salas10
+++ Evaluación de sd.salas10 se procesó sin errores
+   {'m.villamizar564': 3.0, 'sd.salas10': 0, 'ol.pino521': 3.0, 'ds.chicaiza10': 3.0, 'lc.mojica639': 3.0}
+  
+Procesando evaluación de s.florez10
+++ Evaluación de s.florez10 se procesó sin errores
+   {'me.hernandez10': 3.0, 'f.otalora10': 3.0, 's.florez10': 0, 'nf.chaves10': 3.0}
+  
+Procesando evaluación de s.beltran10
+++ Evaluación de s.beltran10 se procesó sin errores
+   {'f.mate10': 3.0, 'ce.forero2551': 3.0, 's.beltran10': 0, 's.siza10': 3.0}
+  
+Procesando evaluación de de.dluyz1309
+++ Evaluación de de.dluyz1309 se procesó sin errores
+   {'de.dluyz1309': 0, 'jj.diaz1067': 3.0, 'cd.bedoya212': 3.0, 'js.salamanca1967': 3.0}
+  
+Procesando evaluación de m.villamizar564
+++ Evaluación de m.villamizar564 se procesó sin errores
+   {'m.villamizar564': 0, 'sd.salas10': 3.0, 'ol.pino521': 3.0, 'ds.chicaiza10': 3.0, 'lc.mojica639': 3.0}
+  
+Procesando evaluación de me.hernandez10
+++ Evaluación de me.hernandez10 se procesó sin errores
+   {'me.hernandez10': 0, 'f.otalora10': 3.0, 's.florez10': 3.0, 'nf.chaves10': 3.0}
+  
+Procesando evaluación de da.gomez11
+-- Evaluación de da.gomez11 se procesó con errores
+   {'ad.sanchez10': 4.0, 'jp.lalinde1079': 2.0, 'sd.hernandez204': 2.0, 'da.gomez11': -0.5, 'pa.otoya757': 4.0}
+  Evaluaci�n enviada tarde y formato incorrecto (espacios adicionales entre compa�eros)
+
+Procesando evaluación de ds.chicaiza10
+++ Evaluación de ds.chicaiza10 se procesó sin errores
+   {'m.villamizar564': 4.0, 'sd.salas10': 3.0, 'ol.pino521': 3.0, 'ds.chicaiza10': 0, 'lc.mojica639': 2.0}
+  
+Procesando evaluación de ja.angel904
+++ Evaluación de ja.angel904 se procesó sin errores
+   {'ja.angel904': 0, 'ca.barrientos1030': 3.0, 'la.avila30': 3.0}
+  
+Procesando evaluación de jh.gomez1793
+++ Evaluación de jh.gomez1793 se procesó sin errores
+   {'ba.hurtado564': 0.0, 'ea.cabello10': 3.0, 'jh.gomez1793': 0, 'ja.de83': 3.0}
+  
+Procesando evaluación de sd.hernandez204
+++ Evaluación de sd.hernandez204 se procesó sin errores
+   {'ad.sanchez10': 5.0, 'jp.lalinde1079': 2.0, 'sd.hernandez204': 0, 'da.gomez11': 2.0, 'pa.otoya757': 3.0}
+  
+Procesando evaluación de cd.bedoya212
+++ Evaluación de cd.bedoya212 se procesó sin errores
+   {'de.dluyz1309': 3.0, 'jj.diaz1067': 3.0, 'cd.bedoya212': 0, 'js.salamanca1967': 3.0}
+  
+Procesando evaluación de la.avila30
+++ Evaluación de la.avila30 se procesó sin errores
+   {'ja.angel904': 2.0, 'ca.barrientos1030': 4.0, 'la.avila30': 0}
+  
+Procesando evaluación de nf.chaves10
+++ Evaluación de nf.chaves10 se procesó sin errores
+   {'me.hernandez10': 3.0, 'f.otalora10': 3.0, 's.florez10': 3.0, 'nf.chaves10': 0}
+  
+Procesando evaluación de ad.sanchez10
+-- Evaluación de ad.sanchez10 se procesó con errores
+   {'ad.sanchez10': -0.5, 'jp.lalinde1079': 3.0, 'sd.hernandez204': 3.0, 'da.gomez11': 3.0, 'pa.otoya757': 3.0}
+  Login de jp.lalinde1079 escrito cómo jp.lalinde10793
+
+Procesando evaluación de jp.lalinde1079
+++ Evaluación de jp.lalinde1079 se procesó sin errores
+   {'ad.sanchez10': 3.0, 'jp.lalinde1079': 0, 'sd.hernandez204': 3.0, 'da.gomez11': 3.0, 'pa.otoya757': 3.0}
+  
+Procesando evaluación de jj.diaz1067
+++ Evaluación de jj.diaz1067 se procesó sin errores
+   {'de.dluyz1309': 3.0, 'jj.diaz1067': 0, 'cd.bedoya212': 3.0, 'js.salamanca1967': 3.0}
+  
+Procesando evaluación de s.abisambra125
+++ Evaluación de s.abisambra125 se procesó sin errores
+   {'jc.ruiz160': 3.0, 's.abisambra125': 0, 'mp.mancipe10': 3.0}
+  
+Procesando evaluación de ca.barrientos1030
+-- Evaluación de ca.barrientos1030 se procesó con errores
+   {'ja.angel904': 2.0, 'ca.barrientos1030': -0.5, 'la.avila30': 4.0}
+  Archivo con formato/contenido incorrecto (\rtf1\ansi\ansicpg1252\cocoartf1344...)
+
+Procesando evaluación de lc.mojica639
+-- Evaluación de lc.mojica639 se procesó con errores
+   {'m.villamizar564': 1.0, 'sd.salas10': 4.0, 'ol.pino521': 3.5, 'ds.chicaiza10': 3.5, 'lc.mojica639': -0.5}
+  Evaluaci�n enviada tarde
+
+ ----------------------------------------------------------------- 
+
+GIS :: 3 integrantes :: 4
+  s.abisambra125 :: 1.0 :: 4.0
+  jc.ruiz160 :: 1.0 :: 4.0
+  mp.mancipe10 :: 0.833333333333 :: 3.33333333333
+
+Crowd Control :: 5 integrantes :: 4.5
+  m.villamizar564 :: 0.916666666667 :: 4.125
+  lc.mojica639 :: 0.875 :: 3.9375
+  ol.pino521 :: 0.958333333333 :: 4.3125
+  ds.chicaiza10 :: 1.04166666667 :: 4.6875
+  sd.salas10 :: 1.08333333333 :: 4.875
+
+OndeHay :: 4 integrantes :: 4
+  jj.rodriguez644 :: 0.888888888889 :: 3.55555555556
+  we.gamba125 :: 1 :: 4
+  ca.ortiz1633 :: 0.888888888889 :: 3.55555555556
+  da.paternina1691 :: 0.888888888889 :: 3.55555555556
+
+3D Home :: 3 integrantes :: 4
+  la.avila30 :: 1.16666666667 :: 4.66666666667
+  ca.barrientos1030 :: 1.08333333333 :: 4.33333333333
+  ja.angel904 :: 0.666666666667 :: 2.66666666667
+
+Should I? :: 4 integrantes :: 4.5
+  f.otalora10 :: 0.888888888889 :: 4.0
+  me.hernandez10 :: 1.0 :: 4.5
+  nf.chaves10 :: 1.0 :: 4.5
+  s.florez10 :: 1.0 :: 4.5
+
+moveCam :: 2 integrantes :: 0
+  je.bautista10 :: 0 :: 0
+  pa.sarmiento10 :: 0 :: 0
+
+Aster :: 5 integrantes :: 4.5
+  pa.otoya757 :: 1.08333333333 :: 4.875
+  jp.lalinde1079 :: 0.833333333333 :: 3.75
+  da.gomez11 :: 0.875 :: 3.9375
+  sd.hernandez204 :: 0.916666666667 :: 4.125
+  ad.sanchez10 :: 1.20833333333 :: 5.4375
+
+TicketService :: 4 integrantes :: 4
+  f.iregui310 :: 1.33333333333 :: 5.33333333333
+  n.sanchez1668 :: 1.33333333333 :: 5.33333333333
+  d.rodriguez13 :: 0.277777777778 :: 1.11111111111
+  hf.vargas10 :: 0.888888888889 :: 3.55555555556
+
+Enigami :: 4 integrantes :: 4
+  ce.forero2551 :: 1.0 :: 4.0
+  f.mate10 :: 1.0 :: 4.0
+  s.beltran10 :: 1.0 :: 4.0
+  s.siza10 :: 0.888888888889 :: 3.55555555556
+
+TransMotion :: 4 integrantes :: 4
+  de.dluyz1309 :: 1.0 :: 4.0
+  cd.bedoya212 :: 1.0 :: 4.0
+  jj.diaz1067 :: 1.0 :: 4.0
+  js.salamanca1967 :: 0.888888888889 :: 3.55555555556
+
+Temporizate :: 4 integrantes :: 4.5
+  jh.gomez1793 :: 1.33333333333 :: 6.0
+  ba.hurtado564 :: -0.111111111111 :: -0.5
+  ea.cabello10 :: 1.22222222222 :: 5.5
+  ja.de83 :: 1.11111111111 :: 5.0
+ ----------------------------------------------------------------- 
+  Normalizando nota para jh.gomez1793 desde 6.0 a 5
+  Normalizando nota para n.sanchez1668 desde 5.33333333333 a 5
+  Normalizando nota para f.iregui310 desde 5.33333333333 a 5
+  Normalizando nota para ba.hurtado564 desde -0.5 a 0
+  Normalizando nota para ea.cabello10 desde 5.5 a 5
+  Normalizando nota para ad.sanchez10 desde 5.4375 a 5
+
+-----------------------------------------------------------------
+RESULTADO EVALUACIONES:
+
+GIS :: 3 integrantes
+   s.abisambra125 {'jc.ruiz160': 3.0, 's.abisambra125': 0, 'mp.mancipe10': 3.0}
+   jc.ruiz160 {'jc.ruiz160': 0, 's.abisambra125': 3.0, 'mp.mancipe10': 3.0}
+   mp.mancipe10 {'jc.ruiz160': 3, 's.abisambra125': 3, 'mp.mancipe10': -1}
+
+Crowd Control :: 5 integrantes
+   m.villamizar564 {'m.villamizar564': 0, 'sd.salas10': 3.0, 'ol.pino521': 3.0, 'ds.chicaiza10': 3.0, 'lc.mojica639': 3.0}
+   lc.mojica639 {'m.villamizar564': 1.0, 'sd.salas10': 4.0, 'ol.pino521': 3.5, 'ds.chicaiza10': 3.5, 'lc.mojica639': -0.5}
+   ol.pino521 {'m.villamizar564': 3, 'sd.salas10': 3, 'ol.pino521': -1, 'ds.chicaiza10': 3, 'lc.mojica639': 3}
+   ds.chicaiza10 {'m.villamizar564': 4.0, 'sd.salas10': 3.0, 'ol.pino521': 3.0, 'ds.chicaiza10': 0, 'lc.mojica639': 2.0}
+   sd.salas10 {'m.villamizar564': 3.0, 'sd.salas10': 0, 'ol.pino521': 3.0, 'ds.chicaiza10': 3.0, 'lc.mojica639': 3.0}
+
+OndeHay :: 4 integrantes
+   jj.rodriguez644 {'jj.rodriguez644': -1, 'we.gamba125': 3, 'da.paternina1691': 3, 'ca.ortiz1633': 3}
+   we.gamba125 {'jj.rodriguez644': 3.0, 'we.gamba125': 0, 'da.paternina1691': 3.0, 'ca.ortiz1633': 3.0}
+   ca.ortiz1633 {'jj.rodriguez644': 3, 'we.gamba125': 3, 'da.paternina1691': 3, 'ca.ortiz1633': -1}
+   da.paternina1691 {'jj.rodriguez644': 3, 'we.gamba125': 3, 'da.paternina1691': -1, 'ca.ortiz1633': 3}
+
+3D Home :: 3 integrantes
+   la.avila30 {'ja.angel904': 2.0, 'ca.barrientos1030': 4.0, 'la.avila30': 0}
+   ca.barrientos1030 {'ja.angel904': 2.0, 'ca.barrientos1030': -0.5, 'la.avila30': 4.0}
+   ja.angel904 {'ja.angel904': 0, 'ca.barrientos1030': 3.0, 'la.avila30': 3.0}
+
+Should I? :: 4 integrantes
+   f.otalora10 {'me.hernandez10': 3, 'f.otalora10': -1, 's.florez10': 3, 'nf.chaves10': 3}
+   me.hernandez10 {'me.hernandez10': 0, 'f.otalora10': 3.0, 's.florez10': 3.0, 'nf.chaves10': 3.0}
+   nf.chaves10 {'me.hernandez10': 3.0, 'f.otalora10': 3.0, 's.florez10': 3.0, 'nf.chaves10': 0}
+   s.florez10 {'me.hernandez10': 3.0, 'f.otalora10': 3.0, 's.florez10': 0, 'nf.chaves10': 3.0}
+
+moveCam :: 2 integrantes
+   je.bautista10 {'je.bautista10': -1, 'pa.sarmiento10': 3}
+   pa.sarmiento10 {'je.bautista10': 3, 'pa.sarmiento10': -1}
+
+Aster :: 5 integrantes
+   pa.otoya757 {'ad.sanchez10': 3.0, 'jp.lalinde1079': 3.0, 'sd.hernandez204': 3.0, 'da.gomez11': 3.0, 'pa.otoya757': 0}
+   jp.lalinde1079 {'ad.sanchez10': 3.0, 'jp.lalinde1079': 0, 'sd.hernandez204': 3.0, 'da.gomez11': 3.0, 'pa.otoya757': 3.0}
+   da.gomez11 {'ad.sanchez10': 4.0, 'jp.lalinde1079': 2.0, 'sd.hernandez204': 2.0, 'da.gomez11': -0.5, 'pa.otoya757': 4.0}
+   sd.hernandez204 {'ad.sanchez10': 5.0, 'jp.lalinde1079': 2.0, 'sd.hernandez204': 0, 'da.gomez11': 2.0, 'pa.otoya757': 3.0}
+   ad.sanchez10 {'ad.sanchez10': -0.5, 'jp.lalinde1079': 3.0, 'sd.hernandez204': 3.0, 'da.gomez11': 3.0, 'pa.otoya757': 3.0}
+
+TicketService :: 4 integrantes
+   f.iregui310 {'n.sanchez1668': 6.0, 'hf.vargas10': 3.0, 'd.rodriguez13': 0.0, 'f.iregui310': 0}
+   n.sanchez1668 {'n.sanchez1668': 0, 'hf.vargas10': 3.0, 'd.rodriguez13': 0.0, 'f.iregui310': 6.0}
+   d.rodriguez13 {'n.sanchez1668': 3.0, 'hf.vargas10': 3.0, 'd.rodriguez13': -0.5, 'f.iregui310': 3.0}
+   hf.vargas10 {'n.sanchez1668': 3, 'hf.vargas10': -1, 'd.rodriguez13': 3, 'f.iregui310': 3}
+
+Enigami :: 4 integrantes
+   ce.forero2551 {'f.mate10': 3.0, 'ce.forero2551': 0, 's.beltran10': 3.0, 's.siza10': 3.0}
+   f.mate10 {'f.mate10': 0, 'ce.forero2551': 3.0, 's.beltran10': 3.0, 's.siza10': 3.0}
+   s.beltran10 {'f.mate10': 3.0, 'ce.forero2551': 3.0, 's.beltran10': 0, 's.siza10': 3.0}
+   s.siza10 {'f.mate10': 3, 'ce.forero2551': 3, 's.beltran10': 3, 's.siza10': -1}
+
+TransMotion :: 4 integrantes
+   de.dluyz1309 {'de.dluyz1309': 0, 'jj.diaz1067': 3.0, 'cd.bedoya212': 3.0, 'js.salamanca1967': 3.0}
+   cd.bedoya212 {'de.dluyz1309': 3.0, 'jj.diaz1067': 3.0, 'cd.bedoya212': 0, 'js.salamanca1967': 3.0}
+   jj.diaz1067 {'de.dluyz1309': 3.0, 'jj.diaz1067': 0, 'cd.bedoya212': 3.0, 'js.salamanca1967': 3.0}
+   js.salamanca1967 {'de.dluyz1309': 3, 'jj.diaz1067': 3, 'cd.bedoya212': 3, 'js.salamanca1967': -1}
+
+Temporizate :: 4 integrantes
+   jh.gomez1793 {'ba.hurtado564': 0.0, 'ea.cabello10': 3.0, 'jh.gomez1793': 0, 'ja.de83': 3.0}
+   ba.hurtado564 {'ba.hurtado564': -1, 'ea.cabello10': 3, 'jh.gomez1793': 3, 'ja.de83': 3}
+   ea.cabello10 {'ba.hurtado564': 0.0, 'ea.cabello10': 0, 'jh.gomez1793': 5.0, 'ja.de83': 4.0}
+   ja.de83 {'ba.hurtado564': 0.0, 'ea.cabello10': 5.0, 'jh.gomez1793': 4.0, 'ja.de83': 0}
+
+-----------------------------------------------------------------
+FACTORES Y CALIFICACIONES: 
+
+ad.sanchez10 [1.2083333333333333, 5]
+ba.hurtado564 [-0.1111111111111111, 0]
+ca.barrientos1030 [1.0833333333333333, 4.333333333333333]
+ca.ortiz1633 [0.8888888888888888, 3.5555555555555554]
+cd.bedoya212 [1.0, 4.0]
+ce.forero2551 [1.0, 4.0]
+d.rodriguez13 [0.2777777777777778, 1.1111111111111112]
+da.gomez11 [0.875, 3.9375]
+da.paternina1691 [0.8888888888888888, 3.5555555555555554]
+de.dluyz1309 [1.0, 4.0]
+ds.chicaiza10 [1.0416666666666667, 4.6875]
+ea.cabello10 [1.2222222222222223, 5]
+f.iregui310 [1.3333333333333333, 5]
+f.mate10 [1.0, 4.0]
+f.otalora10 [0.8888888888888888, 4.0]
+hf.vargas10 [0.8888888888888888, 3.5555555555555554]
+ja.angel904 [0.6666666666666666, 2.6666666666666665]
+ja.de83 [1.1111111111111112, 5.0]
+jc.ruiz160 [1.0, 4.0]
+je.bautista10 [0, 0]
+jh.gomez1793 [1.3333333333333333, 5]
+jj.diaz1067 [1.0, 4.0]
+jj.rodriguez644 [0.8888888888888888, 3.5555555555555554]
+jp.lalinde1079 [0.8333333333333334, 3.75]
+js.salamanca1967 [0.8888888888888888, 3.5555555555555554]
+la.avila30 [1.1666666666666667, 4.666666666666667]
+lc.mojica639 [0.875, 3.9375]
+m.villamizar564 [0.9166666666666666, 4.125]
+me.hernandez10 [1.0, 4.5]
+mp.mancipe10 [0.8333333333333334, 3.3333333333333335]
+n.sanchez1668 [1.3333333333333333, 5]
+nf.chaves10 [1.0, 4.5]
+ol.pino521 [0.9583333333333334, 4.3125]
+pa.otoya757 [1.0833333333333333, 4.875]
+pa.sarmiento10 [0, 0]
+s.abisambra125 [1.0, 4.0]
+s.beltran10 [1.0, 4.0]
+s.florez10 [1.0, 4.5]
+s.siza10 [0.8888888888888888, 3.5555555555555554]
+sd.hernandez204 [0.9166666666666666, 4.125]
+sd.salas10 [1.0833333333333333, 4.875]
+we.gamba125 [1, 4]
+
+----------------------------------------------------------------- 
+
+PENALIZACIONES: 
+
+{'ad.sanchez10': 'Login de jp.lalinde1079 escrito c\xc3\xb3mo jp.lalinde10793\n',
+ 'ca.barrientos1030': 'Archivo con formato/contenido incorrecto (\\rtf1\\ansi\\ansicpg1252\\cocoartf1344...)\n',
+ 'd.rodriguez13': 'Evaluaci\xf3n enviada tarde\r\n',
+ 'da.gomez11': 'Evaluaci\xf3n enviada tarde y formato incorrecto (espacios adicionales entre compa\xf1eros)\r\n',
+ 'lc.mojica639': 'Evaluaci\xf3n enviada tarde\r\n'}
+
+----------------------------------------------------------------- 
+
+ADVERTENCIAS: 
+
+['ja.de83 asign\xc3\xb3 0.0 a ba.hurtado564',
+ 'f.iregui310 asign\xc3\xb3 0.0 a d.rodriguez13',
+ 'n.sanchez1668 asign\xc3\xb3 0.0 a d.rodriguez13',
+ 'ea.cabello10 asign\xc3\xb3 0.0 a ba.hurtado564',
+ 'jh.gomez1793 asign\xc3\xb3 0.0 a ba.hurtado564',
+ 'lc.mojica639 asign\xc3\xb3 1.0 a m.villamizar564']

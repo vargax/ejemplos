@@ -42,6 +42,8 @@ for w in floatRange(0,1,0.05):
 	minimos["{0:.2f}".format(w)] = ("{0:.2f}".format(minimo[0]),"{0:.2f}".format(minimo[1]),"{0:.2f}".format(minimo[2]))
 	
 pp.pprint(minimos)
+# Graficando el frente de pareto
+
 				
 print "\n ALGORITMO EVOLUTIVO"
 # TAREAS:

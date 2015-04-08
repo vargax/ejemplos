@@ -14,21 +14,39 @@ import pprint
 ## CONSTANTES
 ##########################
 DIRECTORIO_ENTRADA = 'data/evaluaciones'
-ARCHIVO_SALIDA = 'data/resultados.csv'
+ARCHIVO_SALIDA = 'resultados.csv'
 
+ENCABEZADO =  'Nombre de usuario'
 ##########################
 ## ATRIBUTOS
 ##########################
+nomColumActividad = 'empresarios 2'
+nomColumEvaCruzada = 'EC empresarios 2'
+
+calificacionActividad = {
+	'3D Home': 3.75,
+	'Aster': 4,
+	'Crowd Control': 4,
+	'Enigami': 3.25,
+	'OndeHay': 4.35,
+	'Geople': 4,
+	'Should I?': 4.5,
+	'Temporizate': 4.25,
+	'SecCam': 3.5,
+	'TransMotion': 3.5,
+	'moveCam': 3.45
+	}
+
 grupos = {
 	'3D Home': ['la.avila30','ca.barrientos1030','ja.angel904'],
 	'Aster': ['pa.otoya757','jp.lalinde1079','da.gomez11','sd.hernandez204','ad.sanchez10'],
 	'Crowd Control': ['m.villamizar564','lc.mojica639','ol.pino521','ds.chicaiza10','sd.salas10'],
 	'Enigami': ['ce.forero2551','f.mate10','s.beltran10','s.siza10'],
 	'OndeHay': ['jj.rodriguez644','we.gamba125','ca.ortiz1633','da.paternina1691'],
-	'GIS': ['s.abisambra125','jc.ruiz160','mp.mancipe10'],
+	'Geople': ['s.abisambra125','jc.ruiz160','mp.mancipe10'],
 	'Should I?': ['f.otalora10','me.hernandez10','nf.chaves10','s.florez10'],
 	'Temporizate': ['jh.gomez1793','ba.hurtado564','ea.cabello10','ja.de83'],
-	'TicketService': ['f.iregui310','n.sanchez1668','d.rodriguez13','hf.vargas10'],
+	'SecCam': ['f.iregui310','n.sanchez1668','d.rodriguez13','hf.vargas10'],
 	'TransMotion': ['de.dluyz1309','cd.bedoya212','jj.diaz1067','js.salamanca1967'],
 	'moveCam': ['je.bautista10','pa.sarmiento10']
 	}
@@ -53,7 +71,7 @@ for grupo, integrantes in grupos.items():
 			else:
 				alumnos[integrante][companiero] = -1 # Penalización que se aplica en caso de no enviar la evaluación
 		print '  ', integrante, alumnos[integrante]
-print '\n ----------------------------------------------------------------- \n'
+
 # Realizando limpieza:
 if os.path.exists(ARCHIVO_SALIDA): 
 	os.remove(ARCHIVO_SALIDA) # Eliminando el archivo de salida, si existe
@@ -64,6 +82,8 @@ for evaluacion in evaluaciones:
 	if len(evaluacion.split('_')) == 4 or not evaluacion.endswith('txt'):
 		os.remove(evaluacion) # Eliminando el archivo adicional que genera SICUA
 
+print '\n ----------------------------------------------------------------- \n'
+# Recuperando asignación de puntos:
 evaluaciones = os.listdir('.')
 for evaluacion in evaluaciones:
 	alumno = evaluacion.split('_')[1] # Obteniendo el login del alumno que envió la evaluación del nombre del archivo
@@ -133,24 +153,66 @@ for evaluacion in evaluaciones:
 			penalizaciones[alumno] = razon
 		
 	if penalizacion:
+		print '-- Evaluación de '+alumno+' se procesó con errores'
 		alumnos[alumno][alumno] = -0.5
 	else:
-		print 'Evaluación de '+alumno+' se procesó sin errores'
 		alumnos[alumno][alumno] = 0
+		print '++ Evaluación de '+alumno+' se procesó sin errores'
 	print '  ', alumnos[alumno]
 	print '  '+razon
+	
+print ' ----------------------------------------------------------------- '
+# Calculando el factor para cada alumno
+factores = {} # Diccionario que contendrá el factor para cada alumno
+for grupo, integrantes in grupos.items():
+	numIntegrantes = len(integrantes)
+	divisor = 3*(numIntegrantes -1)
+	print '\n'+grupo, ':: '+str(numIntegrantes)+' integrantes :: '+str(calificacionActividad[grupo]); 
+	for integrante in integrantes:
+		sumaPuntos = 0 # Inicializo variable para almacenar la suma de los puntos
+		for companeros in integrantes: # Recupero la evaluación para este integrante de cada uno de sus compañeros
+			sumaPuntos += alumnos[companeros][integrante] # Voy sumando la asignación dada por cada compañero
+		factor = sumaPuntos/divisor # Divido por la cantidad de puntos posibles en una asignación equitativa (3*numCompañeros)
+		factores[integrante] = [factor, factor*calificacionActividad[grupo]]
+		print '  '+integrante+' :: '+str(factores[integrante][0])+' :: '+str(factores[integrante][1])
+print ' ----------------------------------------------------------------- '
+# Normalizando calificaciones (mínimo 0 / máximo 5)
+for alumno, clfCruzada in factores.items():
+	nota = clfCruzada[1]
+	if nota < 0 or nota > 5:
+		nota = max(nota,0)
+		nota = min(nota,5)
+		print '  Normalizando nota para '+alumno+' desde '+str(clfCruzada[1])+' a '+str(nota)
+		clfCruzada[1] = nota
 
-print '\n ----------------------------------------------------------------- \n'		
+print '\n-----------------------------------------------------------------'		
+print 'RESULTADO EVALUACIONES:'
 for grupo, integrantes in grupos.items():
 	print '\n'+grupo, ':: '+str(len(integrantes))+' integrantes'; 
 	for integrante in integrantes:
 		print '  ', integrante, alumnos[integrante]
 
-print '\n ----------------------------------------------------------------- \n'
+print '\n-----------------------------------------------------------------'
+print 'FACTORES Y CALIFICACIONES: \n'
+
+# Generando el archivo de resultados para importar en SICUA+
+salida = open(ARCHIVO_SALIDA, 'w')
+salida.write(ENCABEZADO+','+nomColumEvaCruzada+','+nomColumActividad+'\n')
+
+for alumno, nota in sorted(factores.items()):
+	print alumno,nota
+	salida.write(alumno+','+str(nota[0])+','+str(nota[1])+'\n')
+	
+salida.close()
+
+print '\n----------------------------------------------------------------- \n'
 print 'PENALIZACIONES: \n'
 pp.pprint(penalizaciones)		
 	
-print '\n ----------------------------------------------------------------- \n'
+print '\n----------------------------------------------------------------- \n'
 print 'ADVERTENCIAS: \n'
 pp.pprint(advertencias)
+
+
+
 	

@@ -1,0 +1,3 @@
+ca.barrientos1030,3
+la.avila30,3
+PNLZD,Codificación de caracteres diferente a ISO-8859-15 y final de línea en MacOS clásico

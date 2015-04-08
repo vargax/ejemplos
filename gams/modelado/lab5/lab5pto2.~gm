@@ -1,0 +1,38 @@
+$ONTEXT
+LABORATORIO 5 - Modelado, Simulacion y Optimizacion
+
+PROBLEMA: Maximizar el area de un triangulo con perimetro de 60 metros
+
+$OFFTEXT
+Positive Variable
+a
+b
+c
+;
+
+a.LO = 1;
+b.LO = 1;
+c.LO = 1;
+
+Scalar s /30/;
+
+Variable ar area :: variable a maximizar;
+
+Equations
+area
+restPerimetro
+;
+
+area             .. ar =e= sqrt(s*(s-a)*(s-b)*(s-c));
+restPerimetro    .. a+b+c =e= 60;
+
+Model pto2 /all/;
+option nlp = conopt
+
+Solve pto2 using nlp maximizing ar;
+
+Display a.l, b.l, c.l, ar.l;
+$ONTEXT
+
+
+$OFFTEXT
