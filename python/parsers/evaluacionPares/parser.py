@@ -128,9 +128,11 @@ for evaluacion in evaluaciones:
 		if puntos < 2:
 			advertencias.append(alumno+' asignó '+str(puntos)+' a '+login)
 		
-		if alumnos[alumno][login] != 3: # Verificar que el compañero pertenezca al grupo
-			penalizacion = True
-			razon += 'ERR :: '+alumno+' :: compañero '+login+' no encontrado'
+		# Verificar que el compañero pertenezca al grupo
+		if alumnos[alumno][login] != 3:  # la evaluación para cada compañero debe ser 3 (valor de inicialización)
+			penalizacion = True			 # si es diferente de 3 es porque no es un compañero válido
+										 # (si es -1 es porque se autoevaluó, si no se encontró es porque no es un compañero)
+			razon += 'ERR :: '+alumno+' :: '+login+' no es un compañero válido'
 			penalizaciones[alumno] = razon
 			
 		if penalizacion:
@@ -141,16 +143,15 @@ for evaluacion in evaluaciones:
 			
 	evaluacion.close()
 		
-	if not penalizacion:
-		if companeros != 0:
-			penalizacion = True
-			razon += 'ERR :: '+alumno+' :: Faltaron por calificar '+str(companeros)
-			penalizaciones[alumno] = razon
-		
-		if puntosAsignar < 0:
-			penalizacion = True
-			razon += 'ERR :: '+alumno+' :: Se asignaron '+str(-puntosAsignar)+' de mas'
-			penalizaciones[alumno] = razon
+	if companeros != 0:
+		penalizacion = True
+		razon += 'ERR :: '+alumno+' :: Faltaron por calificar '+str(companeros)
+		penalizaciones[alumno] = razon
+	
+	if puntosAsignar < 0:
+		penalizacion = True
+		razon += 'ERR :: '+alumno+' :: Se asignaron '+str(-puntosAsignar)+' de mas'
+		penalizaciones[alumno] = razon
 		
 	if penalizacion:
 		print '-- Evaluación de '+alumno+' se procesó con errores'

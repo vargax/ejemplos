@@ -1,3 +1,0 @@
-f.mate10,3
-s.beltran10,3
-s.siza10,3
