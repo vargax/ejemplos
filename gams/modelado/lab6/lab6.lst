@@ -1,0 +1,2628 @@
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 1
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+C o m p i l a t i o n
+
+
+      LABORATORIO 6 - Modelado, Simulacion y Optimizacion
+      Optimizacion Multiobjetivo :: Metodo de Sumas Ponderadas
+       
+      PROBLEMA: Modelo de transporte
+      FUNCIONES OBJETIVO: Minimizar Tiempo :: Minimizar Costo
+       
+   9  set i iteraciones /0*10/;
+  10  parameter ws(i) vector de pesos /0 0, 1 0.1, 2 0.2, 3 0.3, 4 0.4, 5 0.5, 6
+       0.6, 7 0.7, 8 0.8, 9 0.9, 10 1/;
+  11  scalar w peso /0/;
+  12   
+  13  Set o origenes: plantas / o1*o3 /;
+  14  Set d destinos: bodegas / d1*d4 /;
+  15   
+  16  Parameters
+  17  sp(o) suministro en la planta /o1 35, o2 50, o3 40/
+  18  db(d) demanda de la bodega /d1 45, d2 20, d3 30, d4 30/
+  19  ;
+  20   
+  21  Table c(o,d) Costo transporte de la planta o a la bodega d
+  22           d1      d2      d3      d4
+  23  o1       10      9       10      11
+  24  o2       9       10      11      10
+  25  o3       11      9       10      10
+  26  ;
+  27   
+  28  Table t(o,d) Tiempo para llevar un producto de la planta o a la bodega d
+  29           d1      d2      d3      d4
+  30  o1       12      14      10      11
+  31  o2       11      8       7       13
+  32  o3       6       11      4       15
+  33  ;
+  34   
+  35  Variables
+  36  x(o,d)   Cantidad de producto despachado desde la planta o hacia la bodega
+       d
+  37  fc       funcion costo    :: Primera funcion a minimizar
+  38  ft       funcion tiempo   :: Segunda funcion a minimizar
+  39  f        funcion objetivo :: suma ponderada
+  40  ;
+  41  positive variable x;
+  42   
+  43  Equations
+  44  funcionObjetivo   Funcion de sumas ponderadas
+  45  funcionCosto      Funcion de costo
+  46  funcionTiempo     Funcion de tiempo
+  47  restSuministro(o) Restriccion de suministro :: No se puede proveer mas de 
+      la capacidad de la planta
+  48  restDemanda(d)    Restriccion demanda :: No se puede despachar menos de lo
+      s demandado por la bodega
+  49  ;
+  50   
+  51  funcionObjetivo  ..      f       =e= w*fc + (1-w)*ft;
+  52  funcionCosto     ..      fc      =e= sum((o,d), x(o,d)*c(o,d));
+  53  funcionTiempo    ..      ft      =e= sum((o,d), x(o,d)*t(o,d));
+  54  restSuministro(o)..      sp(o)   =l= sum(d, x(o,d));
+  55  restDemanda(d)   ..      db(d)   =e= sum(o, x(o,d));
+  56   
+  57  Model lab6 /all/;
+  58  parameter f_res(i)       Resultados suma ponderada :: Min;
+  59  parameter fc_res(i)      Resultados funcion costo  :: Min;
+  60  parameter ft_res(i)      Resultados funcion tiempo :: Min;
+  61   
+  62  parameter x_res(o,d,i)   Puntos que minimizan la suma ponderada para cada 
+      peso;
+  63   
+  64  loop(i,
+  65       w = ws(i);
+  66   
+  67       option lp=cplex;
+  68       Solve lab6 using lp minimizing f;
+  69   
+  70       f_res(i) = f.l;
+  71       fc_res(i)= fc.l;
+  72       ft_res(i)= ft.l;
+  73   
+  74       x_res(o,d,i) = x.l(o,d);
+  75       );
+  76   
+  77  display f_res, fc_res, ft_res, x_res;
+  78   
+  79  file resultados /C:\users\cvargasc\Mis Documentos\resultados.dat/;
+  80  resultados.pc = 5;
+  81  put resultados;
+  82  loop(i,
+  83       put fc_res(i),ft_res(i) /
+  84       );
+  85   
+      G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+      E x e c u t i o n
+       
+       
+      ----     77 PARAMETER f_res  Resultados suma ponderada :: Min
+       
+      0  1000.000,    1  1035.000,    2  1070.000,    3  1105.000,    4  1140.00
+      0
+      5  1160.000,    6  1180.000,    7  1200.000,    8  1209.000,    9  1207.50
+      0
+      10 1185.000
+       
+       
+      ----     77 PARAMETER fc_res  Resultados funcion costo  :: Min
+       
+      0  1350.000,    1  1350.000,    2  1350.000,    3  1350.000,    4  1350.00
+      0
+      5  1260.000,    6  1260.000,    7  1260.000,    8  1220.000,    9  1200.00
+      0
+      10 1185.000
+       
+       
+      ----     77 PARAMETER ft_res  Resultados funcion tiempo :: Min
+       
+      0  1000.000,    1  1000.000,    2  1000.000,    3  1000.000,    4  1000.00
+      0
+      5  1060.000,    6  1060.000,    7  1060.000,    8  1165.000,    9  1275.00
+      0
+      10 1425.000
+       
+       
+      ----     77 PARAMETER x_res  Puntos que minimizan la suma ponderada para c
+      ada pe
+                                   so
+       
+                      0           1           2           3           4         
+        5
+       
+      o1.d1       5.000       5.000       5.000       5.000       5.000       5.
+      000
+      o1.d4      30.000      30.000      30.000      30.000      30.000      30.
+      000
+      o2.d1                                                                  30.
+      000
+      o2.d2      20.000      20.000      20.000      20.000      20.000      20.
+      000
+      o2.d3      30.000      30.000      30.000      30.000      30.000
+      o3.d1      40.000      40.000      40.000      40.000      40.000      10.
+      000
+      o3.d3                                                                  30.
+      000
+       
+          +           6           7           8           9          10
+       
+      o1.d1       5.000       5.000
+      o1.d2                               5.000      20.000      20.000
+      o1.d3                                                      15.000
+      o1.d4      30.000      30.000      30.000      15.000
+      o2.d1      30.000      30.000      45.000      45.000      45.000
+      o2.d2      20.000      20.000       5.000
+      o2.d4                                           5.000       5.000
+      o3.d1      10.000      10.000
+      o3.d2                              10.000
+      o3.d3      30.000      30.000      30.000      30.000      15.000
+      o3.d4                                          10.000      25.000
+       
+       
+       
+      EXECUTION TIME       =        0.001 SECONDS      3 MB  24.4.2 r51415 WEX-V
+      S8
+
+
+COMPILATION TIME     =        0.002 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 2
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Equation Listing    SOLVE lab6 Using LP From line 68
+
+
+---- funcionObjetivo  =E=  Funcion de sumas ponderadas
+
+funcionObjetivo..  - ft + f =E= 0 ; (LHS = 0)
+     
+
+---- funcionCosto  =E=  Funcion de costo
+
+funcionCosto..  - 10*x(o1,d1) - 9*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 9*x(o2,d1) - 10*x(o2,d2) - 11*x(o2,d3) - 10*x(o2,d4) - 11*x(o3,d1)
+     
+      - 9*x(o3,d2) - 10*x(o3,d3) - 10*x(o3,d4) + fc =E= 0 ; (LHS = 0)
+     
+
+---- funcionTiempo  =E=  Funcion de tiempo
+
+funcionTiempo..  - 12*x(o1,d1) - 14*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 11*x(o2,d1) - 8*x(o2,d2) - 7*x(o2,d3) - 13*x(o2,d4) - 6*x(o3,d1)
+     
+      - 11*x(o3,d2) - 4*x(o3,d3) - 15*x(o3,d4) + ft =E= 0 ; (LHS = 0)
+     
+
+---- restSuministro  =L=  Restriccion de suministro :: No se puede proveer mas d
+                          e la capacidad de la planta
+
+restSuministro(o1)..  - x(o1,d1) - x(o1,d2) - x(o1,d3) - x(o1,d4) =L= -35 ;
+     
+      (LHS = 0, INFES = 35 ****)
+     
+restSuministro(o2)..  - x(o2,d1) - x(o2,d2) - x(o2,d3) - x(o2,d4) =L= -50 ;
+     
+      (LHS = 0, INFES = 50 ****)
+     
+restSuministro(o3)..  - x(o3,d1) - x(o3,d2) - x(o3,d3) - x(o3,d4) =L= -40 ;
+     
+      (LHS = 0, INFES = 40 ****)
+     
+
+---- restDemanda  =E=  Restriccion demanda :: No se puede despachar menos de los
+                       demandado por la bodega
+
+restDemanda(d1)..  - x(o1,d1) - x(o2,d1) - x(o3,d1) =E= -45 ;
+     
+      (LHS = 0, INFES = 45 ****)
+     
+restDemanda(d2)..  - x(o1,d2) - x(o2,d2) - x(o3,d2) =E= -20 ;
+     
+      (LHS = 0, INFES = 20 ****)
+     
+restDemanda(d3)..  - x(o1,d3) - x(o2,d3) - x(o3,d3) =E= -30 ;
+     
+      (LHS = 0, INFES = 30 ****)
+     
+REMAINING ENTRY SKIPPED
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 3
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Column Listing      SOLVE lab6 Using LP From line 68
+
+
+---- x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+x(o1,d1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -10       funcionCosto
+      -12       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d1)
+
+x(o1,d2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -9       funcionCosto
+      -14       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d2)
+
+x(o1,d3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -10       funcionCosto
+      -10       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d3)
+
+REMAINING 9 ENTRIES SKIPPED
+
+---- fc  funcion costo    :: Primera funcion a minimizar
+
+fc
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       funcionCosto
+
+
+---- ft  funcion tiempo   :: Segunda funcion a minimizar
+
+ft
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -1       funcionObjetivo
+        1       funcionTiempo
+
+
+---- f  funcion objetivo :: suma ponderada
+
+f
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       funcionObjetivo
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 4
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE lab6 Using LP From line 68
+
+
+LOOPS                                    i   0
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS           5     SINGLE EQUATIONS           10
+BLOCKS OF VARIABLES           4     SINGLE VARIABLES           15
+NON ZERO ELEMENTS            52
+
+
+GENERATION TIME      =        0.012 SECONDS      4 MB  24.4.2 r51415 WEX-VS8
+
+
+EXECUTION TIME       =        0.013 SECONDS      4 MB  24.4.2 r51415 WEX-VS8
+               L O O P S                  i 0
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 5
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE lab6 Using LP From line 68
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   lab6                OBJECTIVE  f
+     TYPE    LP                  DIRECTION  MINIMIZE
+     SOLVER  CPLEX               FROM LINE  68
+
+**** SOLVER STATUS     1 Normal Completion         
+**** MODEL STATUS      1 Optimal                   
+**** OBJECTIVE VALUE             1000.0000
+
+ RESOURCE USAGE, LIMIT          0.120      1000.000
+ ITERATION COUNT, LIMIT         6    2000000000
+
+IBM ILOG CPLEX   24.4.2 r51415 Released Mar 15, 2015 VS8 x86 32bit/MS Windows 
+Cplex 12.6.1.0
+
+Space for names approximately 0.00 Mb
+Use option 'names no' to turn use of names off
+LP status(1): optimal
+Cplex Time: 0.10sec (det. 0.02 ticks)
+Optimal solution found.
+Objective :        1000.000000
+
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- EQU funcionOb~      .         .         .        1.000      
+---- EQU funcionCo~      .         .         .         EPS       
+---- EQU funcionTi~      .         .         .        1.000      
+
+  funcionObjetivo  Funcion de sumas ponderadas
+  funcionCosto  Funcion de costo
+  funcionTiempo  Funcion de tiempo
+
+---- EQU restSuministro  Restriccion de suministro :: No se puede proveer mas de
+                         la capacidad de la planta
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+o1     -INF    -35.000   -35.000    -8.000      
+o2     -INF    -50.000   -50.000    -7.000      
+o3     -INF    -40.000   -40.000    -2.000      
+
+---- EQU restDemanda  Restriccion demanda :: No se puede despachar menos de los 
+                      demandado por la bodega
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+d1   -45.000   -45.000   -45.000    -4.000      
+d2   -20.000   -20.000   -20.000    -1.000      
+d3   -30.000   -30.000   -30.000      .         
+d4   -30.000   -30.000   -30.000    -3.000      
+
+---- VAR x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+         LOWER     LEVEL     UPPER    MARGINAL
+
+o1.d1      .        5.000     +INF       .         
+o1.d2      .         .        +INF      5.000      
+o1.d3      .         .        +INF      2.000      
+o1.d4      .       30.000     +INF       .         
+o2.d1      .         .        +INF       .         
+o2.d2      .       20.000     +INF       .         
+o2.d3      .       30.000     +INF       .         
+o2.d4      .         .        +INF      3.000      
+o3.d1      .       40.000     +INF       .         
+o3.d2      .         .        +INF      8.000      
+o3.d3      .         .        +INF      2.000      
+o3.d4      .         .        +INF     10.000      
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- VAR fc             -INF   1350.000     +INF       .         
+---- VAR ft             -INF   1000.000     +INF       .         
+---- VAR f              -INF   1000.000     +INF       .         
+
+  fc  funcion costo    :: Primera funcion a minimizar
+  ft  funcion tiempo   :: Segunda funcion a minimizar
+  f  funcion objetivo :: suma ponderada
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 6
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Equation Listing    SOLVE lab6 Using LP From line 68
+
+
+---- funcionObjetivo  =E=  Funcion de sumas ponderadas
+
+funcionObjetivo..  - 0.1*fc - 0.9*ft + f =E= 0 ; (LHS = -35, INFES = 35 ****)
+     
+
+---- funcionCosto  =E=  Funcion de costo
+
+funcionCosto..  - 10*x(o1,d1) - 9*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 9*x(o2,d1) - 10*x(o2,d2) - 11*x(o2,d3) - 10*x(o2,d4) - 11*x(o3,d1)
+     
+      - 9*x(o3,d2) - 10*x(o3,d3) - 10*x(o3,d4) + fc =E= 0 ; (LHS = 0)
+     
+
+---- funcionTiempo  =E=  Funcion de tiempo
+
+funcionTiempo..  - 12*x(o1,d1) - 14*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 11*x(o2,d1) - 8*x(o2,d2) - 7*x(o2,d3) - 13*x(o2,d4) - 6*x(o3,d1)
+     
+      - 11*x(o3,d2) - 4*x(o3,d3) - 15*x(o3,d4) + ft =E= 0 ; (LHS = 0)
+     
+
+---- restSuministro  =L=  Restriccion de suministro :: No se puede proveer mas d
+                          e la capacidad de la planta
+
+restSuministro(o1)..  - x(o1,d1) - x(o1,d2) - x(o1,d3) - x(o1,d4) =L= -35 ;
+     
+      (LHS = -35)
+     
+restSuministro(o2)..  - x(o2,d1) - x(o2,d2) - x(o2,d3) - x(o2,d4) =L= -50 ;
+     
+      (LHS = -50)
+     
+restSuministro(o3)..  - x(o3,d1) - x(o3,d2) - x(o3,d3) - x(o3,d4) =L= -40 ;
+     
+      (LHS = -40)
+     
+
+---- restDemanda  =E=  Restriccion demanda :: No se puede despachar menos de los
+                       demandado por la bodega
+
+restDemanda(d1)..  - x(o1,d1) - x(o2,d1) - x(o3,d1) =E= -45 ; (LHS = -45)
+     
+restDemanda(d2)..  - x(o1,d2) - x(o2,d2) - x(o3,d2) =E= -20 ; (LHS = -20)
+     
+restDemanda(d3)..  - x(o1,d3) - x(o2,d3) - x(o3,d3) =E= -30 ; (LHS = -30)
+     
+REMAINING ENTRY SKIPPED
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 7
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Column Listing      SOLVE lab6 Using LP From line 68
+
+
+---- x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+x(o1,d1)
+                (.LO, .L, .UP, .M = 0, 5, +INF, 0)
+      -10       funcionCosto
+      -12       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d1)
+
+x(o1,d2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 5)
+       -9       funcionCosto
+      -14       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d2)
+
+x(o1,d3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 2)
+      -10       funcionCosto
+      -10       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d3)
+
+REMAINING 9 ENTRIES SKIPPED
+
+---- fc  funcion costo    :: Primera funcion a minimizar
+
+fc
+                (.LO, .L, .UP, .M = -INF, 1350, +INF, 0)
+       -0.1     funcionObjetivo
+        1       funcionCosto
+
+
+---- ft  funcion tiempo   :: Segunda funcion a minimizar
+
+ft
+                (.LO, .L, .UP, .M = -INF, 1000, +INF, 0)
+       -0.9     funcionObjetivo
+        1       funcionTiempo
+
+
+---- f  funcion objetivo :: suma ponderada
+
+f
+                (.LO, .L, .UP, .M = -INF, 1000, +INF, 0)
+        1       funcionObjetivo
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 8
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE lab6 Using LP From line 68
+
+
+LOOPS                                    i   1
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS           5     SINGLE EQUATIONS           10
+BLOCKS OF VARIABLES           4     SINGLE VARIABLES           15
+NON ZERO ELEMENTS            53
+
+
+GENERATION TIME      =        0.006 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+
+
+EXECUTION TIME       =        0.054 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+               L O O P S                  i 1
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 9
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE lab6 Using LP From line 68
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   lab6                OBJECTIVE  f
+     TYPE    LP                  DIRECTION  MINIMIZE
+     SOLVER  CPLEX               FROM LINE  68
+
+**** SOLVER STATUS     1 Normal Completion         
+**** MODEL STATUS      1 Optimal                   
+**** OBJECTIVE VALUE             1035.0000
+
+ RESOURCE USAGE, LIMIT          0.116      1000.000
+ ITERATION COUNT, LIMIT         2    2000000000
+
+IBM ILOG CPLEX   24.4.2 r51415 Released Mar 15, 2015 VS8 x86 32bit/MS Windows 
+Cplex 12.6.1.0
+
+Space for names approximately 0.00 Mb
+Use option 'names no' to turn use of names off
+LP status(1): optimal
+Cplex Time: 0.11sec (det. 0.03 ticks)
+Optimal solution found.
+Objective :        1035.000000
+
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- EQU funcionOb~      .         .         .        1.000      
+---- EQU funcionCo~      .         .         .        0.100      
+---- EQU funcionTi~      .         .         .        0.900      
+
+  funcionObjetivo  Funcion de sumas ponderadas
+  funcionCosto  Funcion de costo
+  funcionTiempo  Funcion de tiempo
+
+---- EQU restSuministro  Restriccion de suministro :: No se puede proveer mas de
+                         la capacidad de la planta
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+o1     -INF    -35.000   -35.000    -5.300      
+o2     -INF    -50.000   -50.000    -2.800      
+o3     -INF    -40.000   -40.000      .         
+
+---- EQU restDemanda  Restriccion demanda :: No se puede despachar menos de los 
+                      demandado por la bodega
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+d1   -45.000   -45.000   -45.000    -6.500      
+d2   -20.000   -20.000   -20.000    -5.400      
+d3   -30.000   -30.000   -30.000    -4.600      
+d4   -30.000   -30.000   -30.000    -5.700      
+
+---- VAR x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+         LOWER     LEVEL     UPPER    MARGINAL
+
+o1.d1      .        5.000     +INF       .         
+o1.d2      .         .        +INF      2.800      
+o1.d3      .         .        +INF      0.100      
+o1.d4      .       30.000     +INF       .         
+o2.d1      .         .        +INF      1.500      
+o2.d2      .       20.000     +INF       .         
+o2.d3      .       30.000     +INF       .         
+o2.d4      .         .        +INF      4.200      
+o3.d1      .       40.000     +INF       .         
+o3.d2      .         .        +INF      5.400      
+o3.d3      .         .        +INF       .         
+o3.d4      .         .        +INF      8.800      
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- VAR fc             -INF   1350.000     +INF       .         
+---- VAR ft             -INF   1000.000     +INF       .         
+---- VAR f              -INF   1035.000     +INF       .         
+
+  fc  funcion costo    :: Primera funcion a minimizar
+  ft  funcion tiempo   :: Segunda funcion a minimizar
+  f  funcion objetivo :: suma ponderada
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 10
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Equation Listing    SOLVE lab6 Using LP From line 68
+
+
+---- funcionObjetivo  =E=  Funcion de sumas ponderadas
+
+funcionObjetivo..  - 0.2*fc - 0.8*ft + f =E= 0 ; (LHS = -35, INFES = 35 ****)
+     
+
+---- funcionCosto  =E=  Funcion de costo
+
+funcionCosto..  - 10*x(o1,d1) - 9*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 9*x(o2,d1) - 10*x(o2,d2) - 11*x(o2,d3) - 10*x(o2,d4) - 11*x(o3,d1)
+     
+      - 9*x(o3,d2) - 10*x(o3,d3) - 10*x(o3,d4) + fc =E= 0 ; (LHS = 0)
+     
+
+---- funcionTiempo  =E=  Funcion de tiempo
+
+funcionTiempo..  - 12*x(o1,d1) - 14*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 11*x(o2,d1) - 8*x(o2,d2) - 7*x(o2,d3) - 13*x(o2,d4) - 6*x(o3,d1)
+     
+      - 11*x(o3,d2) - 4*x(o3,d3) - 15*x(o3,d4) + ft =E= 0 ; (LHS = 0)
+     
+
+---- restSuministro  =L=  Restriccion de suministro :: No se puede proveer mas d
+                          e la capacidad de la planta
+
+restSuministro(o1)..  - x(o1,d1) - x(o1,d2) - x(o1,d3) - x(o1,d4) =L= -35 ;
+     
+      (LHS = -35)
+     
+restSuministro(o2)..  - x(o2,d1) - x(o2,d2) - x(o2,d3) - x(o2,d4) =L= -50 ;
+     
+      (LHS = -50)
+     
+restSuministro(o3)..  - x(o3,d1) - x(o3,d2) - x(o3,d3) - x(o3,d4) =L= -40 ;
+     
+      (LHS = -40)
+     
+
+---- restDemanda  =E=  Restriccion demanda :: No se puede despachar menos de los
+                       demandado por la bodega
+
+restDemanda(d1)..  - x(o1,d1) - x(o2,d1) - x(o3,d1) =E= -45 ; (LHS = -45)
+     
+restDemanda(d2)..  - x(o1,d2) - x(o2,d2) - x(o3,d2) =E= -20 ; (LHS = -20)
+     
+restDemanda(d3)..  - x(o1,d3) - x(o2,d3) - x(o3,d3) =E= -30 ; (LHS = -30)
+     
+REMAINING ENTRY SKIPPED
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 11
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Column Listing      SOLVE lab6 Using LP From line 68
+
+
+---- x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+x(o1,d1)
+                (.LO, .L, .UP, .M = 0, 5, +INF, 0)
+      -10       funcionCosto
+      -12       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d1)
+
+x(o1,d2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 2.8)
+       -9       funcionCosto
+      -14       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d2)
+
+x(o1,d3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0.0999999999999996)
+      -10       funcionCosto
+      -10       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d3)
+
+REMAINING 9 ENTRIES SKIPPED
+
+---- fc  funcion costo    :: Primera funcion a minimizar
+
+fc
+                (.LO, .L, .UP, .M = -INF, 1350, +INF, 0)
+       -0.2     funcionObjetivo
+        1       funcionCosto
+
+
+---- ft  funcion tiempo   :: Segunda funcion a minimizar
+
+ft
+                (.LO, .L, .UP, .M = -INF, 1000, +INF, 0)
+       -0.8     funcionObjetivo
+        1       funcionTiempo
+
+
+---- f  funcion objetivo :: suma ponderada
+
+f
+                (.LO, .L, .UP, .M = -INF, 1035, +INF, 0)
+        1       funcionObjetivo
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 12
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE lab6 Using LP From line 68
+
+
+LOOPS                                    i   2
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS           5     SINGLE EQUATIONS           10
+BLOCKS OF VARIABLES           4     SINGLE VARIABLES           15
+NON ZERO ELEMENTS            53
+
+
+GENERATION TIME      =        0.005 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+
+
+EXECUTION TIME       =        0.023 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+               L O O P S                  i 2
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 13
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE lab6 Using LP From line 68
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   lab6                OBJECTIVE  f
+     TYPE    LP                  DIRECTION  MINIMIZE
+     SOLVER  CPLEX               FROM LINE  68
+
+**** SOLVER STATUS     1 Normal Completion         
+**** MODEL STATUS      1 Optimal                   
+**** OBJECTIVE VALUE             1070.0000
+
+ RESOURCE USAGE, LIMIT          0.104      1000.000
+ ITERATION COUNT, LIMIT         2    2000000000
+
+IBM ILOG CPLEX   24.4.2 r51415 Released Mar 15, 2015 VS8 x86 32bit/MS Windows 
+Cplex 12.6.1.0
+
+Space for names approximately 0.00 Mb
+Use option 'names no' to turn use of names off
+LP status(1): optimal
+Cplex Time: 0.10sec (det. 0.03 ticks)
+Optimal solution found.
+Objective :        1070.000000
+
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- EQU funcionOb~      .         .         .        1.000      
+---- EQU funcionCo~      .         .         .        0.200      
+---- EQU funcionTi~      .         .         .        0.800      
+
+  funcionObjetivo  Funcion de sumas ponderadas
+  funcionCosto  Funcion de costo
+  funcionTiempo  Funcion de tiempo
+
+---- EQU restSuministro  Restriccion de suministro :: No se puede proveer mas de
+                         la capacidad de la planta
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+o1     -INF    -35.000   -35.000    -4.600      
+o2     -INF    -50.000   -50.000    -2.600      
+o3     -INF    -40.000   -40.000      .         
+
+---- EQU restDemanda  Restriccion demanda :: No se puede despachar menos de los 
+                      demandado por la bodega
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+d1   -45.000   -45.000   -45.000    -7.000      
+d2   -20.000   -20.000   -20.000    -5.800      
+d3   -30.000   -30.000   -30.000    -5.200      
+d4   -30.000   -30.000   -30.000    -6.400      
+
+---- VAR x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+         LOWER     LEVEL     UPPER    MARGINAL
+
+o1.d1      .        5.000     +INF       .         
+o1.d2      .         .        +INF      2.600      
+o1.d3      .         .        +INF      0.200      
+o1.d4      .       30.000     +INF       .         
+o2.d1      .         .        +INF      1.000      
+o2.d2      .       20.000     +INF       .         
+o2.d3      .       30.000     +INF       .         
+o2.d4      .         .        +INF      3.400      
+o3.d1      .       40.000     +INF       .         
+o3.d2      .         .        +INF      4.800      
+o3.d3      .         .        +INF       .         
+o3.d4      .         .        +INF      7.600      
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- VAR fc             -INF   1350.000     +INF       .         
+---- VAR ft             -INF   1000.000     +INF       .         
+---- VAR f              -INF   1070.000     +INF       .         
+
+  fc  funcion costo    :: Primera funcion a minimizar
+  ft  funcion tiempo   :: Segunda funcion a minimizar
+  f  funcion objetivo :: suma ponderada
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 14
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Equation Listing    SOLVE lab6 Using LP From line 68
+
+
+---- funcionObjetivo  =E=  Funcion de sumas ponderadas
+
+funcionObjetivo..  - 0.3*fc - 0.7*ft + f =E= 0 ; (LHS = -35, INFES = 35 ****)
+     
+
+---- funcionCosto  =E=  Funcion de costo
+
+funcionCosto..  - 10*x(o1,d1) - 9*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 9*x(o2,d1) - 10*x(o2,d2) - 11*x(o2,d3) - 10*x(o2,d4) - 11*x(o3,d1)
+     
+      - 9*x(o3,d2) - 10*x(o3,d3) - 10*x(o3,d4) + fc =E= 0 ; (LHS = 0)
+     
+
+---- funcionTiempo  =E=  Funcion de tiempo
+
+funcionTiempo..  - 12*x(o1,d1) - 14*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 11*x(o2,d1) - 8*x(o2,d2) - 7*x(o2,d3) - 13*x(o2,d4) - 6*x(o3,d1)
+     
+      - 11*x(o3,d2) - 4*x(o3,d3) - 15*x(o3,d4) + ft =E= 0 ; (LHS = 0)
+     
+
+---- restSuministro  =L=  Restriccion de suministro :: No se puede proveer mas d
+                          e la capacidad de la planta
+
+restSuministro(o1)..  - x(o1,d1) - x(o1,d2) - x(o1,d3) - x(o1,d4) =L= -35 ;
+     
+      (LHS = -35)
+     
+restSuministro(o2)..  - x(o2,d1) - x(o2,d2) - x(o2,d3) - x(o2,d4) =L= -50 ;
+     
+      (LHS = -50)
+     
+restSuministro(o3)..  - x(o3,d1) - x(o3,d2) - x(o3,d3) - x(o3,d4) =L= -40 ;
+     
+      (LHS = -40)
+     
+
+---- restDemanda  =E=  Restriccion demanda :: No se puede despachar menos de los
+                       demandado por la bodega
+
+restDemanda(d1)..  - x(o1,d1) - x(o2,d1) - x(o3,d1) =E= -45 ; (LHS = -45)
+     
+restDemanda(d2)..  - x(o1,d2) - x(o2,d2) - x(o3,d2) =E= -20 ; (LHS = -20)
+     
+restDemanda(d3)..  - x(o1,d3) - x(o2,d3) - x(o3,d3) =E= -30 ; (LHS = -30)
+     
+REMAINING ENTRY SKIPPED
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 15
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Column Listing      SOLVE lab6 Using LP From line 68
+
+
+---- x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+x(o1,d1)
+                (.LO, .L, .UP, .M = 0, 5, +INF, 0)
+      -10       funcionCosto
+      -12       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d1)
+
+x(o1,d2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 2.6)
+       -9       funcionCosto
+      -14       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d2)
+
+x(o1,d3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0.199999999999999)
+      -10       funcionCosto
+      -10       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d3)
+
+REMAINING 9 ENTRIES SKIPPED
+
+---- fc  funcion costo    :: Primera funcion a minimizar
+
+fc
+                (.LO, .L, .UP, .M = -INF, 1350, +INF, 0)
+       -0.3     funcionObjetivo
+        1       funcionCosto
+
+
+---- ft  funcion tiempo   :: Segunda funcion a minimizar
+
+ft
+                (.LO, .L, .UP, .M = -INF, 1000, +INF, 0)
+       -0.7     funcionObjetivo
+        1       funcionTiempo
+
+
+---- f  funcion objetivo :: suma ponderada
+
+f
+                (.LO, .L, .UP, .M = -INF, 1070, +INF, 0)
+        1       funcionObjetivo
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 16
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE lab6 Using LP From line 68
+
+
+LOOPS                                    i   3
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS           5     SINGLE EQUATIONS           10
+BLOCKS OF VARIABLES           4     SINGLE VARIABLES           15
+NON ZERO ELEMENTS            53
+
+
+GENERATION TIME      =        0.008 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+
+
+EXECUTION TIME       =        0.036 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+               L O O P S                  i 3
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 17
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE lab6 Using LP From line 68
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   lab6                OBJECTIVE  f
+     TYPE    LP                  DIRECTION  MINIMIZE
+     SOLVER  CPLEX               FROM LINE  68
+
+**** SOLVER STATUS     1 Normal Completion         
+**** MODEL STATUS      1 Optimal                   
+**** OBJECTIVE VALUE             1105.0000
+
+ RESOURCE USAGE, LIMIT          0.104      1000.000
+ ITERATION COUNT, LIMIT         2    2000000000
+
+IBM ILOG CPLEX   24.4.2 r51415 Released Mar 15, 2015 VS8 x86 32bit/MS Windows 
+Cplex 12.6.1.0
+
+Space for names approximately 0.00 Mb
+Use option 'names no' to turn use of names off
+LP status(1): optimal
+Cplex Time: 0.10sec (det. 0.03 ticks)
+Optimal solution found.
+Objective :        1105.000000
+
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- EQU funcionOb~      .         .         .        1.000      
+---- EQU funcionCo~      .         .         .        0.300      
+---- EQU funcionTi~      .         .         .        0.700      
+
+  funcionObjetivo  Funcion de sumas ponderadas
+  funcionCosto  Funcion de costo
+  funcionTiempo  Funcion de tiempo
+
+---- EQU restSuministro  Restriccion de suministro :: No se puede proveer mas de
+                         la capacidad de la planta
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+o1     -INF    -35.000   -35.000    -3.900      
+o2     -INF    -50.000   -50.000    -2.400      
+o3     -INF    -40.000   -40.000      .         
+
+---- EQU restDemanda  Restriccion demanda :: No se puede despachar menos de los 
+                      demandado por la bodega
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+d1   -45.000   -45.000   -45.000    -7.500      
+d2   -20.000   -20.000   -20.000    -6.200      
+d3   -30.000   -30.000   -30.000    -5.800      
+d4   -30.000   -30.000   -30.000    -7.100      
+
+---- VAR x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+         LOWER     LEVEL     UPPER    MARGINAL
+
+o1.d1      .        5.000     +INF       .         
+o1.d2      .         .        +INF      2.400      
+o1.d3      .         .        +INF      0.300      
+o1.d4      .       30.000     +INF       .         
+o2.d1      .         .        +INF      0.500      
+o2.d2      .       20.000     +INF       .         
+o2.d3      .       30.000     +INF       .         
+o2.d4      .         .        +INF      2.600      
+o3.d1      .       40.000     +INF       .         
+o3.d2      .         .        +INF      4.200      
+o3.d3      .         .        +INF       .         
+o3.d4      .         .        +INF      6.400      
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- VAR fc             -INF   1350.000     +INF       .         
+---- VAR ft             -INF   1000.000     +INF       .         
+---- VAR f              -INF   1105.000     +INF       .         
+
+  fc  funcion costo    :: Primera funcion a minimizar
+  ft  funcion tiempo   :: Segunda funcion a minimizar
+  f  funcion objetivo :: suma ponderada
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 18
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Equation Listing    SOLVE lab6 Using LP From line 68
+
+
+---- funcionObjetivo  =E=  Funcion de sumas ponderadas
+
+funcionObjetivo..  - 0.4*fc - 0.6*ft + f =E= 0 ; (LHS = -35, INFES = 35 ****)
+     
+
+---- funcionCosto  =E=  Funcion de costo
+
+funcionCosto..  - 10*x(o1,d1) - 9*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 9*x(o2,d1) - 10*x(o2,d2) - 11*x(o2,d3) - 10*x(o2,d4) - 11*x(o3,d1)
+     
+      - 9*x(o3,d2) - 10*x(o3,d3) - 10*x(o3,d4) + fc =E= 0 ; (LHS = 0)
+     
+
+---- funcionTiempo  =E=  Funcion de tiempo
+
+funcionTiempo..  - 12*x(o1,d1) - 14*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 11*x(o2,d1) - 8*x(o2,d2) - 7*x(o2,d3) - 13*x(o2,d4) - 6*x(o3,d1)
+     
+      - 11*x(o3,d2) - 4*x(o3,d3) - 15*x(o3,d4) + ft =E= 0 ; (LHS = 0)
+     
+
+---- restSuministro  =L=  Restriccion de suministro :: No se puede proveer mas d
+                          e la capacidad de la planta
+
+restSuministro(o1)..  - x(o1,d1) - x(o1,d2) - x(o1,d3) - x(o1,d4) =L= -35 ;
+     
+      (LHS = -35)
+     
+restSuministro(o2)..  - x(o2,d1) - x(o2,d2) - x(o2,d3) - x(o2,d4) =L= -50 ;
+     
+      (LHS = -50)
+     
+restSuministro(o3)..  - x(o3,d1) - x(o3,d2) - x(o3,d3) - x(o3,d4) =L= -40 ;
+     
+      (LHS = -40)
+     
+
+---- restDemanda  =E=  Restriccion demanda :: No se puede despachar menos de los
+                       demandado por la bodega
+
+restDemanda(d1)..  - x(o1,d1) - x(o2,d1) - x(o3,d1) =E= -45 ; (LHS = -45)
+     
+restDemanda(d2)..  - x(o1,d2) - x(o2,d2) - x(o3,d2) =E= -20 ; (LHS = -20)
+     
+restDemanda(d3)..  - x(o1,d3) - x(o2,d3) - x(o3,d3) =E= -30 ; (LHS = -30)
+     
+REMAINING ENTRY SKIPPED
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 19
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Column Listing      SOLVE lab6 Using LP From line 68
+
+
+---- x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+x(o1,d1)
+                (.LO, .L, .UP, .M = 0, 5, +INF, 0)
+      -10       funcionCosto
+      -12       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d1)
+
+x(o1,d2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 2.4)
+       -9       funcionCosto
+      -14       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d2)
+
+x(o1,d3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0.300000000000001)
+      -10       funcionCosto
+      -10       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d3)
+
+REMAINING 9 ENTRIES SKIPPED
+
+---- fc  funcion costo    :: Primera funcion a minimizar
+
+fc
+                (.LO, .L, .UP, .M = -INF, 1350, +INF, 0)
+       -0.4     funcionObjetivo
+        1       funcionCosto
+
+
+---- ft  funcion tiempo   :: Segunda funcion a minimizar
+
+ft
+                (.LO, .L, .UP, .M = -INF, 1000, +INF, 0)
+       -0.6     funcionObjetivo
+        1       funcionTiempo
+
+
+---- f  funcion objetivo :: suma ponderada
+
+f
+                (.LO, .L, .UP, .M = -INF, 1105, +INF, 0)
+        1       funcionObjetivo
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 20
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE lab6 Using LP From line 68
+
+
+LOOPS                                    i   4
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS           5     SINGLE EQUATIONS           10
+BLOCKS OF VARIABLES           4     SINGLE VARIABLES           15
+NON ZERO ELEMENTS            53
+
+
+GENERATION TIME      =        0.009 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+
+
+EXECUTION TIME       =        0.050 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+               L O O P S                  i 4
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 21
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE lab6 Using LP From line 68
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   lab6                OBJECTIVE  f
+     TYPE    LP                  DIRECTION  MINIMIZE
+     SOLVER  CPLEX               FROM LINE  68
+
+**** SOLVER STATUS     1 Normal Completion         
+**** MODEL STATUS      1 Optimal                   
+**** OBJECTIVE VALUE             1140.0000
+
+ RESOURCE USAGE, LIMIT          0.108      1000.000
+ ITERATION COUNT, LIMIT         2    2000000000
+
+IBM ILOG CPLEX   24.4.2 r51415 Released Mar 15, 2015 VS8 x86 32bit/MS Windows 
+Cplex 12.6.1.0
+
+Space for names approximately 0.00 Mb
+Use option 'names no' to turn use of names off
+LP status(1): optimal
+Cplex Time: 0.10sec (det. 0.03 ticks)
+Optimal solution found.
+Objective :        1140.000000
+
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- EQU funcionOb~      .         .         .        1.000      
+---- EQU funcionCo~      .         .         .        0.400      
+---- EQU funcionTi~      .         .         .        0.600      
+
+  funcionObjetivo  Funcion de sumas ponderadas
+  funcionCosto  Funcion de costo
+  funcionTiempo  Funcion de tiempo
+
+---- EQU restSuministro  Restriccion de suministro :: No se puede proveer mas de
+                         la capacidad de la planta
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+o1     -INF    -35.000   -35.000    -3.200      
+o2     -INF    -50.000   -50.000    -2.200      
+o3     -INF    -40.000   -40.000      .         
+
+---- EQU restDemanda  Restriccion demanda :: No se puede despachar menos de los 
+                      demandado por la bodega
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+d1   -45.000   -45.000   -45.000    -8.000      
+d2   -20.000   -20.000   -20.000    -6.600      
+d3   -30.000   -30.000   -30.000    -6.400      
+d4   -30.000   -30.000   -30.000    -7.800      
+
+---- VAR x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+         LOWER     LEVEL     UPPER    MARGINAL
+
+o1.d1      .        5.000     +INF       .         
+o1.d2      .         .        +INF      2.200      
+o1.d3      .         .        +INF      0.400      
+o1.d4      .       30.000     +INF       .         
+o2.d1      .         .        +INF  -1.78E-15      
+o2.d2      .       20.000     +INF       .         
+o2.d3      .       30.000     +INF       .         
+o2.d4      .         .        +INF      1.800      
+o3.d1      .       40.000     +INF       .         
+o3.d2      .         .        +INF      3.600      
+o3.d3      .         .        +INF       .         
+o3.d4      .         .        +INF      5.200      
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- VAR fc             -INF   1350.000     +INF       .         
+---- VAR ft             -INF   1000.000     +INF       .         
+---- VAR f              -INF   1140.000     +INF       .         
+
+  fc  funcion costo    :: Primera funcion a minimizar
+  ft  funcion tiempo   :: Segunda funcion a minimizar
+  f  funcion objetivo :: suma ponderada
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 22
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Equation Listing    SOLVE lab6 Using LP From line 68
+
+
+---- funcionObjetivo  =E=  Funcion de sumas ponderadas
+
+funcionObjetivo..  - 0.5*fc - 0.5*ft + f =E= 0 ; (LHS = -35, INFES = 35 ****)
+     
+
+---- funcionCosto  =E=  Funcion de costo
+
+funcionCosto..  - 10*x(o1,d1) - 9*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 9*x(o2,d1) - 10*x(o2,d2) - 11*x(o2,d3) - 10*x(o2,d4) - 11*x(o3,d1)
+     
+      - 9*x(o3,d2) - 10*x(o3,d3) - 10*x(o3,d4) + fc =E= 0 ; (LHS = 0)
+     
+
+---- funcionTiempo  =E=  Funcion de tiempo
+
+funcionTiempo..  - 12*x(o1,d1) - 14*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 11*x(o2,d1) - 8*x(o2,d2) - 7*x(o2,d3) - 13*x(o2,d4) - 6*x(o3,d1)
+     
+      - 11*x(o3,d2) - 4*x(o3,d3) - 15*x(o3,d4) + ft =E= 0 ; (LHS = 0)
+     
+
+---- restSuministro  =L=  Restriccion de suministro :: No se puede proveer mas d
+                          e la capacidad de la planta
+
+restSuministro(o1)..  - x(o1,d1) - x(o1,d2) - x(o1,d3) - x(o1,d4) =L= -35 ;
+     
+      (LHS = -35)
+     
+restSuministro(o2)..  - x(o2,d1) - x(o2,d2) - x(o2,d3) - x(o2,d4) =L= -50 ;
+     
+      (LHS = -50)
+     
+restSuministro(o3)..  - x(o3,d1) - x(o3,d2) - x(o3,d3) - x(o3,d4) =L= -40 ;
+     
+      (LHS = -40)
+     
+
+---- restDemanda  =E=  Restriccion demanda :: No se puede despachar menos de los
+                       demandado por la bodega
+
+restDemanda(d1)..  - x(o1,d1) - x(o2,d1) - x(o3,d1) =E= -45 ; (LHS = -45)
+     
+restDemanda(d2)..  - x(o1,d2) - x(o2,d2) - x(o3,d2) =E= -20 ; (LHS = -20)
+     
+restDemanda(d3)..  - x(o1,d3) - x(o2,d3) - x(o3,d3) =E= -30 ; (LHS = -30)
+     
+REMAINING ENTRY SKIPPED
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 23
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Column Listing      SOLVE lab6 Using LP From line 68
+
+
+---- x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+x(o1,d1)
+                (.LO, .L, .UP, .M = 0, 5, +INF, 0)
+      -10       funcionCosto
+      -12       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d1)
+
+x(o1,d2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 2.2)
+       -9       funcionCosto
+      -14       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d2)
+
+x(o1,d3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0.4)
+      -10       funcionCosto
+      -10       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d3)
+
+REMAINING 9 ENTRIES SKIPPED
+
+---- fc  funcion costo    :: Primera funcion a minimizar
+
+fc
+                (.LO, .L, .UP, .M = -INF, 1350, +INF, 0)
+       -0.5     funcionObjetivo
+        1       funcionCosto
+
+
+---- ft  funcion tiempo   :: Segunda funcion a minimizar
+
+ft
+                (.LO, .L, .UP, .M = -INF, 1000, +INF, 0)
+       -0.5     funcionObjetivo
+        1       funcionTiempo
+
+
+---- f  funcion objetivo :: suma ponderada
+
+f
+                (.LO, .L, .UP, .M = -INF, 1140, +INF, 0)
+        1       funcionObjetivo
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 24
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE lab6 Using LP From line 68
+
+
+LOOPS                                    i   5
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS           5     SINGLE EQUATIONS           10
+BLOCKS OF VARIABLES           4     SINGLE VARIABLES           15
+NON ZERO ELEMENTS            53
+
+
+GENERATION TIME      =        0.004 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+
+
+EXECUTION TIME       =        0.028 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+               L O O P S                  i 5
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 25
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE lab6 Using LP From line 68
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   lab6                OBJECTIVE  f
+     TYPE    LP                  DIRECTION  MINIMIZE
+     SOLVER  CPLEX               FROM LINE  68
+
+**** SOLVER STATUS     1 Normal Completion         
+**** MODEL STATUS      1 Optimal                   
+**** OBJECTIVE VALUE             1160.0000
+
+ RESOURCE USAGE, LIMIT          0.031      1000.000
+ ITERATION COUNT, LIMIT         3    2000000000
+
+IBM ILOG CPLEX   24.4.2 r51415 Released Mar 15, 2015 VS8 x86 32bit/MS Windows 
+Cplex 12.6.1.0
+
+Space for names approximately 0.00 Mb
+Use option 'names no' to turn use of names off
+LP status(1): optimal
+Cplex Time: 0.03sec (det. 0.03 ticks)
+Optimal solution found.
+Objective :        1160.000000
+
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- EQU funcionOb~      .         .         .        1.000      
+---- EQU funcionCo~      .         .         .        0.500      
+---- EQU funcionTi~      .         .         .        0.500      
+
+  funcionObjetivo  Funcion de sumas ponderadas
+  funcionCosto  Funcion de costo
+  funcionTiempo  Funcion de tiempo
+
+---- EQU restSuministro  Restriccion de suministro :: No se puede proveer mas de
+                         la capacidad de la planta
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+o1     -INF    -35.000   -35.000    -2.500      
+o2     -INF    -50.000   -50.000    -1.500      
+o3     -INF    -40.000   -40.000      .         
+
+---- EQU restDemanda  Restriccion demanda :: No se puede despachar menos de los 
+                      demandado por la bodega
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+d1   -45.000   -45.000   -45.000    -8.500      
+d2   -20.000   -20.000   -20.000    -7.500      
+d3   -30.000   -30.000   -30.000    -7.000      
+d4   -30.000   -30.000   -30.000    -8.500      
+
+---- VAR x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+         LOWER     LEVEL     UPPER    MARGINAL
+
+o1.d1      .        5.000     +INF       .         
+o1.d2      .         .        +INF      1.500      
+o1.d3      .         .        +INF      0.500      
+o1.d4      .       30.000     +INF       .         
+o2.d1      .       30.000     +INF       .         
+o2.d2      .       20.000     +INF       .         
+o2.d3      .         .        +INF      0.500      
+o2.d4      .         .        +INF      1.500      
+o3.d1      .       10.000     +INF       .         
+o3.d2      .         .        +INF      2.500      
+o3.d3      .       30.000     +INF       .         
+o3.d4      .         .        +INF      4.000      
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- VAR fc             -INF   1260.000     +INF       .         
+---- VAR ft             -INF   1060.000     +INF       .         
+---- VAR f              -INF   1160.000     +INF       .         
+
+  fc  funcion costo    :: Primera funcion a minimizar
+  ft  funcion tiempo   :: Segunda funcion a minimizar
+  f  funcion objetivo :: suma ponderada
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 26
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Equation Listing    SOLVE lab6 Using LP From line 68
+
+
+---- funcionObjetivo  =E=  Funcion de sumas ponderadas
+
+funcionObjetivo..  - 0.6*fc - 0.4*ft + f =E= 0 ; (LHS = -20, INFES = 20 ****)
+     
+
+---- funcionCosto  =E=  Funcion de costo
+
+funcionCosto..  - 10*x(o1,d1) - 9*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 9*x(o2,d1) - 10*x(o2,d2) - 11*x(o2,d3) - 10*x(o2,d4) - 11*x(o3,d1)
+     
+      - 9*x(o3,d2) - 10*x(o3,d3) - 10*x(o3,d4) + fc =E= 0 ; (LHS = 0)
+     
+
+---- funcionTiempo  =E=  Funcion de tiempo
+
+funcionTiempo..  - 12*x(o1,d1) - 14*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 11*x(o2,d1) - 8*x(o2,d2) - 7*x(o2,d3) - 13*x(o2,d4) - 6*x(o3,d1)
+     
+      - 11*x(o3,d2) - 4*x(o3,d3) - 15*x(o3,d4) + ft =E= 0 ; (LHS = 0)
+     
+
+---- restSuministro  =L=  Restriccion de suministro :: No se puede proveer mas d
+                          e la capacidad de la planta
+
+restSuministro(o1)..  - x(o1,d1) - x(o1,d2) - x(o1,d3) - x(o1,d4) =L= -35 ;
+     
+      (LHS = -35)
+     
+restSuministro(o2)..  - x(o2,d1) - x(o2,d2) - x(o2,d3) - x(o2,d4) =L= -50 ;
+     
+      (LHS = -50)
+     
+restSuministro(o3)..  - x(o3,d1) - x(o3,d2) - x(o3,d3) - x(o3,d4) =L= -40 ;
+     
+      (LHS = -40)
+     
+
+---- restDemanda  =E=  Restriccion demanda :: No se puede despachar menos de los
+                       demandado por la bodega
+
+restDemanda(d1)..  - x(o1,d1) - x(o2,d1) - x(o3,d1) =E= -45 ; (LHS = -45)
+     
+restDemanda(d2)..  - x(o1,d2) - x(o2,d2) - x(o3,d2) =E= -20 ; (LHS = -20)
+     
+restDemanda(d3)..  - x(o1,d3) - x(o2,d3) - x(o3,d3) =E= -30 ; (LHS = -30)
+     
+REMAINING ENTRY SKIPPED
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 27
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Column Listing      SOLVE lab6 Using LP From line 68
+
+
+---- x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+x(o1,d1)
+                (.LO, .L, .UP, .M = 0, 5, +INF, 0)
+      -10       funcionCosto
+      -12       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d1)
+
+x(o1,d2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 1.5)
+       -9       funcionCosto
+      -14       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d2)
+
+x(o1,d3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0.5)
+      -10       funcionCosto
+      -10       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d3)
+
+REMAINING 9 ENTRIES SKIPPED
+
+---- fc  funcion costo    :: Primera funcion a minimizar
+
+fc
+                (.LO, .L, .UP, .M = -INF, 1260, +INF, 0)
+       -0.6     funcionObjetivo
+        1       funcionCosto
+
+
+---- ft  funcion tiempo   :: Segunda funcion a minimizar
+
+ft
+                (.LO, .L, .UP, .M = -INF, 1060, +INF, 0)
+       -0.4     funcionObjetivo
+        1       funcionTiempo
+
+
+---- f  funcion objetivo :: suma ponderada
+
+f
+                (.LO, .L, .UP, .M = -INF, 1160, +INF, 0)
+        1       funcionObjetivo
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 28
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE lab6 Using LP From line 68
+
+
+LOOPS                                    i   6
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS           5     SINGLE EQUATIONS           10
+BLOCKS OF VARIABLES           4     SINGLE VARIABLES           15
+NON ZERO ELEMENTS            53
+
+
+GENERATION TIME      =        0.008 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+
+
+EXECUTION TIME       =        0.116 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+               L O O P S                  i 6
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 29
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE lab6 Using LP From line 68
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   lab6                OBJECTIVE  f
+     TYPE    LP                  DIRECTION  MINIMIZE
+     SOLVER  CPLEX               FROM LINE  68
+
+**** SOLVER STATUS     1 Normal Completion         
+**** MODEL STATUS      1 Optimal                   
+**** OBJECTIVE VALUE             1180.0000
+
+ RESOURCE USAGE, LIMIT          0.128      1000.000
+ ITERATION COUNT, LIMIT         0    2000000000
+
+IBM ILOG CPLEX   24.4.2 r51415 Released Mar 15, 2015 VS8 x86 32bit/MS Windows 
+Cplex 12.6.1.0
+
+Space for names approximately 0.00 Mb
+Use option 'names no' to turn use of names off
+LP status(1): optimal
+Cplex Time: 0.10sec (det. 0.02 ticks)
+Optimal solution found.
+Objective :        1180.000000
+
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- EQU funcionOb~      .         .         .        1.000      
+---- EQU funcionCo~      .         .         .        0.600      
+---- EQU funcionTi~      .         .         .        0.400      
+
+  funcionObjetivo  Funcion de sumas ponderadas
+  funcionCosto  Funcion de costo
+  funcionTiempo  Funcion de tiempo
+
+---- EQU restSuministro  Restriccion de suministro :: No se puede proveer mas de
+                         la capacidad de la planta
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+o1     -INF    -35.000   -35.000   -10.800      
+o2     -INF    -50.000   -50.000    -9.800      
+o3     -INF    -40.000   -40.000    -9.000      
+
+---- EQU restDemanda  Restriccion demanda :: No se puede despachar menos de los 
+                      demandado por la bodega
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+d1   -45.000   -45.000   -45.000      .         
+d2   -20.000   -20.000   -20.000     0.600      
+d3   -30.000   -30.000   -30.000     1.400      
+d4   -30.000   -30.000   -30.000    -0.200      
+
+---- VAR x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+         LOWER     LEVEL     UPPER    MARGINAL
+
+o1.d1      .        5.000     +INF       .         
+o1.d2      .         .        +INF      0.800      
+o1.d3      .         .        +INF      0.600      
+o1.d4      .       30.000     +INF       .         
+o2.d1      .       30.000     +INF       .         
+o2.d2      .       20.000     +INF       .         
+o2.d3      .         .        +INF      1.000      
+o2.d4      .         .        +INF      1.200      
+o3.d1      .       10.000     +INF       .         
+o3.d2      .         .        +INF      1.400      
+o3.d3      .       30.000     +INF       .         
+o3.d4      .         .        +INF      2.800      
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- VAR fc             -INF   1260.000     +INF       .         
+---- VAR ft             -INF   1060.000     +INF       .         
+---- VAR f              -INF   1180.000     +INF       .         
+
+  fc  funcion costo    :: Primera funcion a minimizar
+  ft  funcion tiempo   :: Segunda funcion a minimizar
+  f  funcion objetivo :: suma ponderada
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 30
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Equation Listing    SOLVE lab6 Using LP From line 68
+
+
+---- funcionObjetivo  =E=  Funcion de sumas ponderadas
+
+funcionObjetivo..  - 0.7*fc - 0.3*ft + f =E= 0 ; (LHS = -20, INFES = 20 ****)
+     
+
+---- funcionCosto  =E=  Funcion de costo
+
+funcionCosto..  - 10*x(o1,d1) - 9*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 9*x(o2,d1) - 10*x(o2,d2) - 11*x(o2,d3) - 10*x(o2,d4) - 11*x(o3,d1)
+     
+      - 9*x(o3,d2) - 10*x(o3,d3) - 10*x(o3,d4) + fc =E= 0 ; (LHS = 0)
+     
+
+---- funcionTiempo  =E=  Funcion de tiempo
+
+funcionTiempo..  - 12*x(o1,d1) - 14*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 11*x(o2,d1) - 8*x(o2,d2) - 7*x(o2,d3) - 13*x(o2,d4) - 6*x(o3,d1)
+     
+      - 11*x(o3,d2) - 4*x(o3,d3) - 15*x(o3,d4) + ft =E= 0 ; (LHS = 0)
+     
+
+---- restSuministro  =L=  Restriccion de suministro :: No se puede proveer mas d
+                          e la capacidad de la planta
+
+restSuministro(o1)..  - x(o1,d1) - x(o1,d2) - x(o1,d3) - x(o1,d4) =L= -35 ;
+     
+      (LHS = -35)
+     
+restSuministro(o2)..  - x(o2,d1) - x(o2,d2) - x(o2,d3) - x(o2,d4) =L= -50 ;
+     
+      (LHS = -50)
+     
+restSuministro(o3)..  - x(o3,d1) - x(o3,d2) - x(o3,d3) - x(o3,d4) =L= -40 ;
+     
+      (LHS = -40)
+     
+
+---- restDemanda  =E=  Restriccion demanda :: No se puede despachar menos de los
+                       demandado por la bodega
+
+restDemanda(d1)..  - x(o1,d1) - x(o2,d1) - x(o3,d1) =E= -45 ; (LHS = -45)
+     
+restDemanda(d2)..  - x(o1,d2) - x(o2,d2) - x(o3,d2) =E= -20 ; (LHS = -20)
+     
+restDemanda(d3)..  - x(o1,d3) - x(o2,d3) - x(o3,d3) =E= -30 ; (LHS = -30)
+     
+REMAINING ENTRY SKIPPED
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 31
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Column Listing      SOLVE lab6 Using LP From line 68
+
+
+---- x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+x(o1,d1)
+                (.LO, .L, .UP, .M = 0, 5, +INF, 0)
+      -10       funcionCosto
+      -12       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d1)
+
+x(o1,d2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0.800000000000001)
+       -9       funcionCosto
+      -14       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d2)
+
+x(o1,d3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0.6)
+      -10       funcionCosto
+      -10       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d3)
+
+REMAINING 9 ENTRIES SKIPPED
+
+---- fc  funcion costo    :: Primera funcion a minimizar
+
+fc
+                (.LO, .L, .UP, .M = -INF, 1260, +INF, 0)
+       -0.7     funcionObjetivo
+        1       funcionCosto
+
+
+---- ft  funcion tiempo   :: Segunda funcion a minimizar
+
+ft
+                (.LO, .L, .UP, .M = -INF, 1060, +INF, 0)
+       -0.3     funcionObjetivo
+        1       funcionTiempo
+
+
+---- f  funcion objetivo :: suma ponderada
+
+f
+                (.LO, .L, .UP, .M = -INF, 1180, +INF, 0)
+        1       funcionObjetivo
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 32
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE lab6 Using LP From line 68
+
+
+LOOPS                                    i   7
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS           5     SINGLE EQUATIONS           10
+BLOCKS OF VARIABLES           4     SINGLE VARIABLES           15
+NON ZERO ELEMENTS            53
+
+
+GENERATION TIME      =        0.004 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+
+
+EXECUTION TIME       =        0.030 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+               L O O P S                  i 7
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 33
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE lab6 Using LP From line 68
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   lab6                OBJECTIVE  f
+     TYPE    LP                  DIRECTION  MINIMIZE
+     SOLVER  CPLEX               FROM LINE  68
+
+**** SOLVER STATUS     1 Normal Completion         
+**** MODEL STATUS      1 Optimal                   
+**** OBJECTIVE VALUE             1200.0000
+
+ RESOURCE USAGE, LIMIT          0.111      1000.000
+ ITERATION COUNT, LIMIT         0    2000000000
+
+IBM ILOG CPLEX   24.4.2 r51415 Released Mar 15, 2015 VS8 x86 32bit/MS Windows 
+Cplex 12.6.1.0
+
+Space for names approximately 0.00 Mb
+Use option 'names no' to turn use of names off
+LP status(1): optimal
+Cplex Time: 0.09sec (det. 0.02 ticks)
+Optimal solution found.
+Objective :        1200.000000
+
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- EQU funcionOb~      .         .         .        1.000      
+---- EQU funcionCo~      .         .         .        0.700      
+---- EQU funcionTi~      .         .         .        0.300      
+
+  funcionObjetivo  Funcion de sumas ponderadas
+  funcionCosto  Funcion de costo
+  funcionTiempo  Funcion de tiempo
+
+---- EQU restSuministro  Restriccion de suministro :: No se puede proveer mas de
+                         la capacidad de la planta
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+o1     -INF    -35.000   -35.000   -10.600      
+o2     -INF    -50.000   -50.000    -9.600      
+o3     -INF    -40.000   -40.000    -9.500      
+
+---- EQU restDemanda  Restriccion demanda :: No se puede despachar menos de los 
+                      demandado por la bodega
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+d1   -45.000   -45.000   -45.000      .         
+d2   -20.000   -20.000   -20.000     0.200      
+d3   -30.000   -30.000   -30.000     1.300      
+d4   -30.000   -30.000   -30.000    -0.400      
+
+---- VAR x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+         LOWER     LEVEL     UPPER    MARGINAL
+
+o1.d1      .        5.000     +INF       .         
+o1.d2      .         .        +INF      0.100      
+o1.d3      .         .        +INF      0.700      
+o1.d4      .       30.000     +INF       .         
+o2.d1      .       30.000     +INF       .         
+o2.d2      .       20.000     +INF       .         
+o2.d3      .         .        +INF      1.500      
+o2.d4      .         .        +INF      0.900      
+o3.d1      .       10.000     +INF       .         
+o3.d2      .         .        +INF      0.300      
+o3.d3      .       30.000     +INF       .         
+o3.d4      .         .        +INF      1.600      
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- VAR fc             -INF   1260.000     +INF       .         
+---- VAR ft             -INF   1060.000     +INF       .         
+---- VAR f              -INF   1200.000     +INF       .         
+
+  fc  funcion costo    :: Primera funcion a minimizar
+  ft  funcion tiempo   :: Segunda funcion a minimizar
+  f  funcion objetivo :: suma ponderada
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 34
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Equation Listing    SOLVE lab6 Using LP From line 68
+
+
+---- funcionObjetivo  =E=  Funcion de sumas ponderadas
+
+funcionObjetivo..  - 0.8*fc - 0.2*ft + f =E= 0 ; (LHS = -20, INFES = 20 ****)
+     
+
+---- funcionCosto  =E=  Funcion de costo
+
+funcionCosto..  - 10*x(o1,d1) - 9*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 9*x(o2,d1) - 10*x(o2,d2) - 11*x(o2,d3) - 10*x(o2,d4) - 11*x(o3,d1)
+     
+      - 9*x(o3,d2) - 10*x(o3,d3) - 10*x(o3,d4) + fc =E= 0 ; (LHS = 0)
+     
+
+---- funcionTiempo  =E=  Funcion de tiempo
+
+funcionTiempo..  - 12*x(o1,d1) - 14*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 11*x(o2,d1) - 8*x(o2,d2) - 7*x(o2,d3) - 13*x(o2,d4) - 6*x(o3,d1)
+     
+      - 11*x(o3,d2) - 4*x(o3,d3) - 15*x(o3,d4) + ft =E= 0 ; (LHS = 0)
+     
+
+---- restSuministro  =L=  Restriccion de suministro :: No se puede proveer mas d
+                          e la capacidad de la planta
+
+restSuministro(o1)..  - x(o1,d1) - x(o1,d2) - x(o1,d3) - x(o1,d4) =L= -35 ;
+     
+      (LHS = -35)
+     
+restSuministro(o2)..  - x(o2,d1) - x(o2,d2) - x(o2,d3) - x(o2,d4) =L= -50 ;
+     
+      (LHS = -50)
+     
+restSuministro(o3)..  - x(o3,d1) - x(o3,d2) - x(o3,d3) - x(o3,d4) =L= -40 ;
+     
+      (LHS = -40)
+     
+
+---- restDemanda  =E=  Restriccion demanda :: No se puede despachar menos de los
+                       demandado por la bodega
+
+restDemanda(d1)..  - x(o1,d1) - x(o2,d1) - x(o3,d1) =E= -45 ; (LHS = -45)
+     
+restDemanda(d2)..  - x(o1,d2) - x(o2,d2) - x(o3,d2) =E= -20 ; (LHS = -20)
+     
+restDemanda(d3)..  - x(o1,d3) - x(o2,d3) - x(o3,d3) =E= -30 ; (LHS = -30)
+     
+REMAINING ENTRY SKIPPED
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 35
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Column Listing      SOLVE lab6 Using LP From line 68
+
+
+---- x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+x(o1,d1)
+                (.LO, .L, .UP, .M = 0, 5, +INF, 0)
+      -10       funcionCosto
+      -12       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d1)
+
+x(o1,d2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0.0999999999999996)
+       -9       funcionCosto
+      -14       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d2)
+
+x(o1,d3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0.699999999999999)
+      -10       funcionCosto
+      -10       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d3)
+
+REMAINING 9 ENTRIES SKIPPED
+
+---- fc  funcion costo    :: Primera funcion a minimizar
+
+fc
+                (.LO, .L, .UP, .M = -INF, 1260, +INF, 0)
+       -0.8     funcionObjetivo
+        1       funcionCosto
+
+
+---- ft  funcion tiempo   :: Segunda funcion a minimizar
+
+ft
+                (.LO, .L, .UP, .M = -INF, 1060, +INF, 0)
+       -0.2     funcionObjetivo
+        1       funcionTiempo
+
+
+---- f  funcion objetivo :: suma ponderada
+
+f
+                (.LO, .L, .UP, .M = -INF, 1200, +INF, 0)
+        1       funcionObjetivo
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 36
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE lab6 Using LP From line 68
+
+
+LOOPS                                    i   8
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS           5     SINGLE EQUATIONS           10
+BLOCKS OF VARIABLES           4     SINGLE VARIABLES           15
+NON ZERO ELEMENTS            53
+
+
+GENERATION TIME      =        0.005 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+
+
+EXECUTION TIME       =        0.036 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+               L O O P S                  i 8
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 37
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE lab6 Using LP From line 68
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   lab6                OBJECTIVE  f
+     TYPE    LP                  DIRECTION  MINIMIZE
+     SOLVER  CPLEX               FROM LINE  68
+
+**** SOLVER STATUS     1 Normal Completion         
+**** MODEL STATUS      1 Optimal                   
+**** OBJECTIVE VALUE             1209.0000
+
+ RESOURCE USAGE, LIMIT          0.029      1000.000
+ ITERATION COUNT, LIMIT         2    2000000000
+
+IBM ILOG CPLEX   24.4.2 r51415 Released Mar 15, 2015 VS8 x86 32bit/MS Windows 
+Cplex 12.6.1.0
+
+Space for names approximately 0.00 Mb
+Use option 'names no' to turn use of names off
+LP status(1): optimal
+Cplex Time: 0.01sec (det. 0.03 ticks)
+Optimal solution found.
+Objective :        1209.000000
+
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- EQU funcionOb~      .         .         .        1.000      
+---- EQU funcionCo~      .         .         .        0.800      
+---- EQU funcionTi~      .         .         .        0.200      
+
+  funcionObjetivo  Funcion de sumas ponderadas
+  funcionCosto  Funcion de costo
+  funcionTiempo  Funcion de tiempo
+
+---- EQU restSuministro  Restriccion de suministro :: No se puede proveer mas de
+                         la capacidad de la planta
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+o1     -INF    -35.000   -35.000    -9.800      
+o2     -INF    -50.000   -50.000    -9.400      
+o3     -INF    -40.000   -40.000    -9.200      
+
+---- EQU restDemanda  Restriccion demanda :: No se puede despachar menos de los 
+                      demandado por la bodega
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+d1   -45.000   -45.000   -45.000      .         
+d2   -20.000   -20.000   -20.000    -0.200      
+d3   -30.000   -30.000   -30.000     0.400      
+d4   -30.000   -30.000   -30.000    -1.200      
+
+---- VAR x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+         LOWER     LEVEL     UPPER    MARGINAL
+
+o1.d1      .         .        +INF      0.600      
+o1.d2      .        5.000     +INF       .         
+o1.d3      .         .        +INF      0.600      
+o1.d4      .       30.000     +INF       .         
+o2.d1      .       45.000     +INF       .         
+o2.d2      .        5.000     +INF       .         
+o2.d3      .         .        +INF      1.200      
+o2.d4      .         .        +INF       EPS       
+o3.d1      .         .        +INF      0.800      
+o3.d2      .       10.000     +INF       .         
+o3.d3      .       30.000     +INF       .         
+o3.d4      .         .        +INF      0.600      
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- VAR fc             -INF   1220.000     +INF       .         
+---- VAR ft             -INF   1165.000     +INF       .         
+---- VAR f              -INF   1209.000     +INF       .         
+
+  fc  funcion costo    :: Primera funcion a minimizar
+  ft  funcion tiempo   :: Segunda funcion a minimizar
+  f  funcion objetivo :: suma ponderada
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 38
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Equation Listing    SOLVE lab6 Using LP From line 68
+
+
+---- funcionObjetivo  =E=  Funcion de sumas ponderadas
+
+funcionObjetivo..  - 0.9*fc - 0.1*ft + f =E= 0 ; (LHS = -5.5, INFES = 5.5 ****)
+     
+
+---- funcionCosto  =E=  Funcion de costo
+
+funcionCosto..  - 10*x(o1,d1) - 9*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 9*x(o2,d1) - 10*x(o2,d2) - 11*x(o2,d3) - 10*x(o2,d4) - 11*x(o3,d1)
+     
+      - 9*x(o3,d2) - 10*x(o3,d3) - 10*x(o3,d4) + fc =E= 0 ; (LHS = 0)
+     
+
+---- funcionTiempo  =E=  Funcion de tiempo
+
+funcionTiempo..  - 12*x(o1,d1) - 14*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 11*x(o2,d1) - 8*x(o2,d2) - 7*x(o2,d3) - 13*x(o2,d4) - 6*x(o3,d1)
+     
+      - 11*x(o3,d2) - 4*x(o3,d3) - 15*x(o3,d4) + ft =E= 0 ; (LHS = 0)
+     
+
+---- restSuministro  =L=  Restriccion de suministro :: No se puede proveer mas d
+                          e la capacidad de la planta
+
+restSuministro(o1)..  - x(o1,d1) - x(o1,d2) - x(o1,d3) - x(o1,d4) =L= -35 ;
+     
+      (LHS = -35)
+     
+restSuministro(o2)..  - x(o2,d1) - x(o2,d2) - x(o2,d3) - x(o2,d4) =L= -50 ;
+     
+      (LHS = -50)
+     
+restSuministro(o3)..  - x(o3,d1) - x(o3,d2) - x(o3,d3) - x(o3,d4) =L= -40 ;
+     
+      (LHS = -40)
+     
+
+---- restDemanda  =E=  Restriccion demanda :: No se puede despachar menos de los
+                       demandado por la bodega
+
+restDemanda(d1)..  - x(o1,d1) - x(o2,d1) - x(o3,d1) =E= -45 ; (LHS = -45)
+     
+restDemanda(d2)..  - x(o1,d2) - x(o2,d2) - x(o3,d2) =E= -20 ; (LHS = -20)
+     
+restDemanda(d3)..  - x(o1,d3) - x(o2,d3) - x(o3,d3) =E= -30 ; (LHS = -30)
+     
+REMAINING ENTRY SKIPPED
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 39
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Column Listing      SOLVE lab6 Using LP From line 68
+
+
+---- x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+x(o1,d1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0.6)
+      -10       funcionCosto
+      -12       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d1)
+
+x(o1,d2)
+                (.LO, .L, .UP, .M = 0, 5, +INF, 0)
+       -9       funcionCosto
+      -14       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d2)
+
+x(o1,d3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0.599999999999998)
+      -10       funcionCosto
+      -10       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d3)
+
+REMAINING 9 ENTRIES SKIPPED
+
+---- fc  funcion costo    :: Primera funcion a minimizar
+
+fc
+                (.LO, .L, .UP, .M = -INF, 1220, +INF, 0)
+       -0.9     funcionObjetivo
+        1       funcionCosto
+
+
+---- ft  funcion tiempo   :: Segunda funcion a minimizar
+
+ft
+                (.LO, .L, .UP, .M = -INF, 1165, +INF, 0)
+       -0.1     funcionObjetivo
+        1       funcionTiempo
+
+
+---- f  funcion objetivo :: suma ponderada
+
+f
+                (.LO, .L, .UP, .M = -INF, 1209, +INF, 0)
+        1       funcionObjetivo
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 40
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE lab6 Using LP From line 68
+
+
+LOOPS                                    i   9
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS           5     SINGLE EQUATIONS           10
+BLOCKS OF VARIABLES           4     SINGLE VARIABLES           15
+NON ZERO ELEMENTS            53
+
+
+GENERATION TIME      =        0.008 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+
+
+EXECUTION TIME       =        0.032 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+               L O O P S                  i 9
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 41
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE lab6 Using LP From line 68
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   lab6                OBJECTIVE  f
+     TYPE    LP                  DIRECTION  MINIMIZE
+     SOLVER  CPLEX               FROM LINE  68
+
+**** SOLVER STATUS     1 Normal Completion         
+**** MODEL STATUS      1 Optimal                   
+**** OBJECTIVE VALUE             1207.5000
+
+ RESOURCE USAGE, LIMIT          0.074      1000.000
+ ITERATION COUNT, LIMIT         2    2000000000
+
+IBM ILOG CPLEX   24.4.2 r51415 Released Mar 15, 2015 VS8 x86 32bit/MS Windows 
+Cplex 12.6.1.0
+
+Space for names approximately 0.00 Mb
+Use option 'names no' to turn use of names off
+LP status(1): optimal
+Cplex Time: 0.06sec (det. 0.03 ticks)
+Optimal solution found.
+Objective :        1207.500000
+
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- EQU funcionOb~      .         .         .        1.000      
+---- EQU funcionCo~      .         .         .        0.900      
+---- EQU funcionTi~      .         .         .        0.100      
+
+  funcionObjetivo  Funcion de sumas ponderadas
+  funcionCosto  Funcion de costo
+  funcionTiempo  Funcion de tiempo
+
+---- EQU restSuministro  Restriccion de suministro :: No se puede proveer mas de
+                         la capacidad de la planta
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+o1     -INF    -35.000   -35.000    -9.500      
+o2     -INF    -50.000   -50.000    -8.800      
+o3     -INF    -40.000   -40.000    -9.000      
+
+---- EQU restDemanda  Restriccion demanda :: No se puede despachar menos de los 
+                      demandado por la bodega
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+d1   -45.000   -45.000   -45.000    -0.400      
+d2   -20.000   -20.000   -20.000      .         
+d3   -30.000   -30.000   -30.000    -0.400      
+d4   -30.000   -30.000   -30.000    -1.500      
+
+---- VAR x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+         LOWER     LEVEL     UPPER    MARGINAL
+
+o1.d1      .         .        +INF      0.300      
+o1.d2      .       20.000     +INF       .         
+o1.d3      .         .        +INF      0.100      
+o1.d4      .       15.000     +INF       .         
+o2.d1      .       45.000     +INF       .         
+o2.d2      .         .        +INF      1.000      
+o2.d3      .         .        +INF      1.400      
+o2.d4      .        5.000     +INF       .         
+o3.d1      .         .        +INF      1.100      
+o3.d2      .         .        +INF      0.200      
+o3.d3      .       30.000     +INF       .         
+o3.d4      .       10.000     +INF       .         
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- VAR fc             -INF   1200.000     +INF       .         
+---- VAR ft             -INF   1275.000     +INF       .         
+---- VAR f              -INF   1207.500     +INF       .         
+
+  fc  funcion costo    :: Primera funcion a minimizar
+  ft  funcion tiempo   :: Segunda funcion a minimizar
+  f  funcion objetivo :: suma ponderada
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 42
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Equation Listing    SOLVE lab6 Using LP From line 68
+
+
+---- funcionObjetivo  =E=  Funcion de sumas ponderadas
+
+funcionObjetivo..  - fc + f =E= 0 ; (LHS = 7.5, INFES = 7.5 ****)
+     
+
+---- funcionCosto  =E=  Funcion de costo
+
+funcionCosto..  - 10*x(o1,d1) - 9*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 9*x(o2,d1) - 10*x(o2,d2) - 11*x(o2,d3) - 10*x(o2,d4) - 11*x(o3,d1)
+     
+      - 9*x(o3,d2) - 10*x(o3,d3) - 10*x(o3,d4) + fc =E= 0 ; (LHS = 0)
+     
+
+---- funcionTiempo  =E=  Funcion de tiempo
+
+funcionTiempo..  - 12*x(o1,d1) - 14*x(o1,d2) - 10*x(o1,d3) - 11*x(o1,d4)
+     
+      - 11*x(o2,d1) - 8*x(o2,d2) - 7*x(o2,d3) - 13*x(o2,d4) - 6*x(o3,d1)
+     
+      - 11*x(o3,d2) - 4*x(o3,d3) - 15*x(o3,d4) + ft =E= 0 ; (LHS = 0)
+     
+
+---- restSuministro  =L=  Restriccion de suministro :: No se puede proveer mas d
+                          e la capacidad de la planta
+
+restSuministro(o1)..  - x(o1,d1) - x(o1,d2) - x(o1,d3) - x(o1,d4) =L= -35 ;
+     
+      (LHS = -35)
+     
+restSuministro(o2)..  - x(o2,d1) - x(o2,d2) - x(o2,d3) - x(o2,d4) =L= -50 ;
+     
+      (LHS = -50)
+     
+restSuministro(o3)..  - x(o3,d1) - x(o3,d2) - x(o3,d3) - x(o3,d4) =L= -40 ;
+     
+      (LHS = -40)
+     
+
+---- restDemanda  =E=  Restriccion demanda :: No se puede despachar menos de los
+                       demandado por la bodega
+
+restDemanda(d1)..  - x(o1,d1) - x(o2,d1) - x(o3,d1) =E= -45 ; (LHS = -45)
+     
+restDemanda(d2)..  - x(o1,d2) - x(o2,d2) - x(o3,d2) =E= -20 ; (LHS = -20)
+     
+restDemanda(d3)..  - x(o1,d3) - x(o2,d3) - x(o3,d3) =E= -30 ; (LHS = -30)
+     
+REMAINING ENTRY SKIPPED
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 43
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Column Listing      SOLVE lab6 Using LP From line 68
+
+
+---- x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+x(o1,d1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0.300000000000001)
+      -10       funcionCosto
+      -12       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d1)
+
+x(o1,d2)
+                (.LO, .L, .UP, .M = 0, 20, +INF, 0)
+       -9       funcionCosto
+      -14       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d2)
+
+x(o1,d3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0.0999999999999996)
+      -10       funcionCosto
+      -10       funcionTiempo
+       -1       restSuministro(o1)
+       -1       restDemanda(d3)
+
+REMAINING 9 ENTRIES SKIPPED
+
+---- fc  funcion costo    :: Primera funcion a minimizar
+
+fc
+                (.LO, .L, .UP, .M = -INF, 1200, +INF, 0)
+       -1       funcionObjetivo
+        1       funcionCosto
+
+
+---- ft  funcion tiempo   :: Segunda funcion a minimizar
+
+ft
+                (.LO, .L, .UP, .M = -INF, 1275, +INF, 0)
+        1       funcionTiempo
+
+
+---- f  funcion objetivo :: suma ponderada
+
+f
+                (.LO, .L, .UP, .M = -INF, 1207.5, +INF, 0)
+        1       funcionObjetivo
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 44
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE lab6 Using LP From line 68
+
+
+LOOPS                                    i   10
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS           5     SINGLE EQUATIONS           10
+BLOCKS OF VARIABLES           4     SINGLE VARIABLES           15
+NON ZERO ELEMENTS            52
+
+
+GENERATION TIME      =        0.008 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+
+
+EXECUTION TIME       =        0.066 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+               L O O P S                  i 10
+
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 45
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE lab6 Using LP From line 68
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   lab6                OBJECTIVE  f
+     TYPE    LP                  DIRECTION  MINIMIZE
+     SOLVER  CPLEX               FROM LINE  68
+
+**** SOLVER STATUS     1 Normal Completion         
+**** MODEL STATUS      1 Optimal                   
+**** OBJECTIVE VALUE             1185.0000
+
+ RESOURCE USAGE, LIMIT          0.121      1000.000
+ ITERATION COUNT, LIMIT         1    2000000000
+
+IBM ILOG CPLEX   24.4.2 r51415 Released Mar 15, 2015 VS8 x86 32bit/MS Windows 
+Cplex 12.6.1.0
+
+Space for names approximately 0.00 Mb
+Use option 'names no' to turn use of names off
+LP status(1): optimal
+Cplex Time: 0.10sec (det. 0.03 ticks)
+Optimal solution found.
+Objective :        1185.000000
+
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- EQU funcionOb~      .         .         .        1.000      
+---- EQU funcionCo~      .         .         .        1.000      
+---- EQU funcionTi~      .         .         .         EPS       
+
+  funcionObjetivo  Funcion de sumas ponderadas
+  funcionCosto  Funcion de costo
+  funcionTiempo  Funcion de tiempo
+
+---- EQU restSuministro  Restriccion de suministro :: No se puede proveer mas de
+                         la capacidad de la planta
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+o1     -INF    -35.000   -35.000   -10.000      
+o2     -INF    -50.000   -50.000   -10.000      
+o3     -INF    -40.000   -40.000   -10.000      
+
+---- EQU restDemanda  Restriccion demanda :: No se puede despachar menos de los 
+                      demandado por la bodega
+
+      LOWER     LEVEL     UPPER    MARGINAL
+
+d1   -45.000   -45.000   -45.000     1.000      
+d2   -20.000   -20.000   -20.000     1.000      
+d3   -30.000   -30.000   -30.000      EPS       
+d4   -30.000   -30.000   -30.000      .         
+
+---- VAR x  Cantidad de producto despachado desde la planta o hacia la bodega d
+
+         LOWER     LEVEL     UPPER    MARGINAL
+
+o1.d1      .         .        +INF      1.000      
+o1.d2      .       20.000     +INF       .         
+o1.d3      .       15.000     +INF       .         
+o1.d4      .         .        +INF      1.000      
+o2.d1      .       45.000     +INF       .         
+o2.d2      .         .        +INF      1.000      
+o2.d3      .         .        +INF      1.000      
+o2.d4      .        5.000     +INF       .         
+o3.d1      .         .        +INF      2.000      
+o3.d2      .         .        +INF       EPS       
+o3.d3      .       15.000     +INF       .         
+o3.d4      .       25.000     +INF       .         
+
+                       LOWER     LEVEL     UPPER    MARGINAL
+
+---- VAR fc             -INF   1185.000     +INF       .         
+---- VAR ft             -INF   1425.000     +INF       .         
+---- VAR f              -INF   1185.000     +INF       .         
+
+  fc  funcion costo    :: Primera funcion a minimizar
+  ft  funcion tiempo   :: Segunda funcion a minimizar
+  f  funcion objetivo :: suma ponderada
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+GAMS 24.4.2  r51415 Released Mar 15, 2015 WEX-VS8 x86 32bit/MS Windows 04/14/15 22:04:08 Page 46
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+E x e c u t i o n
+
+
+----     77 PARAMETER f_res  Resultados suma ponderada :: Min
+
+0  1000.000,    1  1035.000,    2  1070.000,    3  1105.000,    4  1140.000
+5  1160.000,    6  1180.000,    7  1200.000,    8  1209.000,    9  1207.500
+10 1185.000
+
+
+----     77 PARAMETER fc_res  Resultados funcion costo  :: Min
+
+0  1350.000,    1  1350.000,    2  1350.000,    3  1350.000,    4  1350.000
+5  1260.000,    6  1260.000,    7  1260.000,    8  1220.000,    9  1200.000
+10 1185.000
+
+
+----     77 PARAMETER ft_res  Resultados funcion tiempo :: Min
+
+0  1000.000,    1  1000.000,    2  1000.000,    3  1000.000,    4  1000.000
+5  1060.000,    6  1060.000,    7  1060.000,    8  1165.000,    9  1275.000
+10 1425.000
+
+
+----     77 PARAMETER x_res  Puntos que minimizan la suma ponderada para cada pe
+                             so
+
+                0           1           2           3           4           5
+
+o1.d1       5.000       5.000       5.000       5.000       5.000       5.000
+o1.d4      30.000      30.000      30.000      30.000      30.000      30.000
+o2.d1                                                                  30.000
+o2.d2      20.000      20.000      20.000      20.000      20.000      20.000
+o2.d3      30.000      30.000      30.000      30.000      30.000
+o3.d1      40.000      40.000      40.000      40.000      40.000      10.000
+o3.d3                                                                  30.000
+
+    +           6           7           8           9          10
+
+o1.d1       5.000       5.000
+o1.d2                               5.000      20.000      20.000
+o1.d3                                                      15.000
+o1.d4      30.000      30.000      30.000      15.000
+o2.d1      30.000      30.000      45.000      45.000      45.000
+o2.d2      20.000      20.000       5.000
+o2.d4                                           5.000       5.000
+o3.d1      10.000      10.000
+o3.d2                              10.000
+o3.d3      30.000      30.000      30.000      30.000      15.000
+o3.d4                                          10.000      25.000
+
+
+**** REPORT FILE SUMMARY
+
+resultados C:\users\cvargasc\Mis Documentos\resultados.dat
+
+
+EXECUTION TIME       =        0.016 SECONDS      3 MB  24.4.2 r51415 WEX-VS8
+
+
+USER: GAMS Development Corporation, Washington, DC   G871201/0000CA-ANY
+      Free Demo,  202-342-0180,  sales@gams.com,  www.gams.com   DC0000
+
+
+**** FILE SUMMARY
+
+Input      C:\users\cvargasc\Mis Documentos\Desarrollo\Fuentes\ejemplos\gams\mod
+           elado\Nueva carpeta\lab6.gms
+Output     C:\users\cvargasc\Mis Documentos\gamsdir\projdir\lab6.lst
