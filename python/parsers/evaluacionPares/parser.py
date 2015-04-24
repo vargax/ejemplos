@@ -24,17 +24,17 @@ nomColumActividad = 'empresarios 2'
 nomColumEvaCruzada = 'EC empresarios 2'
 
 calificacionActividad = {
-	'3D Home': 3.75,
-	'Aster': 4,
-	'Crowd Control': 4,
-	'Enigami': 3.25,
-	'OndeHay': 4.35,
-	'Geople': 4,
-	'Should I?': 4.5,
-	'Temporizate': 4.25,
-	'SecCam': 3.5,
-	'TransMotion': 3.5,
-	'moveCam': 3.45
+	'3D Home': 3.8,
+	'Aster': 3.9,
+	'Crowd Control': 4.7,
+	'Enigami': 3.7,
+	'OndeHay': 2.7,
+	'Geople': 4.3,
+	'Should I?': 5,
+	'Temporizate': 4,
+	'SecCam': 3.4,
+	'TransMotion': 4,
+	'moveCam': 3.5
 	}
 
 grupos = {
