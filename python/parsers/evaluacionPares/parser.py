@@ -20,8 +20,8 @@ ENCABEZADO =  'Nombre de usuario'
 ##########################
 ## ATRIBUTOS
 ##########################
-nomColumActividad = 'empresarios 2'
-nomColumEvaCruzada = 'EC empresarios 2'
+nomColumActividad = 'nota'
+nomColumEvaCruzada = 'EC'
 
 calificacionActividad = {
 	'3D Home': 3.8,
