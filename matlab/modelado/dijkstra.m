@@ -1,6 +1,6 @@
 function [sp, spcost] = dijkstra(matriz_costo, s, d)
-% This is an implementation of the dijkstra´s algorithm, wich finds the 
-% minimal cost path between two nodes. It´s supoussed to solve the problem on 
+% This is an implementation of the dijkstras algorithm, wich finds the 
+% minimal cost path between two nodes. Its supoussed to solve the problem on 
 % possitive weighted instances.
 
 % the inputs of the algorithm are:

@@ -1,3 +1,10 @@
+% 1: Para modelar multiples lineas la variable Free pasa de ser un booleano a un entero que indica el numero de lineas libres
+% luego si Free > 0 se atiende la llamada.
+% 1.1: En el peor de los casos llegan llamadas cada minuto y cada llamada dura 20 minutos, luego para tener un porcentaje de
+% aceptacion del 100% seria necesario tener 20 telefonos.
+
+
+% -------------------------------------------------------------------------------------------------
 clc, clear all, close all
 
 %Inicializacion de parmetros y variables
@@ -6,7 +13,7 @@ Na=0; %nmero de llamadas
 Nb=0; %nmero de llamadas aceptadas
 Nc=0; %nmero de llamadas finalizadas
 N_llamDen=0; %nmero de llamdas denegadas
-Free=1; %el callcenter est disponible para atender llamadas.
+Free=2; %numero de llamdas que el callcenter puede atender simultaneamente
 
 %inicializacin del tiempo.
 t=0;
@@ -39,7 +46,7 @@ while length(evtQueue)>0 % Mientras la cola de evento tenga eventos pendientes
         newEvt.type='B'; % El siguiente evento deberia ser atender la llamada
         evtQueue=[evtQueue newEvt]; % A la cola de eventos se concatena el nuevo evento
         if Na<NMAX
-            newEvt.t=t+unidrnd(10); 
+            newEvt.t=t+unidrnd(10); % Genero la siguiente llamada con un retraso entre 1 y 10 minutos
             newEvt.type='A'; 
             evtQueue=[evtQueue newEvt];
         end
@@ -48,8 +55,8 @@ while length(evtQueue)>0 % Mientras la cola de evento tenga eventos pendientes
     
     if evtAct.type=='B' % Si el evento actual es atender una llamada
         %Modificacion de variables
-        if Free==1  % Si estoy libre
-            Free=0; % Paso a estar ocupado
+        if Free > 0  % Si tengo al menos un telefono disponible
+            Free = Free - 1; % Paso a a tener una linea menos disponible
             
             Nb=Nb+1; % Incremento en 1 el numero de llamdas atendidas
                         
@@ -65,8 +72,8 @@ while length(evtQueue)>0 % Mientras la cola de evento tenga eventos pendientes
     if evtAct.type=='C' % Si el evento actual es la finalizacion de una llamada
         %Modificacion de variables
         Nc=Nc+1; % Incremento en 1 el numero de llamadas finalizadas
-        Free=1; % Vuelvo a estar disponible
-        fprintf('Ocurre evento B: Finalizacin de la llamada \n');
+        Free = Free + 1; % Tengo una linea mas disponible para atender llamadas
+        fprintf('Ocurre evento C: Finalizacin de la llamada \n');
     end
     
     vec_t=[vec_t t]; % Concateno al vector de tiempo el tiempo actual
