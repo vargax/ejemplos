@@ -25,16 +25,16 @@ nomColumEvaCruzada = 'EC'
 
 calificacionActividad = {
 	'3D Home': 3.8,
-	'Aster': 3.9,
-	'Crowd Control': 4.7,
-	'Enigami': 3.7,
-	'OndeHay': 2.7,
-	'Geople': 4.3,
+	'Aster': 4,
+	'Crowd Control': 5,
+	'Enigami': 3.4,
+	'OndeHay': 4.4,
+	'Geople': 2.5,
 	'Should I?': 5,
-	'Temporizate': 4,
-	'SecCam': 3.4,
-	'TransMotion': 4,
-	'moveCam': 3.5
+	'Temporizate': 1.5,
+	'SecCam': 3.8,
+	'TransMotion': 4.4,
+	'moveCam': 4.5
 	}
 
 grupos = {
@@ -86,8 +86,16 @@ print '\n ----------------------------------------------------------------- \n'
 # Recuperando asignación de puntos:
 evaluaciones = os.listdir('.')
 for evaluacion in evaluaciones:
-	alumno = evaluacion.split('_')[1] # Obteniendo el login del alumno que envió la evaluación del nombre del archivo
-	print 'Procesando evaluación de '+alumno
+	print 'Procesando evaluación '+evaluacion
+	alumno = '+!!+ Alumno N/D !!'
+	# En caso haya sido necesario modificar a mano el nombre del archivo porque Sicua no lo generó correctamente
+	if len(evaluacion.split('_')) == 2:   # El nombre que se coloca a mano es EC_login.txt
+		alumno = evaluacion.split('_')[1] # Tomo el segundo elemento al partir por '_'
+		alumno = alumno[:-4]			  # Le quito el .txt
+	else:
+		alumno = evaluacion.split('_')[1] # Obteniendo el login del alumno que envió la evaluación del nombre del archivo
+		
+	print '+ Login identificado: '+alumno
 	evaluacion = open(evaluacion) # Reasigno la variable :: De ser el "nombre del archivo" pasa a ser el archivo en sí!
 	
 	penalizacion = False
