@@ -24,17 +24,17 @@ nomColumActividad = 'nota'
 nomColumEvaCruzada = 'EC'
 
 calificacionActividad = {
-	'3D Home': 3.8,
-	'Aster': 4,
+	'3D Home': 3.5,
+	'Aster': 5,
 	'Crowd Control': 5,
-	'Enigami': 3.4,
-	'OndeHay': 4.4,
-	'Geople': 2.5,
-	'Should I?': 5,
-	'Temporizate': 1.5,
-	'SecCam': 3.8,
-	'TransMotion': 4.4,
-	'moveCam': 4.5
+	'Enigami': 4,
+	'OndeHay': 0,
+	'Geople': 5,
+	'Should I?': 4,
+	'Temporizate': 3.2,
+	'SecCam': 5,
+	'TransMotion': 5,
+	'moveCam': 3.4
 	}
 
 grupos = {
@@ -67,9 +67,9 @@ for grupo, integrantes in grupos.items():
 		alumnos[integrante] = {}
 		for companiero in integrantes:
 			if integrante != companiero:
-				alumnos[integrante][companiero] = 3 # A cada compañero se asigna 3 por defecto
+				alumnos[integrante][companiero] = 3.0 # A cada compañero se asigna 3 por defecto
 			else:
-				alumnos[integrante][companiero] = -1 # Penalización que se aplica en caso de no enviar la evaluación
+				alumnos[integrante][companiero] = -1.0 # Penalización que se aplica en caso de no enviar la evaluación
 		print '  ', integrante, alumnos[integrante]
 
 # Realizando limpieza:
@@ -221,7 +221,3 @@ pp.pprint(penalizaciones)
 print '\n----------------------------------------------------------------- \n'
 print 'ADVERTENCIAS: \n'
 pp.pprint(advertencias)
-
-
-
-	
