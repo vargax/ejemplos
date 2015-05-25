@@ -24,17 +24,17 @@ nomColumActividad = 'nota'
 nomColumEvaCruzada = 'EC'
 
 calificacionActividad = {
-	'3D Home': 3.5,
-	'Aster': 5,
-	'Crowd Control': 5,
-	'Enigami': 4,
-	'OndeHay': 0,
-	'Geople': 5,
-	'Should I?': 4,
-	'Temporizate': 3.2,
-	'SecCam': 5,
-	'TransMotion': 5,
-	'moveCam': 3.4
+	'3D Home': 3.7125,
+	'Aster': 4.175,
+	'Crowd Control': 3.91,
+	'Enigami': 3.8,
+	'OndeHay': 3.6,
+	'Geople': 3.675,
+	'Should I?': 3.9375,
+	'Temporizate': 3.4,
+	'SecCam': 3.725,
+	'TransMotion': 3.8375,
+	'moveCam': 3.475
 	}
 
 grupos = {
