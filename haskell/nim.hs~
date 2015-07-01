@@ -22,5 +22,5 @@ jugadas x = [1..x] -- puedo quitar desde 1 hasta x fichas de esta pila
 juego :: Integral x => [x] -> x
 juego []  = 0
 juego [x] = sum $ zipWith (*) mult $ sort [x]
-            where mult = [10^n | n <- [l-1..0]]
+            where mult = [10^n | n <- [l,l-1..0]]
                   l = length [x]
