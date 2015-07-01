@@ -75,4 +75,19 @@ evenSum9 :: Integral a => [a] -> a
 evenSum9 = (foldl' (+) 0) . (filter even)
 
 -- Version 10
+sum' :: (Num a) => [a] -> a
+sum' = foldl' (+) 0
+evenSum10 :: Integral a => [a] -> a
+evenSum10 = sum' . (filter even)
 
+-- Square sum
+sumSquare :: (Num a) => [a] -> a
+sumSquare = foldl' (\ x y -> x + y^2 ) 0
+evenSumSquare1 :: Integral a => [a] -> a
+evenSumSquare1 = sumSquare . (filter even)
+
+evenSumSquare2 :: Integral a => [a] -> a
+evenSumSquare2 = evenSum10 . (map (^2))
+
+evenSumSquare3 :: Integral a => [a] -> a
+evenSumSquare3 = sum' . (filter even) . (map (^2))
