@@ -82,7 +82,7 @@ evenSum10 = sum' . (filter even)
 
 -- Square sum
 sumSquare :: (Num a) => [a] -> a
-sumSquare = foldl' (\ x y -> (x + y)^2 ) 0
+sumSquare = foldl' (\ x y -> x + y^2 ) 0
 evenSumSquare1 :: Integral a => [a] -> a
 evenSumSquare1 = sumSquare . (filter even)
 
