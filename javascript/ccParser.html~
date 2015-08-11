@@ -3,7 +3,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script>
 			$(document).on('keydown', function(event) {
-				console.log("Reconocido "+event.which+" "+String.fromCharCode(event.which));
+				console.log("Reconocido "+event.which);
 				if (event.which == 45) {                // El evento se dispara con la tecla 'Insert'
 					
 					if ($(parser).prop('readonly')) {       // Si el campo es de soloLectura (estado inicial)...
