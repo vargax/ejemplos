@@ -4,17 +4,17 @@
 		<script>
 			$(document).on('keydown', function(event) {
 				console.log("Reconocido "+event.which);
-				if (event.which == 45) { 						// El evento se dispara con la tecla 'Insert'
+				if (event.which == 45) { 		// El evento se dispara con la tecla 'Insert'
 
-					if ($(parser).prop('readonly')) {			// Si el campo es de soloLectura...
+					if ($(parser).prop('readonly')) {		// Si el campo es de soloLectura (estado inicial)...
 						console.log("Leyendo...")				
 						$(parser).prop('readonly',false);		// Lo desbloqueo...
 						$(parser).val('');				// Lo limpio...
-						$(parser).focus();						// Le doy foco (para capturar la entrada del teclado)
+						$(parser).focus();				// Le doy foco (para capturar la entrada del teclado)
 					
-					} else {									// Si el campo NO es de soloLectira (implica lo desbloqué antes...)
+					} else {					// Si el campo NO es de soloLectira (implica lo desbloqué antes...)
 						console.log("Perseando...")
-						$(parser).prop('readonly',true);			// Bloqueo nuevamente el campo
+						$(parser).prop('readonly',true);		// Lo bloqueo nuevamente...
 						var datos = $(parser).val().split('&');		// Recupero los datos :: la cadena es de la forma (cc)&(nombre)
 						
 						$(nombre).val(datos[0]); // Defino el valor de $(nombre) con el primer elemento de la cadena
