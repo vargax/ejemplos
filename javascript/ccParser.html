@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script>
+			$(document).on('keydown', function(event) {
+				console.log("Reconocido "+event.which);
+				if (event.which == 45) { 						// El evento se dispara con la tecla 'Insert'
+
+					if ($(parser).prop('readonly')) {			// Si el campo es de soloLectura...
+						console.log("Leyendo...")				
+						$(parser).prop('readonly',false);		// Lo desbloqueo...
+						$(parser).focus();						// Le doy foco (para capturar la entrada del teclado)
+					
+					} else {									// Si el campo NO es de soloLectira (implica lo desbloqué antes...)
+						console.log("Perseando...")
+						$(parser).prop('readonly',true);			// Bloqueo nuevamente el campo
+						var datos = $(parser).val().split('&');		// Recupero los datos :: la cadena es de la forma (cc)&(nombre)
+						
+						$(nombre).val(datos[0]); // Defino el valor de $(nombre) con el primer elemento de la cadena
+						$(cc).val(datos[1]);     // Defino el valor de $(cc) con el segundo elemento de la cadena
+					}
+				}
+			})
+		</script>
+	</head>
+	<body>
+		<input id="parser" type="text" readonly />
+		<input id="nombre" type="text" />
+		<input id="cc" type="text" />
+	</body>
+</html>
