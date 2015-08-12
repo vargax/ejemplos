@@ -62,10 +62,10 @@ npm install geotabula express socket.io terraformer terraformer-wkt-parser
 ```
 ## Project Template
 A basic NodeJS application have two files and two folders:
-- *index.js*: This file contains the NodeJS code that runs in the server.
-- *index.html*: This is the html file served to the client.
-- *_public_ folder*: The files in this folder are available to the client. This is the place to put client-side JavaScript and CSS files.
-- *_node_modules_ folder*: This folder contains the NodeJS npm installed modules.
+- *_index.js_:* This file contains the NodeJS code that runs in the server.
+- *_index.html_:* This is the html file served to the client.
+- *_public_ folder:* The files in this folder are available to the client. This is the place to put client-side JavaScript and CSS files.
+- *_node_modules_ folder:* This folder contains the NodeJS npm installed modules.
 ```
 mkdir public
 touch index.js
