@@ -17,7 +17,7 @@ psql -c "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;" geotabula
 ```
 sudo apt-get install nodejs npm
 ```
-### Fedora 22
+## Fedora 22
 ### PostGIS Database
 ```
 # Install packages
@@ -34,7 +34,7 @@ psql -c "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;" geotabula
 ```
 ToDo
 ```
-### Mac OSX
+## Mac OSX
 ### PostGIS Database
 ```
 # Install packages
@@ -51,11 +51,11 @@ psql -c "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;" geotabula
 ```
 ToDo
 ```
-## Project Setup
+# Project Setup
 ```
-# Create project folder
+## Create project folder
 mkdir -p [pathToProjectFolder]
 cd [pathToProjectFolder]
-# Install NodeJS Modules
+## Install NodeJS Modules
 npm install mysql pg express socket.io terraformer terraformer-wkt-parser
 ```
