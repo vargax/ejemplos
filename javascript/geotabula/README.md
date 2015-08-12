@@ -1,3 +1,4 @@
+This readme walks through the steps required to setup the environment and build a simple web-based application.
 # Workspace Setup
 ## Ubuntu 14.04
 ### PostGIS Database
@@ -64,7 +65,7 @@ npm install geotabula express socket.io terraformer terraformer-wkt-parser
 A basic NodeJS application have two files and two folders:
 - *index.js:* This file contains the NodeJS code that runs in the server.
 - *index.html:* This is the html file served to the client.
-- *public_ folder:* The files in this folder are available to the client. This is the place to put client-side JavaScript and CSS files.
+- *public folder:* The files in this folder are available to the client. This is the place to put client-side JavaScript and CSS files.
 - *node_modules folder:* This folder contains the NodeJS npm installed modules.
 ```
 mkdir public
@@ -72,4 +73,4 @@ touch index.js
 touch index.html
 ```
 ### Geotabula example
-
+Fot
