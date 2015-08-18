@@ -53,5 +53,5 @@ mkdir public
 touch index.js
 touch index.html
 ```
-### Geotabula example
+## Geotabula example
 
