@@ -5,7 +5,7 @@ This howto walks through the steps required to setup the environment and build a
 ```
 # Postgres
 sudo apt-get install postgresql postgresql-contrib postgresql-client pgadmin3
-sudo apt-get install postgis postgresql-9.3-postgis-scripts
+sudo apt-get install postgis postgresql-9.1-postgis-2.1
 # NodeJS
 sudo apt-get install nodejs npm
 ```
@@ -48,6 +48,10 @@ A basic NodeJS application has two files and two folders:
 - *index.html:* This is the html file served to the client.
 - *public folder:* The files in this folder are available to the client. This is the place to put client-side JavaScript and CSS files.
 - *node_modules folder:* This folder contains the NodeJS npm installed modules.
-
-
+```
+mkdir public
+touch index.js
+touch index.html
+```
+## Geotabula example
 
