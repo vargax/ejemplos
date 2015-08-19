@@ -12,9 +12,10 @@ sudo apt-get install nodejs npm
 ### Fedora 22
 ```
 # Postgres
-ToDo
+sudo yum install postgresql
+sudo yum install postgis
 # NodeJS
-ToDo
+sudo yum install nodejs
 ```
 ### Mac OSX 10.x
 ```
@@ -35,6 +36,7 @@ psql -c "CREATE EXTENSION postgis; CREATE EXTENSION postgis_topology;" geotabula
 ```
 # Project Setup
 ## Prerequisites
+First we have to setup the project folder and install the required NodeJS modules:
 ```
 ### Create project folder
 mkdir -p [pathToProjectFolder]
@@ -42,12 +44,12 @@ cd [pathToProjectFolder]
 ### Install NodeJS Modules
 npm install geotabula express socket.io terraformer terraformer-wkt-parser
 ```
+Now we are going to populate the database with an initial shape:
+
 ## Project Template
 A basic NodeJS application has two files and two folders:
 - *index.js:* This file contains the NodeJS code that runs in the server.
 - *index.html:* This is the html file served to the client.
 - *public folder:* The files in this folder are available to the client. This is the place to put client-side JavaScript and CSS files.
 - *node_modules folder:* This folder contains the NodeJS npm installed modules.
-
-
-
+For this ex
