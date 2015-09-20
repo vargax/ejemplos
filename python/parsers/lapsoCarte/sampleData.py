@@ -27,7 +27,7 @@ if os.path.exists(OUTPUT_FILE):
     os.remove(OUTPUT_FILE)
 
 output = open(OUTPUT_FILE, 'w')
-output.write('spObj_id,t,population\n')
+output.write('objectid,t,population\n')
 
 for sp in spatialObjects_ids:
     initialPop = random.randint(initialPop_range[0], initialPop_range[1])

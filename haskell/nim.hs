@@ -50,8 +50,4 @@ estrategia l  = l ++ estrategia (sucesor)
                              if sucesores (last l) == []
                              then []
                              else [head (sucesores (last l))]
-
-
-
-
-          
+         
