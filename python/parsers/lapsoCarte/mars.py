@@ -159,4 +159,5 @@ for topic in trips, tours, hh_by_zone, employed_pop, residents, cars, co2:
     result.write(array_to_csv(topic[DATA_STRUCTURE]))
     result.close()
 
+sql.write('VACUUM;')
 sql.close()
