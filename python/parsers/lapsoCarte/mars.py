@@ -3,7 +3,7 @@ import os
 
 INPUT_FILE = 'data.csv'
 
-NAME, FUNCTION, DATA_STRUCTURE = 'name', 'function', 'data_structure'
+NAME, COLUMNS, FUNCTION, DATA_STRUCTURE = 'name', 'columns', 'function', 'data_structure'
 # ----------------------------------------------------------------------------------------------------------------------
 # Utility functions
 # ----------------------------------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ def array_to_csv(array_of_arrays):
     output = ''
     for row in array_of_arrays:
         for column in row:
-            output += column+','
+            output += str(column)+','
         output = output[:-1]
         output += '\n'
     return output
@@ -67,36 +67,43 @@ times = {
 }
 trips = {
     NAME: 'trips',
+    COLUMNS: 't,gid,mode,trips',
     FUNCTION: two_dim_parser,
     DATA_STRUCTURE: []
 }
 tours = {
     NAME: 'tours',
+    COLUMNS: 't,gid,mode,tours',
     FUNCTION: two_dim_parser,
     DATA_STRUCTURE: []
 }
 hh_by_zone = {
     NAME: 'hh_by_zone',
+    COLUMNS: 't,gid,hh_by_zone',
     FUNCTION: one_dim_parser,
     DATA_STRUCTURE: []
 }
 employed_pop = {
     NAME: 'employed_pop',
+    COLUMNS: 't,gid,employed_pop',
     FUNCTION: one_dim_parser,
     DATA_STRUCTURE: []
 }
 residents = {
     NAME: 'residents',
+    COLUMNS: 't,gid,residents',
     FUNCTION: one_dim_parser,
     DATA_STRUCTURE: []
 }
 cars = {
     NAME: 'cars',
+    COLUMNS: 't,gid,cars',
     FUNCTION: one_dim_parser,
     DATA_STRUCTURE: []
 }
 co2 = {
     NAME: 'co2',
+    COLUMNS: 't,gid,co2',
     FUNCTION: one_dim_parser,
     DATA_STRUCTURE: []
 }
@@ -122,5 +129,9 @@ for line in input_file:
             data_structure.extend(function(line))
             break
 
-for result in [trips, tours, hh_by_zone, employed_pop, residents, cars, co2]:
-    print result
+for topic in trips, tours, hh_by_zone, employed_pop, residents, cars, co2:
+    result = open(topic[NAME]+'.csv', 'w')
+    result.write(topic[COLUMNS]+'\n')
+    result.write(array_to_csv(topic[DATA_STRUCTURE]))
+    result.close()
+
