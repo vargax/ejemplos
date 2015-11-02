@@ -1,7 +1,9 @@
 # -*- coding: UTF-8 -*-
 import os
+import shutil
 
 INPUT_FILE = 'data.csv'
+OUTPUT_DIR = 'output'
 
 NAME, COLUMNS, FUNCTION, DATA_STRUCTURE = 'name', 'columns', 'function', 'data_structure'
 # ----------------------------------------------------------------------------------------------------------------------
@@ -57,7 +59,7 @@ def array_to_csv(array_of_arrays):
 
 
 # ----------------------------------------------------------------------------------------------------------------------
-# Script
+# Different data sets in INPUT_FILE
 # ----------------------------------------------------------------------------------------------------------------------
 time = []
 times = {
@@ -108,6 +110,9 @@ co2 = {
     DATA_STRUCTURE: []
 }
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Script
+# ----------------------------------------------------------------------------------------------------------------------
 patterns = {
     'Time': times,
     'trip time mode i': trips,
@@ -119,7 +124,6 @@ patterns = {
     'total CO2 i per year WW': co2
 }
 
-
 input_file = open(INPUT_FILE)
 for line in input_file:
     for pattern in patterns.keys():
@@ -129,8 +133,14 @@ for line in input_file:
             data_structure.extend(function(line))
             break
 
+try:
+    shutil.rmtree(OUTPUT_DIR)
+except OSError:
+    pass
+
+os.mkdir(OUTPUT_DIR)
 for topic in trips, tours, hh_by_zone, employed_pop, residents, cars, co2:
-    result = open(topic[NAME]+'.csv', 'w')
+    result = open(OUTPUT_DIR+'/'+topic[NAME]+'.csv', 'w')
     result.write(topic[COLUMNS]+'\n')
     result.write(array_to_csv(topic[DATA_STRUCTURE]))
     result.close()
