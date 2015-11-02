@@ -139,9 +139,24 @@ except OSError:
     pass
 
 os.mkdir(OUTPUT_DIR)
+sql = open(OUTPUT_DIR+'/db.sql', 'w')
 for topic in trips, tours, hh_by_zone, employed_pop, residents, cars, co2:
+    query = 'DROP TABLE IF EXISTS '+topic[NAME]+';\n'
+
+    query += 'CREATE TABLE '+topic[NAME]+'(t int, gid int,'
+    if topic[FUNCTION] is two_dim_parser:
+        query += 'mode text,'+topic[NAME]+' float);\n'
+        query += 'ALTER TABLE '+topic[NAME]+' ADD CONSTRAINT '+topic[NAME]+'_pk PRIMARY KEY(t,gid,mode);\n'
+    else:
+        query += topic[NAME]+' float);\n'
+        query += 'ALTER TABLE '+topic[NAME]+' ADD CONSTRAINT '+topic[NAME]+'_pk PRIMARY KEY(t,gid);\n'
+
+    query += 'COPY '+topic[NAME]+' FROM "/tmp/mars/'+topic[NAME]+'.csv" DELIMITER "," CSV HEADER;'
+    sql.write(query)
+
     result = open(OUTPUT_DIR+'/'+topic[NAME]+'.csv', 'w')
     result.write(topic[COLUMNS]+'\n')
     result.write(array_to_csv(topic[DATA_STRUCTURE]))
     result.close()
 
+sql.close()
