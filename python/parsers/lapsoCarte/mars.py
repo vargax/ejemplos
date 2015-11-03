@@ -69,37 +69,37 @@ times = {
 }
 trips = {
     NAME: 'trips',
-    COLUMNS: 't,gid,mode,trips',
+    COLUMNS: 't,mars,mode,trips',
     FUNCTION: two_dim_parser,
     DATA_STRUCTURE: []
 }
 tours = {
     NAME: 'tours',
-    COLUMNS: 't,gid,mode,tours',
+    COLUMNS: 't,mars,mode,tours',
     FUNCTION: two_dim_parser,
     DATA_STRUCTURE: []
 }
 hh_by_zone = {
     NAME: 'hh_by_zone',
-    COLUMNS: 't,gid,hh_by_zone',
+    COLUMNS: 't,mars,hh_by_zone',
     FUNCTION: one_dim_parser,
     DATA_STRUCTURE: []
 }
 employed_pop = {
     NAME: 'employed_pop',
-    COLUMNS: 't,gid,employed_pop',
+    COLUMNS: 't,mars,employed_pop',
     FUNCTION: one_dim_parser,
     DATA_STRUCTURE: []
 }
 residents = {
     NAME: 'residents',
-    COLUMNS: 't,gid,residents',
+    COLUMNS: 't,mars,residents',
     FUNCTION: one_dim_parser,
     DATA_STRUCTURE: []
 }
 cars = {
     NAME: 'cars',
-    COLUMNS: 't,gid,cars',
+    COLUMNS: 't,mars,cars',
     FUNCTION: one_dim_parser,
     DATA_STRUCTURE: []
 }
@@ -143,13 +143,13 @@ sql = open(OUTPUT_DIR+'/db.sql', 'w')
 for topic in trips, tours, hh_by_zone, employed_pop, residents, cars, co2:
     query = 'DROP TABLE IF EXISTS '+topic[NAME]+';\n'
 
-    query += 'CREATE TABLE '+topic[NAME]+'(t int, gid int,'
+    query += 'CREATE TABLE '+topic[NAME]+'(t int, mars int,'
     if topic[FUNCTION] is two_dim_parser:
         query += 'mode text,'+topic[NAME]+' float);\n'
-        query += 'ALTER TABLE '+topic[NAME]+' ADD CONSTRAINT '+topic[NAME]+'_pk PRIMARY KEY(t,gid,mode);\n'
+        query += 'ALTER TABLE '+topic[NAME]+' ADD CONSTRAINT '+topic[NAME]+'_pk PRIMARY KEY(t,mars,mode);\n'
     else:
         query += topic[NAME]+' float);\n'
-        query += 'ALTER TABLE '+topic[NAME]+' ADD CONSTRAINT '+topic[NAME]+'_pk PRIMARY KEY(t,gid);\n'
+        query += 'ALTER TABLE '+topic[NAME]+' ADD CONSTRAINT '+topic[NAME]+'_pk PRIMARY KEY(t,mars);\n'
 
     query += "COPY "+topic[NAME]+" FROM '/tmp/mars/"+topic[NAME]+".csv' DELIMITER ',' CSV HEADER;\n"
     sql.write(query)
