@@ -4,6 +4,7 @@ import shutil
 
 INPUT_FILE = 'data.csv'
 OUTPUT_DIR = 'output'
+HEADER = 't,gid,data'
 
 NAME, COLUMNS, FUNCTION, DATA_STRUCTURE = 'name', 'columns', 'function', 'data_structure'
 # ----------------------------------------------------------------------------------------------------------------------
@@ -44,8 +45,8 @@ def two_dim_parser(line):
     data = string_to_float_array(line)
 
     for t in range(0, len(time)):
-        output.append([time[t], gid, mode, data[t]])
-    return output
+        output.append([time[t], gid, data[t]])
+    return mode, output
 
 
 def array_to_csv(array_of_arrays):
@@ -56,6 +57,19 @@ def array_to_csv(array_of_arrays):
         output = output[:-1]
         output += '\n'
     return output
+
+
+def sql_gen(name):
+    query = 'DROP TABLE IF EXISTS '+name+';\n'
+    query += 'CREATE TABLE '+name+'(t int, mars int,'+name+' float);\n'
+    query += 'ALTER TABLE '+name+' ADD CONSTRAINT '+name+'_pk PRIMARY KEY(t,mars);\n'
+    query += "COPY "+name+" FROM '/tmp/mars/"+name+".csv' DELIMITER ',' CSV HEADER;\n"
+
+    select = ', '+name+'.'+name
+    join = 'INNER JOIN '+name+' ON a.t='+name+'.t '
+    join += 'AND a.mars='+name+'.mars\n'
+
+    return query, select, join
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -69,43 +83,36 @@ times = {
 }
 trips = {
     NAME: 'trips',
-    COLUMNS: 't,mars,mode,trips',
     FUNCTION: two_dim_parser,
-    DATA_STRUCTURE: []
+    DATA_STRUCTURE: {}
 }
 tours = {
     NAME: 'tours',
-    COLUMNS: 't,mars,mode,tours',
     FUNCTION: two_dim_parser,
-    DATA_STRUCTURE: []
+    DATA_STRUCTURE: {}
 }
 hh_by_zone = {
     NAME: 'hh_by_zone',
-    COLUMNS: 't,mars,hh_by_zone',
     FUNCTION: one_dim_parser,
     DATA_STRUCTURE: []
 }
 employed_pop = {
     NAME: 'employed_pop',
-    COLUMNS: 't,mars,employed_pop',
     FUNCTION: one_dim_parser,
     DATA_STRUCTURE: []
 }
 residents = {
     NAME: 'residents',
-    COLUMNS: 't,mars,residents',
     FUNCTION: one_dim_parser,
     DATA_STRUCTURE: []
 }
 cars = {
     NAME: 'cars',
-    COLUMNS: 't,mars,cars',
     FUNCTION: one_dim_parser,
     DATA_STRUCTURE: []
 }
 co2 = {
     NAME: 'co2',
-    COLUMNS: 't,gid,co2',
     FUNCTION: one_dim_parser,
     DATA_STRUCTURE: []
 }
@@ -130,7 +137,15 @@ for line in input_file:
         if line.startswith(pattern):
             function = patterns[pattern][FUNCTION]
             data_structure = patterns[pattern][DATA_STRUCTURE]
-            data_structure.extend(function(line))
+
+            if function is two_dim_parser:
+                mode, output = function(line)
+                try:
+                    data_structure[mode].extend(output)
+                except KeyError:
+                    data_structure[mode] = output
+            else:
+                data_structure.extend(function(line))
             break
 
 try:
@@ -140,24 +155,35 @@ except OSError:
 
 os.mkdir(OUTPUT_DIR)
 sql = open(OUTPUT_DIR+'/db.sql', 'w')
-for topic in trips, tours, hh_by_zone, employed_pop, residents, cars, co2:
-    query = 'DROP TABLE IF EXISTS '+topic[NAME]+';\n'
+sql_select = 'SELECT a.t, a.mars'
+sql_join = ''
 
-    query += 'CREATE TABLE '+topic[NAME]+'(t int, mars int,'
-    if topic[FUNCTION] is two_dim_parser:
-        query += 'mode text,'+topic[NAME]+' float);\n'
-        query += 'ALTER TABLE '+topic[NAME]+' ADD CONSTRAINT '+topic[NAME]+'_pk PRIMARY KEY(t,mars,mode);\n'
-    else:
-        query += topic[NAME]+' float);\n'
-        query += 'ALTER TABLE '+topic[NAME]+' ADD CONSTRAINT '+topic[NAME]+'_pk PRIMARY KEY(t,mars);\n'
+for topic in patterns.values():
+    if topic[FUNCTION] is time_parser:
+        continue
 
-    query += "COPY "+topic[NAME]+" FROM '/tmp/mars/"+topic[NAME]+".csv' DELIMITER ',' CSV HEADER;\n"
-    sql.write(query)
+    if topic[FUNCTION] is one_dim_parser:
+        topic[DATA_STRUCTURE] = {'': topic[DATA_STRUCTURE]}
 
-    result = open(OUTPUT_DIR+'/'+topic[NAME]+'.csv', 'w')
-    result.write(topic[COLUMNS]+'\n')
-    result.write(array_to_csv(topic[DATA_STRUCTURE]))
-    result.close()
+    for mode in topic[DATA_STRUCTURE].keys():
+        name = topic[NAME]
+        if mode != '':
+            name += '_'+mode
+        name = name.replace(' ', '')
+        query, select, join = sql_gen(name)
 
+        result = open(OUTPUT_DIR+'/'+name+'.csv', 'w')
+        result.write(HEADER+'\n')
+        result.write(array_to_csv(topic[DATA_STRUCTURE][mode]))
+        result.close()
+
+        sql.write(query)
+        sql_select += select
+        if sql_join == '':
+            sql_join += 'FROM '+name+' a \n'
+        else:
+            sql_join += join
+
+sql.write(sql_select+sql_join)
 sql.write('VACUUM;')
 sql.close()
