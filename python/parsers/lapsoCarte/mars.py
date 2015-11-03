@@ -155,7 +155,7 @@ except OSError:
 
 os.mkdir(OUTPUT_DIR)
 sql = open(OUTPUT_DIR+'/db.sql', 'w')
-sql_select = 'SELECT a.t, a.mars'
+sql_select = ''
 sql_join = ''
 
 for topic in patterns.values():
@@ -178,12 +178,12 @@ for topic in patterns.values():
         result.close()
 
         sql.write(query)
-        sql_select += select
-        if sql_join == '':
-            sql_join += 'FROM '+name+' a \n'
+        if sql_select == '':
+            sql_select += 'SELECT a.t, a.mars'
+            sql_join += '\nFROM '+name+' a \n'
         else:
+            sql_select += select
             sql_join += join
 
 sql.write(sql_select+sql_join)
-sql.write('VACUUM;')
 sql.close()
