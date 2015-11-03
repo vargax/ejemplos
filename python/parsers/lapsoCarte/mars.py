@@ -29,18 +29,18 @@ def time_parser(line):
 def one_dim_parser(line):
     output = []
 
-    upz = line[line.find('[')+1:line.find(']')]
+    gid = line[line.find('[')+2:line.find(']')]
     data = string_to_float_array(line)
 
     for t in range(0, len(time)):
-        output.append([time[t], upz, data[t]])
+        output.append([time[t], gid, data[t]])
     return output
 
 
 def two_dim_parser(line):
     output = []
 
-    gid, mode = (line[line.find('[')+1:line.find(']')]).split(',')
+    gid, mode = (line[line.find('[')+2:line.find(']')]).split(',')
     data = string_to_float_array(line)
 
     for t in range(0, len(time)):
@@ -151,7 +151,7 @@ for topic in trips, tours, hh_by_zone, employed_pop, residents, cars, co2:
         query += topic[NAME]+' float);\n'
         query += 'ALTER TABLE '+topic[NAME]+' ADD CONSTRAINT '+topic[NAME]+'_pk PRIMARY KEY(t,gid);\n'
 
-    query += 'COPY '+topic[NAME]+' FROM "/tmp/mars/'+topic[NAME]+'.csv" DELIMITER "," CSV HEADER;'
+    query += "COPY "+topic[NAME]+" FROM '/tmp/mars/"+topic[NAME]+".csv' DELIMITER ',' CSV HEADER;\n"
     sql.write(query)
 
     result = open(OUTPUT_DIR+'/'+topic[NAME]+'.csv', 'w')
