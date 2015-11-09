@@ -1,10 +1,7 @@
 # -*- coding: UTF-8 -*-
 import os
-import shutil
 
 INPUT_FILE = 'data.csv'
-OUTPUT_DIR = 'output'
-HEADER = 't,gid,data'
 
 NAME, COLUMNS, FUNCTION, DATA_STRUCTURE = 'name', 'columns', 'function', 'data_structure'
 # ----------------------------------------------------------------------------------------------------------------------
@@ -47,30 +44,6 @@ def two_dim_parser(line):
     for t in range(0, len(time)):
         output.append([time[t], gid, data[t]])
     return mode, output
-
-
-def array_to_csv(array_of_arrays):
-    output = ''
-    for row in array_of_arrays:
-        for column in row:
-            output += str(column)+','
-        output = output[:-1]
-        output += '\n'
-    return output
-
-
-def sql_gen(name):
-    query = 'DROP TABLE IF EXISTS '+name+';\n'
-    query += 'CREATE TABLE '+name+'(t int, mars int,'+name+' float);\n'
-    query += 'ALTER TABLE '+name+' ADD CONSTRAINT '+name+'_pk PRIMARY KEY(t,mars);\n'
-    query += "COPY "+name+" FROM '/tmp/mars/"+name+".csv' DELIMITER ',' CSV HEADER;\n"
-
-    select = ', '+name+'.'+name
-    join = 'INNER JOIN '+name+' ON a.t='+name+'.t '
-    join += 'AND a.mars='+name+'.mars\n'
-
-    return query, select, join
-
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Different data sets in INPUT_FILE
@@ -149,14 +122,15 @@ for line in input_file:
             break
 
 try:
-    shutil.rmtree(OUTPUT_DIR)
+    os.remove('mars.sql')
 except OSError:
     pass
 
-os.mkdir(OUTPUT_DIR)
-sql = open(OUTPUT_DIR+'/db.sql', 'w')
-sql_select = ''
-sql_join = ''
+sql = open('mars.sql', 'w')
+
+sql.write('DROP TABLE IF EXISTS mars;\n')
+sql.write('CREATE TABLE mars(type TEXT, t INT, gid INT, name TEXT, data FLOAT);\n')
+sql.write('ALTER TABLE mars ADD CONSTRAINT mars_pk PRIMARY KEY(type, t, gid, name);\n')
 
 for topic in patterns.values():
     if topic[FUNCTION] is time_parser:
@@ -170,20 +144,15 @@ for topic in patterns.values():
         if mode != '':
             name += '_'+mode
         name = name.replace(' ', '')
-        query, select, join = sql_gen(name)
 
-        result = open(OUTPUT_DIR+'/'+name+'.csv', 'w')
-        result.write(HEADER+'\n')
-        result.write(array_to_csv(topic[DATA_STRUCTURE][mode]))
-        result.close()
+        array = topic[DATA_STRUCTURE][mode]
 
+        query = 'INSERT INTO mars VALUES '
+        for entry in array:
+            time, gid, data = entry
+            query += "('level',"+str(time)+','+str(gid)+",'"+name+"',"+str(data)+'),'
+
+        query = query[:-1] + ';\n'
         sql.write(query)
-        if sql_select == '':
-            sql_select += 'SELECT a.t, a.mars'
-            sql_join += '\nFROM '+name+' a \n'
-        else:
-            sql_select += select
-            sql_join += join
 
-sql.write(sql_select+sql_join)
 sql.close()
