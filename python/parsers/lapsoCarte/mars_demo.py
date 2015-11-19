@@ -25,8 +25,8 @@ except OSError:
 
 sql = open('demo.sql', 'w')
 sql.write('DROP TABLE IF EXISTS demo;\n')
-sql.write('CREATE TABLE demo(howClmn TEXT, whatClmn TEXT, whenClmn INT, whereClmn INT, data FLOAT);\n')
-sql.write('ALTER TABLE demo ADD CONSTRAINT demo_pk PRIMARY KEY(howClmn, whatClmn, whenClmn, whereClmn);\n')
+sql.write('CREATE TABLE demo(how_column TEXT, what_column TEXT, when_column INT, where_column INT, data_column FLOAT);\n')
+sql.write('ALTER TABLE demo ADD CONSTRAINT demo_pk PRIMARY KEY(how_column, what_column, when_column, where_column);\n')
 
 query = "INSERT INTO demo VALUES "
 for row in output:
