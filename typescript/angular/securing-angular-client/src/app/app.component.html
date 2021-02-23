@@ -1,0 +1,19 @@
+<nav>
+    <mat-toolbar color="primary">
+        <a href="/">
+            <span>
+                <img src="/assets/images/Globo_logo.png" alt="Globomantics" title="Globomantics" class="globo-logo">
+            </span>
+        </a>
+        <span class="navbar-fill">
+            <button mat-button routerLink="/projects">My Projects</button>
+            <button mat-button routerLink="/admin">Manage Projects</button>
+        </span>
+        <span>
+            <button mat-button (click)="login()">Login</button>
+        </span>
+    </mat-toolbar>
+</nav>
+<div>
+<router-outlet></router-outlet>
+</div>
