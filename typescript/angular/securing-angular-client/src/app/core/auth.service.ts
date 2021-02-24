@@ -24,7 +24,15 @@ export class AuthService {
       redirect_uri: `${Constants.clientRoot}signin-callback`,
       scope: 'openid profile projects-api',
       response_type: 'code', // for PKCE (set to 'id_token token' to use implicit flow instead of PKCE)
-      post_logout_redirect_uri: `${Constants.clientRoot}signout-callback`
+      //post_logout_redirect_uri: `${Constants.clientRoot}signout-callback`,
+      metadata: {
+        issuer: `${Constants.stsAuthority}`,
+        authorization_endpoint: `${Constants.stsAuthority}authorize?audience=${Constants.audience}`,
+        jwks_uri: `${Constants.stsAuthority}.well-known/jwks.json`,
+        token_endpoint: `${Constants.stsAuthority}oauth/token`,
+        userinfo_endpoint: `${Constants.stsAuthority}userinfo`,
+        end_session_endpoint: `${Constants.stsAuthority}v2/logout?client_id=${Constants.clientId}&returnTo=${encodeURI(Constants.clientRoot)}signout-callback`
+      }
     };
     this._userManager = new UserManager(stsSettings);
   }
