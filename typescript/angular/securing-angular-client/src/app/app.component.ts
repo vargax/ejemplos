@@ -9,7 +9,7 @@ import {AuthService} from './core/auth.service';
 export class AppComponent implements OnInit {
   isLoggedIn = false;
 
-  constructor(private _authService: AuthService){
+  constructor(private _authService: AuthService) {
     this._authService.loginChanged.subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
     })
@@ -24,5 +24,9 @@ export class AppComponent implements OnInit {
 
   login() {
     this._authService.login();
+  }
+
+  logout() {
+    this._authService.logout();
   }
 }

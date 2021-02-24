@@ -55,4 +55,13 @@ export class AuthService {
     );
   }
 
+  logout() {
+    this._userManager.signoutRedirect();
+  }
+
+  completeLogout(): Promise<User> {
+    this._user = null;
+    return this._userManager.signinRedirectCallback();
+  }
+
 }

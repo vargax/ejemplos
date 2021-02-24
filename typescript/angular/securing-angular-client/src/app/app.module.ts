@@ -25,6 +25,7 @@ import { AddEditMilestoneDialogComponent } from './projects/add-edit-milestone-d
 import { AdminModule } from './admin/admin.module';
 import { CoreModule } from './core/core.module';
 import { SigninRedirectCallbackComponent } from './home/signin-redirect-callback.component';
+import { SignoutRedirectCallbackComponent } from './home/signout-redirect-callback.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { SigninRedirectCallbackComponent } from './home/signin-redirect-callback
     ProjectListComponent,
     ProjectComponent,
     AddEditMilestoneDialogComponent,
-    SigninRedirectCallbackComponent
+    SigninRedirectCallbackComponent,
+    SignoutRedirectCallbackComponent
   ],
   imports: [
     BrowserModule,
