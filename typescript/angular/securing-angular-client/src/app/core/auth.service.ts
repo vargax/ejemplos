@@ -44,4 +44,15 @@ export class AuthService {
     });
   }
 
+  // Returns a promise that produces a user
+  completeLogin(): Promise<User> {
+    return this._userManager.signinRedirectCallback().then(
+        user => {
+          this._user = user;
+          this._loginChangedSubject.next(!!user && !user.expired); // Fire the loginChange observable to any code that's subscribed
+          return user;
+        }
+    );
+  }
+
 }
