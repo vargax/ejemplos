@@ -7,6 +7,7 @@ import { ProjectComponent } from './projects/project.component';
 import { ContactUsComponent } from './home/contact-us.component';
 import {SigninRedirectCallbackComponent} from './home/signin-redirect-callback.component';
 import {SignoutRedirectCallbackComponent} from './home/signout-redirect-callback.component';
+import {UnauthorizedComponent} from './home/unauthorized.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
     { path: 'project/:projectId', component: ProjectComponent },
     { path: 'signin-callback', component: SigninRedirectCallbackComponent },
     { path: 'signout-callback', component: SignoutRedirectCallbackComponent },
+    { path: 'unauthorized', component: UnauthorizedComponent}
 ];
 
 @NgModule({
