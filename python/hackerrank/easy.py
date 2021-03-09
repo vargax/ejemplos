@@ -3,28 +3,7 @@ import random
 
 
 def main():
-    factors(123456)
-
-
-# Factors of a Number
-def factors(number):
-    bottom = [1]
-    top = [number]
-
-    i = 2
-    while i < top[0]:
-        if number % i == 0:
-            bottom.append(i)
-            top.insert(0, number // i)
-        i += 1
-
-    if bottom[-1] == top[0]:
-        bottom.pop()
-    results = bottom + top
-
-    print('Iterations: ', i)
-    print('Factors: ', len(results))
-    print(results)
+    print(staircase(25))
 
 
 # Complete the staircase function below.
