@@ -1,41 +1,107 @@
 #!/bin/python3
-import random
 
-
-def main():
-    print(extra_long_factorials(25))
-
-
-def extra_long_factorials(n):
+# https://www.hackerrank.com/challenges/extra-long-factorials/submissions/code/203469687
+# Complete the extraLongFactorials function below.
+def extraLongFactorials(n):
     result = 1
     for i in range(2, n+1):
         result *= i
-    return result
+    print(result)
 
 
-# Factors of a Number
-def factors(number):
-    bottom = [1]
-    top = [number]
+# https://www.hackerrank.com/challenges/ctci-ice-cream-parlor/submissions/code/189628352
+# Complete the whatFlavors function below.
+def whatFlavors(prices, money):
+    prices_dic = {}
+    flavor = 0
+    while flavor < len(prices):
+        price = prices[flavor]
 
-    i = 2
-    while i < top[0]:
-        if number % i == 0:
-            bottom.append(i)
-            top.insert(0, number // i)
+        if prices_dic.get(price):
+            (prices_dic.get(price)).append(flavor)
+        else:
+            prices_dic[price] = [flavor]
+
+        flavor += 1
+
+    for price, flavors in prices_dic.items():
+        first_flavor = flavors[0] + 1
+        remaining_money = money - price
+
+        possible_flavors = prices_dic.get(remaining_money)
+        if possible_flavors:
+            second_flavor = possible_flavors[0] + 1
+
+            if possible_flavors == flavors:
+                if len(flavors) >= 2:
+                    second_flavor = flavors[1] + 1
+                else:
+                    continue
+
+            return str(first_flavor) + " " + str(second_flavor)
+
+# https://www.hackerrank.com/challenges/ctci-recursive-staircase/submissions/code/188121002
+# Complete the stepPerms function below.
+STEPS_AT_TIME = [1, 2, 3]
+
+class tree_node:
+    cache = {}
+
+    def __init__(self, steps):
+        self.steps = steps
+
+    def climb(self, remaining_steps):
+        remaining_steps = remaining_steps - self.steps
+
+        if tree_node.cache.get(remaining_steps):
+            return tree_node.cache.get(remaining_steps)
+
+        if remaining_steps < 0:
+            return 0
+        if remaining_steps == 0:
+            return 1
+
+        ways = 0
+        for i in STEPS_AT_TIME:
+            ways += tree_node(i).climb(remaining_steps)
+
+        ways = ways % 10000000007
+        tree_node.cache[remaining_steps] = ways
+
+        return ways
+
+def stepPerms(n):
+    root = tree_node(0)
+    return root.climb(n)
+
+
+# https://www.hackerrank.com/challenges/minimum-swaps-2/submissions/code/184045864
+# Complete the minimumSwaps function below.
+def minimumSwaps(arr):
+    arr = [i - 1 for i in arr]
+
+    dic = {}
+    i = 0
+    while i < len(arr):
+        if arr[i] != i:
+            dic[arr[i]] = i
         i += 1
 
-    if bottom[-1] == top[0]:
-        bottom.pop()
-    results = bottom + top
+    swaps = 0
+    for k, v in dic.items():
+        if k != v:
+            arr[v] = arr[k]
+            dic[arr[k]] = v
+            arr[k] = k
+            dic[k] = k
+            swaps += 1
 
-    print('Iterations: ', i)
-    print('Factors: ', len(results))
-    print(results)
+    return swaps
 
 
+# https://www.hackerrank.com/challenges/new-year-chaos/submissions/code/182889656
 # Complete the minimumBribes function below.
-def minimum_bribes(q):
+def minimumBribes(q):
     q = [i - 1 for i in q]
 
     total_bribes = 0
@@ -56,7 +122,3 @@ def minimum_bribes(q):
         me -= 1
 
     return total_bribes
-
-
-if __name__ == "__main__":
-    main()
