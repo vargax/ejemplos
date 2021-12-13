@@ -1,5 +1,22 @@
 #!/bin/python3
 
+# https://www.hackerrank.com/challenges/ctci-comparator-sorting/submissions/code/232534638
+# Comparators are used to compare two objects. In this challenge you'll create a comparator and use it to sort an array.
+class Player:
+    def __init__(self, name, score):
+        self.name = name
+        self.score = score
+
+    def __repr__(self):
+        return f"{self.name} {self.score}"
+
+    def comparator(self, other):
+        if other.score == self.score:
+            if other.name < self.name:
+                return 1
+            return -1
+        return other.score - self.score
+
 # https://www.hackerrank.com/challenges/extra-long-factorials/submissions/code/203469687
 # Complete the extraLongFactorials function below.
 def extraLongFactorials(n):
