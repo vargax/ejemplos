@@ -1,5 +1,53 @@
 #!/bin/python3
 
+# https://www.hackerrank.com/challenges/detect-whether-a-linked-list-contains-a-cycle/submissions/code/255442943
+# Complete the has_cycle function below.
+#
+def has_cycle(head):
+    s = set()
+    c = head
+    while c:
+        if c in s:
+            return True
+        else:
+            s.add(c)
+        c = c.next
+    return False
+
+
+# https://www.hackerrank.com/challenges/insert-a-node-at-the-tail-of-a-linked-list/submissions/code/255440151
+# Complete the insertNodeAtTail function below.
+#
+class SinglyLinkedListNode:
+    def __init__(self, node_data):
+        self.data = node_data
+        self.next = None
+
+
+def insertNodeAtTail(head, data):
+    if head is None:
+        return SinglyLinkedListNode(data)
+
+    n = head
+    while n.next is not None:
+        n = n.next
+
+    n.next = SinglyLinkedListNode(data)
+
+    return head
+
+
+# https://www.hackerrank.com/challenges/arrays-ds/submissions/code/255438119
+# Complete the 'reverseArray' function below.
+#
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts INTEGER_ARRAY a as parameter.
+#
+def reverseArray(a):
+    a.reverse()
+    return a
+
+
 # https://www.hackerrank.com/challenges/birthday-cake-candles/submissions/code/203466986
 # Complete the 'birthdayCakeCandles' function below.
 #
@@ -33,9 +81,9 @@ def staircase(n):
     floor = n
     while floor > 0:
         step = ''
-        for i in range(floor-1):
+        for i in range(floor - 1):
             step += ' '
-        for i in range(n+1-floor):
+        for i in range(n + 1 - floor):
             step += '#'
         print(step)
         floor -= 1
@@ -133,29 +181,6 @@ def findMergeNode(head1, head2):
         current = current.next
 
 
-"""
-# https://www.hackerrank.com/challenges/ctci-linked-list-cycle/submissions/code/187529926
-Detect a cycle in a linked list. Note that the head pointer may be 'None' if the list is empty.
-
-A Node is defined as: 
-
-    class Node(object):
-        def __init__(self, data = None, next_node = None):
-            self.data = data
-            self.next = next_node
-"""
-def has_cycle(head):
-    d = {}
-    current = head
-    while current:
-        if d.get(head.data):
-            return True
-        else:
-            d[head.data] = True
-        current = current.next
-    return False
-
-
 # https://www.hackerrank.com/challenges/ctci-fibonacci-numbers/submissions/code/187528733
 def fibonacci(n):
     if n == 0:
@@ -164,9 +189,6 @@ def fibonacci(n):
         return 1
 
     return (fibonacci(n - 1) + fibonacci(n - 2))
-
-n = int(input())
-print(fibonacci(n))
 
 
 # https://www.hackerrank.com/challenges/reverse-a-doubly-linked-list/submissions/code/186771220
@@ -204,6 +226,13 @@ def reverse(head):
 #     DoublyLinkedListNode prev
 #
 #
+class DoublyLinkedListNode:
+    def __init__(self, node_data):
+        self.data = node_data
+        self.next = None
+        self.prev = None
+
+
 def sortedInsert(head, data):
     new_node = DoublyLinkedListNode(data)
 
@@ -302,6 +331,8 @@ class Node:
 
        // this is a node of the tree , which contains info as data, left , right
 '''
+
+
 def lca(root, v1, v2):
     min_v, max_v = min(v1, v2), max(v1, v2)
 
@@ -325,6 +356,8 @@ class Node:
 
        // this is a node of the tree , which contains info as data, left , right
 '''
+
+
 def height(root):
     l_deep, r_deep = 0, 0
 
@@ -344,8 +377,8 @@ def alternatingCharacters(s):
     try:
         i = 0
         while True:
-            while l[i] == l[i+1]:
-                l.pop(i+1)
+            while l[i] == l[i + 1]:
+                l.pop(i + 1)
             i += 1
     except IndexError:
         return len(s) - len(l)
@@ -433,7 +466,7 @@ def checkMagazine(magazine, note):
 # https://www.hackerrank.com/challenges/ctci-array-left-rotation/submissions/code/181900486
 # Complete the rotLeft function below.
 def rotLeft(a, d):
-    return a[d:]+a[:d]
+    return a[d:] + a[:d]
 
 
 # https://www.hackerrank.com/challenges/2d-array/submissions/code/181899367
@@ -459,11 +492,10 @@ def hourglassSum(arr):
 # https://www.hackerrank.com/challenges/repeated-string/submissions/code/181892816
 # Complete the repeatedString function below.
 def repeatedString(s, n):
-
     times = n // len(s)
-    rem = n - (len(s)*times)
+    rem = n - (len(s) * times)
 
-    occurrences = times*s.count('a')
+    occurrences = times * s.count('a')
     occurrences += s[:rem].count('a')
 
     return occurrences

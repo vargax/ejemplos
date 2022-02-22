@@ -1,5 +1,31 @@
 #!/bin/python3
 
+# https://www.hackerrank.com/challenges/tree-huffman-decoding/submissions/code/255757598
+# Complete the decodeHuff function below.
+def decodeHuff(root, ss):
+    null = root.data
+
+    d = []
+    i = 0
+    n = root
+
+    while i < len(ss):
+        while n.data == null:
+            s = ss[i]
+
+            if s == '0':
+                n = n.left
+            else:
+                n = n.right
+
+            i += 1
+
+        d.append(n.data)
+        n = root
+
+    print(''.join(d))
+
+
 # https://www.hackerrank.com/challenges/ctci-comparator-sorting/submissions/code/232534638
 # Comparators are used to compare two objects. In this challenge you'll create a comparator and use it to sort an array.
 class Player:
@@ -17,11 +43,12 @@ class Player:
             return -1
         return other.score - self.score
 
+
 # https://www.hackerrank.com/challenges/extra-long-factorials/submissions/code/203469687
 # Complete the extraLongFactorials function below.
 def extraLongFactorials(n):
     result = 1
-    for i in range(2, n+1):
+    for i in range(2, n + 1):
         result *= i
     print(result)
 
@@ -57,9 +84,11 @@ def whatFlavors(prices, money):
 
             return str(first_flavor) + " " + str(second_flavor)
 
+
 # https://www.hackerrank.com/challenges/ctci-recursive-staircase/submissions/code/188121002
 # Complete the stepPerms function below.
 STEPS_AT_TIME = [1, 2, 3]
+
 
 class tree_node:
     cache = {}
@@ -86,6 +115,7 @@ class tree_node:
         tree_node.cache[remaining_steps] = ways
 
         return ways
+
 
 def stepPerms(n):
     root = tree_node(0)
