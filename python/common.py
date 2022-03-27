@@ -21,3 +21,21 @@ def isprime(n):
 
 pp = [n for n in range(100) if isprime(n)]
 print(pp)
+
+
+def fibonacci():
+    """Fibonnaci lazy generator"""
+    a, b = 0, 1
+    yield a
+    while True:
+        yield b
+        a, b = b, a + b
+
+
+ff = []
+for f in fibonacci():
+    ff.append(f)
+    if len(ff) >= 10:
+        break
+
+print(ff)
