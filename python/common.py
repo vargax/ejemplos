@@ -19,6 +19,5 @@ def isprime(n):
     return True
 
 
-a, b = 0, 100
-pp = [n for n in range(a, b) if isprime(n)]
+pp = [n for n in range(100) if isprime(n)]
 print(pp)
