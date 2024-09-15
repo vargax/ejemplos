@@ -1,4 +1,4 @@
-"""https://www.hackerrank.com/challenges/one-week-preparation-kit-simple-text-editor/submissions/code/399789599"""
+"""https://www.hackerrank.com/challenges/simple-text-editor/submissions/code/400761496"""
 
 class Editor:
     def __init__(self):

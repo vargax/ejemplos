@@ -1,4 +1,19 @@
-"""https://www.hackerrank.com/challenges/one-week-preparation-kit-balanced-brackets/submissions/code/399783686"""
+#!/bin/python3
+
+"""https://www.hackerrank.com/challenges/balanced-brackets/submissions/code/400372513"""
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'isBalanced' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts STRING s as parameter.
+#
 
 def is_balanced(string: str) -> bool:
     stack = []
@@ -28,3 +43,27 @@ def is_balanced(string: str) -> bool:
         return False
 
     return True
+
+
+def isBalanced(string: str) -> str:
+    response = is_balanced(string)
+    
+    if response:
+        return 'YES'
+    
+    return 'NO'
+    
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(input().strip())
+
+    for t_itr in range(t):
+        s = input()
+
+        result = isBalanced(s)
+
+        fptr.write(result + '\n')
+
+    fptr.close()

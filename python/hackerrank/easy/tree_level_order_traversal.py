@@ -1,4 +1,4 @@
-"""https://www.hackerrank.com/challenges/tree-postorder-traversal/submissions/code/399832685"""
+"""https://www.hackerrank.com/challenges/tree-level-order-traversal/submissions/code/400371107"""
 
 class Node:
     def __init__(self, info):
@@ -38,18 +38,39 @@ class BinarySearchTree:
                     break
 
 
-def post_order(node: Node):
-    if node.left:
-        yield from post_order(node.left)
+"""
+Node is defined as
+self.left (the left child of the node)
+self.right (the right child of the node)
+self.info (the value of the node)
+"""
 
-    if node.right:
-        yield from post_order(node.right)
-
-    yield node.info
+from collections import deque
 
 
-def postOrder(root: Node) -> None:
-    print(*post_order(root))
+def level_order(node: Node) -> str:
+    queue = deque()
+
+    level_order_ = []
+    queue.append(node)
+    while queue:
+        current = queue.popleft()
+
+        if not current:
+            continue
+
+        queue.append(current.left)
+        queue.append(current.right)
+
+        level_order_.append(str(current.info))
+
+    response = ' '.join(level_order_)
+    return response
+
+
+def levelOrder(root: Node) -> None:
+    level_order_traversal = level_order(root)
+    print(level_order_traversal)
 
 
 tree = BinarySearchTree()
@@ -60,4 +81,4 @@ arr = list(map(int, input().split()))
 for i in range(t):
     tree.create(arr[i])
 
-postOrder(tree.root)
+levelOrder(tree.root)

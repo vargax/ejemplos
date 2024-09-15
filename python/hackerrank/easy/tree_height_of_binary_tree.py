@@ -1,4 +1,4 @@
-"""https://www.hackerrank.com/challenges/tree-postorder-traversal/submissions/code/399832685"""
+"""https://www.hackerrank.com/challenges/tree-height-of-a-binary-tree/submissions/code/400357818"""
 
 class Node:
     def __init__(self, info):
@@ -9,7 +9,6 @@ class Node:
 
     def __str__(self):
         return str(self.info)
-
 
 class BinarySearchTree:
     def __init__(self):
@@ -38,18 +37,21 @@ class BinarySearchTree:
                     break
 
 
-def post_order(node: Node):
-    if node.left:
-        yield from post_order(node.left)
+def height(node: Node) -> int:
 
-    if node.right:
-        yield from post_order(node.right)
+    if node is None:
+        return 0
 
-    yield node.info
+    if not node.left and not node.right:
+        # node is a leaf
+        return 0
+
+    left = height(node.left)
+    right = height(node.right)
+
+    return max(left, right) + 1
 
 
-def postOrder(root: Node) -> None:
-    print(*post_order(root))
 
 
 tree = BinarySearchTree()
@@ -60,4 +62,4 @@ arr = list(map(int, input().split()))
 for i in range(t):
     tree.create(arr[i])
 
-postOrder(tree.root)
+print(height(tree.root))
